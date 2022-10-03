@@ -12,7 +12,7 @@ export default function Timer({ meal }) {
       )}
       {meal.start < new Date() && (
         <>
-          <p>This mealtime ends in</p>
+          <p>This mealtime ends</p>
           <h2>{ft(new Date(meal.end))}</h2>
         </>
       )}

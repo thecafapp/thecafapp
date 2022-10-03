@@ -46,6 +46,14 @@
   margin-bottom: 1.25em;
 }
 
+.restaurants {
+  display: inline-flex;
+  width: calc(100% + 2em);
+  margin-left: -1em;
+  overflow-x: scroll;
+  flex-direction: row;
+}
+
 .disclaimer {
   font-size: 0.85em;
   opacity: 0.65;

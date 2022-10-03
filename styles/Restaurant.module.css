@@ -1,0 +1,49 @@
+.restaurant {
+  width: max-content;
+  padding: 1em;
+  padding-top: 3em;
+  padding-right: 4em;
+  border-radius: 0.4em;
+  margin-bottom: 0.5em;
+  color: white;
+  user-select: none;
+  position: relative;
+  background-size: cover;
+  -webkit-overflow-scrolling: touch;
+  margin-right: 1em;
+  flex-shrink: 0;
+}
+
+.restaurant:first-of-type {
+  margin-left: 1em;
+}
+
+.restaurant h3,
+.restaurant p,
+.restaurant h4 {
+  z-index: 2;
+  position: relative;
+}
+
+.restaurant p {
+  opacity: 0.85;
+  font-size: 0.85em;
+}
+
+.restaurant h4 {
+  opacity: 1;
+  color: white;
+}
+
+.overlay {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+  z-index: 1;
+  border-radius: 0.4em;
+}

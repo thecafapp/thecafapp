@@ -40,5 +40,8 @@ export default async function handler(req, res) {
       menu: items,
     });
   });
-  res.status(200).json(json);
+  res
+    .setHeader("Cache-Control", "max-age=30000, public")
+    .status(200)
+    .json(json);
 }

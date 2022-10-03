@@ -1,16 +1,24 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import Meal from "../components/Meal";
+import Restaurant from "../components/Restaurant";
 import Timer from "../components/Timer";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [data, setData] = useState(null);
+  const [restaurants, setRestaurants] = useState([]);
   useEffect(() => {
-    fetch("/api/today")
+    fetch("/api/caf")
       .then((res) => res.json())
       .then((info) => {
         setData(info);
+      });
+    fetch("/api/restaurants")
+      .then((res) => res.json())
+      .then((info) => {
+        console.log("Setting restaurants");
+        setRestaurants(info.restaurants);
       });
   }, []);
   return (
@@ -26,7 +34,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <header className={styles.header}>
-          <h1>CafInfo</h1>
+          <h1>The Caf at MC</h1>
         </header>
         {!data && <div className={styles.loading}>Loading...</div>}
         {data && (
@@ -39,15 +47,45 @@ export default function Home() {
               </details>
             ))}
             <div className={styles.divider}></div>
+            <h3 className={styles.mealTitle}>Other Dining</h3>
+            <div className={styles.restaurants}>
+              {restaurants
+                .sort((a) => {
+                  if (a.hours.current == true) {
+                    return -1;
+                  } else {
+                    return 1;
+                  }
+                })
+                .map((rr, i) => (
+                  <Restaurant restaurant={rr} key={i} />
+                ))}
+            </div>
+            <div className={styles.divider}></div>
             <p className={styles.disclaimer}>
-              All data comes from the official Mississippi College website. This
-              dashboard was created by{" "}
+              All data comes from the{" "}
+              <a
+                href="https://www.mc.edu/offices/food/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                official Mississippi College website
+              </a>
+              . This dashboard was created by{" "}
               <a
                 href="https://micahlindley.com"
                 target="_blank"
                 rel="noreferrer"
               >
                 Micah Lindley
+              </a>
+              . Is something wrong?{" "}
+              <a
+                href="https://instagram.com/micahtlindley"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Shoot me a DM
               </a>
               .
             </p>

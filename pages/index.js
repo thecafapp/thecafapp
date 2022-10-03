@@ -17,7 +17,10 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>MC CafInfo</title>
-        <meta name="description" content="Menu and hours for MC's cafeteria" />
+        <meta
+          name="description"
+          content="Access hours and menus from the cafeteria at Mississippi College."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

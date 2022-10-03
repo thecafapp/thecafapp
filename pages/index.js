@@ -21,7 +21,7 @@ export default function Home() {
           name="description"
           content="Access hours and menus from the cafeteria at Mississippi College."
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/icon.png" />
       </Head>
 
       <main className={styles.main}>

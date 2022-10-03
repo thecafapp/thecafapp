@@ -6,6 +6,7 @@
   border-radius: 0.4em;
   margin-bottom: 0.5em;
   color: white;
+  user-select: none;
 }
 
 .timerParent h2 {

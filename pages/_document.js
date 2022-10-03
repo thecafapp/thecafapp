@@ -14,17 +14,17 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0"
         />
-        <meta property="og:title" content="CafInfo" />
+        <meta property="og:title" content="The Caf at MC" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://thecaf.me" />
         <meta
           property="og:description"
           content="Access hours and menus from the cafeteria at Mississippi College."
         />
-        <meta name="application-name" content="CafInfo" />
+        <meta name="application-name" content="The Caf" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="CafInfo" />
+        <meta name="apple-mobile-web-app-title" content="The Caf" />
         <meta
           name="description"
           content="Access hours and menus from the cafeteria at Mississippi College."

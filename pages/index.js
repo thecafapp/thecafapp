@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>MC CafInfo</title>
+        <title>The Caf at MC</title>
         <meta
           name="description"
           content="Access hours and menus from the cafeteria at Mississippi College."
@@ -47,7 +47,9 @@ export default function Home() {
               </details>
             ))}
             <div className={styles.divider}></div>
-            <h3 className={styles.mealTitle}>Other Dining</h3>
+            <h3 className={styles.mealTitle} style={{ marginBottom: "0.5em" }}>
+              Other Dining
+            </h3>
             <div className={styles.restaurants}>
               {restaurants
                 .sort((a) => {

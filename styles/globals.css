@@ -1,26 +1,46 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
 }
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+details > summary {
+  list-style: none;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+details[open] > summary {
+  opacity: 1;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  font-family: "Material Symbols Outlined";
+  content: "expand_more";
+  transform: translateY(3px);
+  display: inline-block;
+  margin-left: 0.25em;
+}
+details[open] summary:after {
+  font-family: "Material Symbols Outlined";
+  content: "expand_less";
+  transform: translateY(3px);
+  display: inline-block;
+  margin-left: 0.25em;
 }

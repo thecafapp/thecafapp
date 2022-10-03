@@ -1,0 +1,14 @@
+.timerParent {
+  background: linear-gradient(200deg, #dca627, #268da8);
+  display: block;
+  padding: 1em;
+  padding-top: 3em;
+  border-radius: 0.2em;
+  margin-bottom: 0.5em;
+  color: white;
+}
+
+.timerParent h2 {
+  font-family: "Merriweather", sans-serif;
+  font-weight: 400;
+}

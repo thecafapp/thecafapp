@@ -1,0 +1,17 @@
+.mealInfo {
+  display: block;
+  background-color: #ddefff;
+  padding: 1em;
+  border-radius: 0.2em;
+  margin-bottom: 0.5em;
+}
+
+.mealInfo p {
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: #2e6983;
+}
+
+.mealFoods {
+  list-style-type: none;
+}

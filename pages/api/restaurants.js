@@ -5,9 +5,8 @@ export default async function handler(req, res) {
       name: "Chick-Fil-A",
       hours: {
         "M-T": {
-          open: null,
-          close: null,
-          current: false,
+          open: "10:30 AM",
+          close: "6:00 PM",
         },
         F: {
           open: "10:30 AM",

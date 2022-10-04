@@ -19,6 +19,7 @@ export default async function handler(req, res) {
         },
       },
       image: "/assets/restaurants/chick-fil-a.jpg",
+      link: "https://goo.gl/maps/h86wkkoe8XtnvoKg8",
       color: "#a00000",
     },
     {
@@ -39,6 +40,7 @@ export default async function handler(req, res) {
         },
       },
       image: "/assets/restaurants/einsteins.jpg",
+      link: "https://goo.gl/maps/nTg1dEP7Xikz7Bv3A",
       color: "#6f5e00",
     },
     {
@@ -59,6 +61,7 @@ export default async function handler(req, res) {
         },
       },
       image: "/assets/restaurants/starbucks.jpg",
+      link: "https://goo.gl/maps/BYP1dH3bNZihewrv8",
       color: "#004302",
     },
     {
@@ -80,6 +83,7 @@ export default async function handler(req, res) {
         },
       },
       image: "/assets/restaurants/corner.jpg",
+      link: "https://goo.gl/maps/fvEkQuiK426JHWtZA",
       color: "#000c43",
     },
   ];

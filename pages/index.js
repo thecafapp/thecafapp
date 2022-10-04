@@ -17,7 +17,6 @@ export default function Home() {
     fetch("/api/restaurants")
       .then((res) => res.json())
       .then((info) => {
-        console.log("Setting restaurants");
         setRestaurants(info.restaurants);
       });
   }, []);

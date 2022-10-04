@@ -15,7 +15,6 @@ export default function Timer({ meal }) {
     }
     setInterval(() => {
       setDate(new Date());
-      console.log("setting new date");
     }, 5000);
   }, []);
   const toggleMethod = () => {

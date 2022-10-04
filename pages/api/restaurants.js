@@ -98,11 +98,7 @@ export default async function handler(req, res) {
     );
   };
   const json = { restaurants: [] };
-  const date = new Date(
-    new Date().toLocaleString("en-US", {
-      timeZone: "CST",
-    })
-  );
+  const date = new Date(new Date().toLocaleString("en-US", {}));
   const dow = date.getDay();
   restaurants.forEach((rr, i) => {
     let hours = {};
@@ -118,7 +114,8 @@ export default async function handler(req, res) {
     if (hours.open) {
       let open = generateDate(hours.open);
       let close = generateDate(hours.close);
-      if (date >= open && date <= close) {
+      console.log(date.getTime(), open);
+      if (date.getTime() >= open && date.getTime() <= close) {
         hours.current = true;
       } else {
         hours.current = false;

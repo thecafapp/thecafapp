@@ -16,10 +16,15 @@ export default function Restaurant({ restaurant: rr }) {
       <h4>{rr.hours.current ? "Open" : "Closed"}</h4>
       {rr.hours.open && (
         <p>
+          <span className={styles.inlineIcon}>schedule</span>
           {rr.hours.open} - {rr.hours.close}
         </p>
       )}
       {!rr.hours.open && <p>Not open today</p>}
+      <p>
+        <span className={styles.inlineIcon}>location_on</span>
+        {rr.location}
+      </p>
       <div
         className={styles.overlay}
         style={{ backgroundColor: rr.hours.current ? rr.color : "#000" }}

@@ -51,3 +51,11 @@
   z-index: 1;
   border-radius: 0.4em;
 }
+
+.inlineIcon {
+  font-family: "Material Symbols Outlined";
+  font-size: inherit;
+  margin-right: 0.3em;
+  transform: translateY(0.1em);
+  display: inline-block;
+}

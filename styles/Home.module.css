@@ -54,6 +54,11 @@
   flex-direction: row;
 }
 
+.restaurants::-webkit-scrollbar {
+  -webkit-appearance: none;
+  display: none;
+}
+
 .disclaimer {
   font-size: 0.85em;
   opacity: 0.65;

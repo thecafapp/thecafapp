@@ -118,7 +118,6 @@ export default async function handler(req, res) {
     if (hours.open) {
       let open = generateDate(hours.open);
       let close = generateDate(hours.close);
-      console.log(date.getTime(), open);
       if (date.getTime() >= open && date.getTime() <= close) {
         hours.current = true;
       } else {

@@ -8,9 +8,17 @@
   color: white;
   user-select: none;
   box-shadow: 0 0.1em 0.4em rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
 .timerParent h2 {
   font-family: "Merriweather", sans-serif;
   font-weight: 400;
+}
+
+.timerSwap {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  font-family: "Material Symbols Outlined";
 }

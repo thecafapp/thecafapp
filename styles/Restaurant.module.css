@@ -1,4 +1,6 @@
 .restaurant {
+  text-decoration: none;
+  display: block;
   width: max-content;
   padding: 1em;
   padding-top: 2em;

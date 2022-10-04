@@ -65,7 +65,7 @@ export default async function handler(req, res) {
       name: "Corner Grill",
       hours: {
         "M-T": {
-          open: "4:30 AM",
+          open: "4:30 PM",
           close: "8:30 PM",
         },
         F: {
@@ -84,9 +84,7 @@ export default async function handler(req, res) {
     },
   ];
   const generateDate = (time) => {
-    return (
-      new Date(new Date().toDateString() + ", " + time + " " + "CST") - 3600000
-    );
+    return new Date(new Date().toDateString() + ", " + time + " " + "CST");
   };
   const json = { restaurants: [] };
   const dow = new Date().getDay();
@@ -113,5 +111,6 @@ export default async function handler(req, res) {
     rr.hours = hours;
     json.restaurants.push(rr);
   });
-  res.setHeader("Cache-Control", "max-age=30, public").status(200).json(json);
+  res.status(200).json(json);
+  //.setHeader("Cache-Control", "max-age=30, public")
 }

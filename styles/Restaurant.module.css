@@ -1,7 +1,7 @@
 .restaurant {
   width: max-content;
   padding: 1em;
-  padding-top: 3em;
+  padding-top: 2em;
   padding-right: 4em;
   border-radius: 0.4em;
   margin-bottom: 0.5em;
@@ -12,6 +12,7 @@
   -webkit-overflow-scrolling: touch;
   margin-right: 1em;
   flex-shrink: 0;
+  box-shadow: 0 0.1em 0.4em rgba(0, 0, 0, 0.3);
 }
 
 .restaurant:first-of-type {
@@ -33,6 +34,7 @@
 .restaurant h4 {
   opacity: 1;
   color: white;
+  font-size: 0.95em;
 }
 
 .overlay {

@@ -5,8 +5,9 @@ export default async function handler(req, res) {
       name: "Chick-Fil-A",
       hours: {
         "M-T": {
-          open: "10:30 AM",
-          close: "6:00 PM",
+          open: null,
+          close: null,
+          current: false,
         },
         F: {
           open: "10:30 AM",
@@ -84,10 +85,22 @@ export default async function handler(req, res) {
     },
   ];
   const generateDate = (time) => {
-    return new Date(new Date().toDateString() + ", " + time + " " + "CST");
+    return (
+      new Date(
+        new Date().toDateString("en-US", { timeZone: "CST" }) +
+          ", " +
+          time +
+          " CST"
+      ) - 3600000
+    );
   };
   const json = { restaurants: [] };
-  const dow = new Date().getDay();
+  const date = new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "CST",
+    })
+  );
+  const dow = date.getDay();
   restaurants.forEach((rr, i) => {
     let hours = {};
     if (rr.hours) {
@@ -102,7 +115,7 @@ export default async function handler(req, res) {
     if (hours.open) {
       let open = generateDate(hours.open);
       let close = generateDate(hours.close);
-      if (new Date() >= open && new Date() <= close) {
+      if (date >= open && date <= close) {
         hours.current = true;
       } else {
         hours.current = false;
@@ -111,6 +124,5 @@ export default async function handler(req, res) {
     rr.hours = hours;
     json.restaurants.push(rr);
   });
-  res.status(200).json(json);
-  //.setHeader("Cache-Control", "max-age=30, public")
+  res.setHeader("Cache-Control", "max-age=30, public").status(200).json(json);
 }

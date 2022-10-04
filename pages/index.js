@@ -71,7 +71,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
               >
-                official Mississippi College website
+                official MC website
               </a>
               . This dashboard was created by{" "}
               <a
@@ -81,7 +81,8 @@ export default function Home() {
               >
                 Micah Lindley
               </a>
-              . Is something wrong?{" "}
+              .<br />
+              Is something wrong?{" "}
               <a
                 href="https://instagram.com/micahtlindley"
                 target="_blank"

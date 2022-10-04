@@ -50,7 +50,7 @@
   display: inline-flex;
   width: calc(100% + 2em);
   margin-left: -1em;
-  overflow-x: scroll;
+  overflow-x: auto;
   flex-direction: row;
 }
 

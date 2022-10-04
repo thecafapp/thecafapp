@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Timer({ meal }) {
   const [method, setMethod] = useState(null);
+  const [date, setDate] = useState(new Date());
   useEffect(() => {
     if (localStorage.getItem("method")) {
       setMethod(localStorage.getItem("method"));
@@ -12,6 +13,10 @@ export default function Timer({ meal }) {
       setMethod("relative");
       localStorage.setItem("method", "relative");
     }
+    setInterval(() => {
+      setDate(new Date());
+      console.log("setting new date");
+    }, 5000);
   }, []);
   const toggleMethod = () => {
     if (method == "relative") {
@@ -29,23 +34,23 @@ export default function Timer({ meal }) {
           <span title="Swap time views" className={styles.timerSwap}>
             swap_horiz
           </span>
-          {meal.start >= new Date() && (
+          {meal.start >= date && (
             <>
               <p>Next mealtime starts {method == "exact" && " in"}</p>
               <h2>
                 {method == "relative"
                   ? ft(new Date(meal.start))
-                  : du(meal.start / 1000 - Date.now() / 1000, "m")}
+                  : du(meal.start / 1000 - date.getTime() / 1000, "m")}
               </h2>
             </>
           )}
-          {meal.start < new Date() && (
+          {meal.start < date && (
             <>
               <p>This mealtime ends</p>
               <h2>
                 {method == "relative"
                   ? ft(new Date(meal.end))
-                  : du(meal.end / 1000 - Date.now() / 1000, "m")}
+                  : du(meal.end / 1000 - date.getTime() / 1000, "m")}
               </h2>
             </>
           )}

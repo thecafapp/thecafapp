@@ -9,6 +9,8 @@ export default function Restaurant({ restaurant: rr }) {
         opacity: rr.hours.current ? 1 : 0.6,
       }}
       href={rr.link}
+      target="_blank"
+      rel="noreferrer"
     >
       <h3 className={styles.name}>{rr.name}</h3>
       <h4>{rr.hours.current ? "Open" : "Closed"}</h4>

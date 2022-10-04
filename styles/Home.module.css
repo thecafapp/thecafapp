@@ -1,8 +1,8 @@
 .header {
   text-align: center;
   background: rgba(12, 35, 64, 0.95);
-  padding-top: 1.25em;
-  padding-bottom: 1.25em;
+  padding-top: 1.35em;
+  padding-bottom: 1.35em;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   position: fixed;
   width: 100%;
@@ -15,7 +15,7 @@
   color: #c99700;
   font-weight: 300;
   font-family: "Merriweather", sans-serif;
-  font-size: 1.5em;
+  font-size: 1.35em;
 }
 
 .content {

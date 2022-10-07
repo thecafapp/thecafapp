@@ -103,7 +103,11 @@ export default async function handler(req, res) {
   };
   const json = { restaurants: [] };
   const date = new Date(new Date().toLocaleString("en-US", {}));
-  const dow = date.getDay();
+  const dow = new Date(
+    new Date().toLocaleString("en-US", {
+      timeZone: "CST",
+    })
+  ).getDay();
   restaurants.forEach((rr, i) => {
     let hours = {};
     if (rr.hours) {

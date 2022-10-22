@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.CAFANALYID}`}
       />
 
-      <Script strategy="afterInteractive">
+      <Script strategy="afterInteractive" id="gascript">
         {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}

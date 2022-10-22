@@ -55,7 +55,7 @@ export default function Vote() {
             </div>
           ) : (
             <div className={styles.voteButtonCell}>
-              <p>You've provided your rating for the day. Thank you!</p>
+              <p>You&apos;ve provided your rating for the day. Thank you!</p>
             </div>
           )}
         </div>

@@ -18,14 +18,14 @@ export default async function handler(req, res) {
           alreadyRated = true;
         }
       });
-      avg = (avg / numItems).toFixed(1);
+      avg = avg / numItems;
       if (numItems == 0) {
         avg = 0;
       }
       res
         .setHeader("Cache-Control", "max-age=300, public")
         .status(200)
-        .json({ average: avg, numItems, alreadyRated });
+        .json({ average: avg.toFixed(1), numItems, alreadyRated });
     } else {
       res
         .status(400)

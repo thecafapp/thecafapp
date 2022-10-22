@@ -69,6 +69,9 @@ export default function Home() {
                   <Restaurant restaurant={rr} key={i} />
                 ))}
             </div>
+            <p>
+              <b>Notice:</b> this section may vary on breaks and holidays
+            </p>
             <div className={styles.divider}></div>
             <p className={styles.disclaimer}>
               All data comes from the{" "}

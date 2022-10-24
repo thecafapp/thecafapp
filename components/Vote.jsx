@@ -20,7 +20,11 @@ export default function Vote() {
       .then((res) => res.json())
       .then((json) => {
         setCanRate(false);
-        setDailyRating((dailyRating + rating) / 2);
+        if (dailyRating == 0) {
+          setDailyRating(rating);
+        } else {
+          setDailyRating((dailyRating + rating) / 2);
+        }
       });
   };
   return (

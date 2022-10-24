@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         avg = 0;
       }
       res
-        .setHeader("Cache-Control", "max-age=300, public")
+        .setHeader("Cache-Control", "max-age=30, public")
         .status(200)
         .json({ average: avg.toFixed(1), numItems, alreadyRated });
     } else {

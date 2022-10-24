@@ -3,15 +3,20 @@ import { Rating } from "react-simple-star-rating";
 import styles from "../styles/Vote.module.css";
 export default function Vote() {
   const [dailyRating, setDailyRating] = useState(null);
+  const [numItems, setNumItems] = useState(null);
   const [canRate, setCanRate] = useState(true);
   useEffect(() => {
-    fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}`)
+    getRating();
+  }, []);
+  const getRating = (noCache) => {
+    fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}&_vercel_no_cache=${noCache || 0}`)
       .then((res) => res.json())
       .then((json) => {
-        setCanRate(!json.alreadyRated);
+        setCanRate(!json.alreadyRated)
         setDailyRating(json.average);
+        setNumItems(json.numItems);
       });
-  }, []);
+  }
   const sendRating = (rating) => {
     fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}`, {
       method: "POST",
@@ -20,11 +25,7 @@ export default function Vote() {
       .then((res) => res.json())
       .then((json) => {
         setCanRate(false);
-        if (dailyRating == 0) {
-          setDailyRating(rating);
-        } else {
-          setDailyRating((dailyRating + rating) / 2);
-        }
+        getRating(1);
       });
   };
   return (

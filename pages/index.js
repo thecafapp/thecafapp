@@ -48,9 +48,9 @@ export default function Home() {
               <a href="https://mc.edu" target="_blank" rel="noreferrer">
                 new MC website
               </a>{" "}
-              currently doesn't provide the daily Caf menu. We hope this issue
-              will be resolved soon. As soon as the menu is re-added to the new
-              site we'll update this site accordingly.
+              currently doesn&apos;t provide the daily Caf menu. We hope this
+              issue will be resolved soon. As soon as the menu is re-added to
+              the new site we&apos;ll update this site accordingly.
             </p>
           </div>
         )}

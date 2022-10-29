@@ -31,7 +31,7 @@ export default function Home() {
         <title>The Caf at MC</title>
         <meta
           name="description"
-          content="Access hours and menus from the cafeteria at Mississippi College."
+          content="[temporarily down] Access hours and menus from the cafeteria at Mississippi College."
         />
         <link rel="icon" href="/icons/icon.png" />
       </Head>

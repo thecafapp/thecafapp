@@ -14,16 +14,16 @@ export default function Home() {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
-    fetch("/api/caf")
-      .then((res) => res.json())
-      .then((info) => {
-        setData(info);
-      });
-    fetch("/api/restaurants")
-      .then((res) => res.json())
-      .then((info) => {
-        setRestaurants(info.restaurants);
-      });
+    // fetch("/api/caf")
+    //   .then((res) => res.json())
+    //   .then((info) => {
+    //     setData(info);
+    //   });
+    // fetch("/api/restaurants")
+    //   .then((res) => res.json())
+    //   .then((info) => {
+    //     setRestaurants(info.restaurants);
+    //   });
   }, []);
   return (
     <div className={styles.container}>
@@ -40,7 +40,20 @@ export default function Home() {
         <header className={styles.header}>
           <h1>The Caf at MC</h1>
         </header>
-        {!data && <div className={styles.loading}>Loading...</div>}
+        {!data && (
+          <div className={styles.temporarilyDown}>
+            <h2>Temporarily down</h2>
+            <p>
+              The{" "}
+              <a href="https://mc.edu" target="_blank" rel="noreferrer">
+                new MC website
+              </a>{" "}
+              currently doesn't provide the daily Caf menu. We hope this issue
+              will be resolved soon. As soon as the menu is re-added to the new
+              site we'll update this site accordingly.
+            </p>
+          </div>
+        )}
         {data && (
           <div className={styles.content}>
             <Timer meal={data.meals[0]} />

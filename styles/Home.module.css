@@ -32,6 +32,20 @@
   font-weight: 600;
 }
 
+.temporarilyDown {
+  text-align: center;
+  padding-top: 6em;
+  max-width: 80%;
+  margin: auto;
+}
+
+.temporarilyDown h2 {
+  color: #2e6983;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
 .mealTitle {
   font-size: 1.2em;
   font-weight: 600;

@@ -14,16 +14,16 @@ export default function Home() {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
-    // fetch("/api/caf")
-    //   .then((res) => res.json())
-    //   .then((info) => {
-    //     setData(info);
-    //   });
-    // fetch("/api/restaurants")
-    //   .then((res) => res.json())
-    //   .then((info) => {
-    //     setRestaurants(info.restaurants);
-    //   });
+    fetch("/api/caf")
+      .then((res) => res.json())
+      .then((info) => {
+        setData(info);
+      });
+    fetch("/api/restaurants")
+      .then((res) => res.json())
+      .then((info) => {
+        setRestaurants(info.restaurants);
+      });
   }, []);
   return (
     <div className={styles.container}>
@@ -31,7 +31,7 @@ export default function Home() {
         <title>The Caf at MC</title>
         <meta
           name="description"
-          content="[temporarily down] Access hours and menus from the cafeteria at Mississippi College."
+          content="Access hours and menus from the cafeteria at Mississippi College."
         />
         <link rel="icon" href="/icons/icon.png" />
       </Head>

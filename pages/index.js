@@ -41,9 +41,9 @@ export default function Home() {
           <h1>The Caf at MC</h1>
         </header>
         {!data && (
-          <div className={styles.temporarilyDown}>
-            <h2>Temporarily down</h2>
-            <p>
+          <div className={styles.loading}>
+            <h2>Loading</h2>
+            {/* <p>
               The{" "}
               <a href="https://mc.edu" target="_blank" rel="noreferrer">
                 new MC website
@@ -51,7 +51,7 @@ export default function Home() {
               currently doesn&apos;t provide the daily Caf menu. We hope this
               issue will be resolved soon. As soon as the menu is re-added to
               the new site we&apos;ll update this site accordingly.
-            </p>
+            </p> */}
           </div>
         )}
         {data && (

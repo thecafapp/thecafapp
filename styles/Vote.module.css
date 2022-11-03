@@ -1,11 +1,11 @@
 .voteParent {
-  background: linear-gradient(200deg, hsl(42, 72%, 90%), hsl(192, 63%, 90%));
+  background: linear-gradient(200deg, var(--grad-1), var(--grad-2));
   display: grid;
   grid-template-columns: auto auto;
   padding: 1em;
   border-radius: 0.4em;
   margin-bottom: 0.5em;
-  color: #0c2340;
+  color: #ffffff;
   user-select: none;
   box-shadow: 0 0.1em 0.4em rgba(0, 0, 0, 0.3);
 }
@@ -34,7 +34,7 @@
   margin-left: 1em;
   padding-left: 1em;
   margin-right: 0.5em;
-  border-left: 1px solid #0c2340;
+  border-left: 1px solid #ffffff;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -47,12 +47,12 @@
 }
 
 .voteSkeleton {
-  background: linear-gradient(200deg, hsl(42, 72%, 90%), hsl(192, 63%, 90%));
+  background: linear-gradient(200deg, var(--grad-1), var(--grad-2));
   display: grid;
   padding: 2em;
   border-radius: 0.4em;
   margin-bottom: 0.5em;
-  color: #0c2340;
+  color: var(--text-primary);
   user-select: none;
   box-shadow: 0 0.1em 0.4em rgba(0, 0, 0, 0.3);
   align-content: center;

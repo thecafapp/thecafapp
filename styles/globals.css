@@ -1,8 +1,29 @@
+html {
+  --text-primary: #0c2340;
+  --text-secondary: #2e6983;
+  --bg-primary: #ffffff;
+  --bg-secondary: #ddefff;
+  --grad-1: #dca627;
+  --grad-2: #268da8;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --text-primary: #d0ccc6;
+    --text-secondary: #7eb8d2;
+    --bg-primary: #181a1b;
+    --bg-secondary: #222426;
+    --grad-1: #826215;
+    --grad-2: #1e7186;
+  }
+}
+
 html,
 body {
   font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, Segoe UI,
     Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
     sans-serif;
+  background-color: var(--bg-primary);
 }
 
 a {

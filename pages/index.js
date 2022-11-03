@@ -82,7 +82,7 @@ export default function Home() {
                   <Restaurant restaurant={rr} key={i} />
                 ))}
             </div>
-            <p>
+            <p className={styles.notice}>
               <b>Notice:</b> this section may vary on breaks and holidays
             </p>
             <div className={styles.divider}></div>

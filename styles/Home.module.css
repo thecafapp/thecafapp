@@ -50,12 +50,13 @@
   font-size: 1.2em;
   font-weight: 600;
   margin-bottom: 0.25em;
-  color: #0c2340;
+  color: var(--text-primary);
 }
 
 .divider {
   width: 100%;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-top: 1px solid var(--text-primary);
+  opacity: 0.25;
   margin-top: 1.25em;
   margin-bottom: 1.25em;
 }
@@ -73,9 +74,15 @@
   display: none;
 }
 
+.notice {
+  font-size: 0.85em;
+  color: var(--text-primary);
+}
+
 .disclaimer {
   font-size: 0.85em;
   opacity: 0.65;
+  color: var(--text-primary);
 }
 
 @keyframes loading {

@@ -1,6 +1,6 @@
 .mealInfo {
   display: block;
-  background-color: #ddefff;
+  background-color: var(--bg-secondary);
   padding: 1em;
   border-radius: 0.4em;
   margin-bottom: 0.5em;
@@ -9,10 +9,10 @@
 .mealInfo p {
   font-weight: 600;
   margin-bottom: 0.5em;
-  color: #2e6983;
+  color: var(--text-secondary);
 }
 
 .mealFoods {
   list-style-type: none;
-  color: #0c2340;
+  color: var(--text-primary);
 }

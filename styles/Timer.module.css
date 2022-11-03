@@ -1,5 +1,5 @@
 .timerParent {
-  background: linear-gradient(200deg, #dca627, #268da8);
+  background: linear-gradient(200deg, var(--grad-1), var(--grad-2));
   display: block;
   padding: 1em;
   padding-top: 3em;

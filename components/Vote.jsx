@@ -9,14 +9,18 @@ export default function Vote() {
     getRating();
   }, []);
   const getRating = (noCache) => {
-    fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}&_vercel_no_cache=${noCache || 0}`)
+    fetch(
+      `/api/ratings?id=${window.localStorage.getItem(
+        "iden"
+      )}&_vercel_no_cache=${noCache || 0}`
+    )
       .then((res) => res.json())
       .then((json) => {
-        setCanRate(!json.alreadyRated)
+        setCanRate(!json.alreadyRated);
         setDailyRating(json.average);
         setNumItems(json.numItems);
       });
-  }
+  };
   const sendRating = (rating) => {
     fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}`, {
       method: "POST",
@@ -47,6 +51,7 @@ export default function Vote() {
                 star
               </span>
             </h2>
+            <p className={styles.voteNumber}>{numItems} ratings</p>
           </div>
           {canRate ? (
             <div className={styles.voteButtonCell}>

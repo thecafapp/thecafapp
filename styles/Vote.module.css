@@ -3,7 +3,7 @@
   display: grid;
   grid-template-columns: auto auto;
   padding: 1em;
-  border-radius: 0.4em;
+  border-radius: 0.4rem;
   margin-bottom: 0.5em;
   color: #ffffff;
   user-select: none;
@@ -67,6 +67,68 @@
   opacity: 0.75;
   font-size: 0.8em;
   margin-top: 0.5em;
+}
+
+.alertOverlay {
+  background-color: rgb(0 0 0 / 72%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.alertModal {
+  height: max-content;
+  width: max-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 0.4rem;
+  padding: 2em;
+  display: grid;
+  grid-template-areas:
+    "a a"
+    "b b"
+    "c d";
+}
+
+.alertModal span {
+  grid-area: a;
+  margin-bottom: 0.5em;
+}
+
+.alertModal h2 {
+  grid-area: b;
+  margin-bottom: 0.25em;
+}
+
+.alertModal .cancelButton {
+  grid-area: c;
+  margin: 0.5em;
+  color: white;
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.75em 0.5em;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.alertModal .submitButton {
+  grid-area: d;
+  margin: 0.5em;
+  color: white;
+  background-color: var(--grad-1);
+  border: none;
+  border-radius: 0.3em;
+  padding: 0.75em 0.5em;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 @keyframes loading {

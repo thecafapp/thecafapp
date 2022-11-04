@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
+import Modal from "react-modal";
 import { Rating } from "react-simple-star-rating";
 import styles from "../styles/Vote.module.css";
+Modal.setAppElement("#__next");
 export default function Vote() {
   const [dailyRating, setDailyRating] = useState(null);
   const [numItems, setNumItems] = useState(null);
   const [canRate, setCanRate] = useState(true);
+  const [myRating, setMyRating] = useState(null);
+  const [modalIsOpen, setIsOpen] = useState(false);
   useEffect(() => {
     getRating();
   }, []);
@@ -21,16 +25,24 @@ export default function Vote() {
         setNumItems(json.numItems);
       });
   };
-  const sendRating = (rating) => {
+  const sendRating = () => {
     fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}`, {
       method: "POST",
-      body: JSON.stringify({ rating }),
+      body: JSON.stringify({ rating: myRating }),
     })
       .then((res) => res.json())
-      .then((json) => {
+      .then(() => {
+        closeModal();
         setCanRate(false);
         getRating(1);
       });
+  };
+  const openModal = (rating) => {
+    setMyRating(rating);
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
   };
   return (
     <>
@@ -53,11 +65,25 @@ export default function Vote() {
             </h2>
             <p className={styles.voteNumber}>{numItems} ratings</p>
           </div>
+          <Modal
+            isOpen={modalIsOpen}
+            className={styles.alertModal}
+            overlayClassName={styles.alertOverlay}
+          >
+            <span className="material-symbols-outlined">reviews</span>
+            <h2>Rate {myRating} stars?</h2>
+            <button className={styles.cancelButton} onClick={closeModal}>
+              Cancel
+            </button>
+            <button className={styles.submitButton} onClick={sendRating}>
+              Submit
+            </button>
+          </Modal>
           {canRate ? (
             <div className={styles.voteButtonCell}>
               <p>Rate your meal to help others</p>
               <Rating
-                onClick={sendRating}
+                onClick={openModal}
                 allowFraction={true}
                 fillColor="#dca627"
                 className={styles.rating}

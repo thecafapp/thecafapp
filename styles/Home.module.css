@@ -21,6 +21,8 @@
 .content {
   padding: 1em;
   padding-top: 5.5em;
+  max-width: 520px;
+  margin: auto;
 }
 
 .loading {

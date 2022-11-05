@@ -20,18 +20,6 @@
   font-size: 0.9em;
 }
 
-.openMenu {
-  background-color: var(--grad-2);
-  color: var(--text-primary);
-  border: none;
-  padding: 0.75em 1em;
-  border-radius: 0.3rem;
-  margin-top: 0.25rem;
-  font-family: inherit;
-  margin-right: 0.5rem;
-  cursor: pointer;
-}
-
 .dismiss {
   background-color: var(--bg-primary);
   color: var(--text-primary);

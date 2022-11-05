@@ -17,20 +17,6 @@ export default function InstallPrompt() {
       setShouldShow(true);
     }
   });
-  const openMenu = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "The Caf at MC",
-          url: "https://thecaf.me/",
-        })
-        .then(() => {
-          window.localStorage.setItem("ir", "yes");
-          setShouldShow(false);
-        })
-        .catch(console.error);
-    }
-  };
   const dismiss = () => {
     window.localStorage.setItem("ir", "yes");
     setShouldShow(false);
@@ -44,11 +30,8 @@ export default function InstallPrompt() {
             Click the Share icon in Safari and then select{" "}
             <b>Add to homescreen</b> for a better experience!
           </p>
-          <button className={styles.openMenu} onClick={openMenu}>
-            Open share menu
-          </button>
           <button className={styles.dismiss} onClick={dismiss}>
-            Not now
+            Dismiss
           </button>
         </div>
       )}

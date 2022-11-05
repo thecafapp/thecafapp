@@ -6,6 +6,7 @@ import Timer from "../components/Timer";
 import Vote from "../components/Vote";
 import styles from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
+import InstallPrompt from "../components/InstallPrompt";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -116,6 +117,7 @@ export default function Home() {
             </p>
           </div>
         )}
+        <InstallPrompt />
       </main>
     </div>
   );

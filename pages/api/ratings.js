@@ -34,10 +34,9 @@ export default async function handler(req, res) {
   } else if (req.method == "POST") {
     const body = JSON.parse(req.body);
     console.log(body);
-    if (req.query.id && body.rating) {
+    if (req.query.id && body.rating && body.expires) {
       collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
-      const expiry = new Date();
-      expiry.setDate(expiry.getDate() + 1);
+      const expiry = new Date(body.expires);
       await collection.insertOne({
         uid: req.query.id,
         rating: body.rating,
@@ -46,7 +45,8 @@ export default async function handler(req, res) {
       res.status(200).json({ status: "success" });
     } else {
       res.status(400).json({
-        error: "You must provide a unique consistent UID and a rating.",
+        error:
+          "You must provide a unique consistent UID, expiry, and a rating.",
       });
     }
   }

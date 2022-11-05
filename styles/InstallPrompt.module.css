@@ -1,0 +1,32 @@
+.prompt {
+  background-color: var(--bg-secondary);
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-primary);
+  border-radius: 0.4rem;
+  padding: 1.5rem;
+  width: 90%;
+  bottom: 5vw;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+.prompt h3 {
+  margin-bottom: 0.25em;
+}
+
+.instructions {
+  font-size: 0.9em;
+}
+
+.dismiss {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: none;
+  padding: 0.75em 1em;
+  border-radius: 0.3rem;
+  margin-top: 0.25rem;
+  font-family: inherit;
+  cursor: pointer;
+}

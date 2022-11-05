@@ -65,7 +65,7 @@ export default function Home() {
               </details>
             ))}
             <div className={styles.divider}></div>
-            <Vote />
+            <Vote currentMealtime={data.meals[0]} />
             <div className={styles.divider}></div>
             <h3 className={styles.mealTitle} style={{ marginBottom: "0.5em" }}>
               Other Dining

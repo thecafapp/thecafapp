@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { Rating } from "react-simple-star-rating";
 import styles from "../styles/Vote.module.css";
 Modal.setAppElement("#__next");
-export default function Vote() {
+export default function Vote({ currentMealtime }) {
   const [dailyRating, setDailyRating] = useState(null);
   const [numItems, setNumItems] = useState(null);
   const [canRate, setCanRate] = useState(true);
@@ -28,7 +28,7 @@ export default function Vote() {
   const sendRating = () => {
     fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}`, {
       method: "POST",
-      body: JSON.stringify({ rating: myRating }),
+      body: JSON.stringify({ rating: myRating, expires: currentMealtime.end }),
     })
       .then((res) => res.json())
       .then(() => {
@@ -79,21 +79,25 @@ export default function Vote() {
               Submit
             </button>
           </Modal>
-          {canRate ? (
-            <div className={styles.voteButtonCell}>
-              <p>Rate your meal to help others</p>
-              <Rating
-                onClick={openModal}
-                allowFraction={true}
-                fillColor="#dca627"
-                className={styles.rating}
-              />
-            </div>
-          ) : (
-            <div className={styles.voteButtonCell}>
+          <div className={styles.voteButtonCell}>
+            {canRate ? (
+              Date.now() > currentMealtime.start ? (
+                <>
+                  <p>Rate your meal to help others</p>
+                  <Rating
+                    onClick={openModal}
+                    allowFraction={true}
+                    fillColor="#dca627"
+                    className={styles.rating}
+                  />
+                </>
+              ) : (
+                <p>You can only vote during mealtimes.</p>
+              )
+            ) : (
               <p>You&apos;ve provided your rating for the day. Thank you!</p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
     </>

@@ -53,7 +53,7 @@ export default function Vote({ currentMealtime }) {
       ) : (
         <div className={styles.voteParent}>
           <div className={styles.votePercentageCell}>
-            <p>Day rating</p>
+            <p>Meal rating</p>
             <h2>
               {dailyRating}{" "}
               <span

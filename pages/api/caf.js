@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   menu.forEach((meal) => {
     let items = [];
     const time = meal.querySelector("p").textContent.trim();
-    meal.querySelectorAll("html-blob ul").forEach((item) => {
+    meal.querySelectorAll("span ul").forEach((item) => {
       item.querySelectorAll("li").forEach((food) => {
         items.push(food.textContent.trim());
       });

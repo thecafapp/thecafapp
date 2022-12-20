@@ -9,9 +9,13 @@ export default async function handler(req, res) {
     const memos = await collection
       .find({ memo_text: { $exists: true } })
       .toArray();
-    res
-      .setHeader("Cache-Control", "max-age=120, public")
-      .status(200)
-      .json(memos[0]);
+    if (memos.length > 0) {
+      res
+        .setHeader("Cache-Control", "max-age=120, public")
+        .status(200)
+        .json(memos[0]);
+    } else {
+      res.status(404).json({ memo_id: -1 });
+    }
   }
 }

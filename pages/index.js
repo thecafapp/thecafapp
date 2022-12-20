@@ -7,10 +7,13 @@ import Vote from "../components/Vote";
 import styles from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
+import Memo from "../components/Memo";
 
 export default function Home() {
   const [data, setData] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
+  const [memo, setMemo] = useState({});
+  const [showMemo, setShowMemo] = useState(false);
   useEffect(() => {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
@@ -25,7 +28,22 @@ export default function Home() {
       .then((info) => {
         setRestaurants(info.restaurants);
       });
+    fetch("/api/memo")
+      .then((res) => res.json())
+      .then((info) => {
+        console.log(info);
+        setMemo(info);
+        if (info.memo_id <= Number(localStorage.getItem("lm"))) {
+          setShowMemo(false);
+        } else {
+          setShowMemo(true);
+        }
+      });
   }, []);
+  const closeMemo = () => {
+    localStorage.setItem("lm", memo.memo_id);
+    setShowMemo(false);
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -53,15 +71,6 @@ export default function Home() {
                 strokeWidth="5"
               ></circle>
             </svg>
-            {/* <p>
-              The{" "}
-              <a href="https://mc.edu" target="_blank" rel="noreferrer">
-                new MC website
-              </a>{" "}
-              currently doesn&apos;t provide the daily Caf menu. We hope this
-              issue will be resolved soon. As soon as the menu is re-added to
-              the new site we&apos;ll update this site accordingly.
-            </p> */}
           </div>
         )}
         {data && (
@@ -76,6 +85,12 @@ export default function Home() {
             <div className={styles.divider}></div>
             <Vote currentMealtime={data.meals[0]} />
             <div className={styles.divider}></div>
+            {memo && showMemo && (
+              <>
+                <Memo memo={memo} closeMemo={closeMemo} />
+                <div className={styles.divider}></div>
+              </>
+            )}
             <h3 className={styles.mealTitle} style={{ marginBottom: "0.5em" }}>
               Other Dining
             </h3>

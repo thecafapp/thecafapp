@@ -1,0 +1,39 @@
+.memo {
+  display: block;
+  background-color: rgba(255, 213, 0, 0.15);
+  padding: 1em;
+  border-radius: 0.4em;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+.memo h4 {
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: var(--text-secondary);
+  display: flex;
+}
+
+.memo h4:after {
+  content: "ANNOUNCEMENT";
+  font-size: 0.75em;
+  background-color: var(--text-secondary);
+  color: var(--bg-primary);
+  padding: 0.1em 0.4em;
+  line-height: 1.4em;
+  display: block;
+  margin-left: 0.5em;
+  border-radius: 0.35em;
+}
+
+.memo p {
+  color: var(--text-primary);
+}
+
+.close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-family: "Material Symbols Outlined";
+  user-select: none;
+}

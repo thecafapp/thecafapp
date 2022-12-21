@@ -1,0 +1,65 @@
+.form {
+  display: block;
+  background-color: var(--bg-secondary);
+  padding: 1em;
+  border-radius: 0.4em;
+  margin-bottom: 0.5em;
+  color: var(--text-primary);
+}
+
+.form h2 {
+  margin-bottom: 0.5rem;
+  font-family: "PS Fournier Std", sans-serif;
+  font-weight: normal;
+}
+
+.form input,
+.form textarea {
+  font-family: inherit;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.form input[type="text"],
+.form textarea {
+  background: transparent;
+  font-size: 1.2rem;
+  border: none;
+  border-bottom: 2px solid var(--bg-primary);
+  padding: 0.25rem 0;
+  outline: none;
+  width: 100%;
+  transition: border 250ms;
+}
+
+.form input[type="text"]:focus {
+  border-bottom-color: #c19932;
+}
+
+.form input {
+  accent-color: #c19932;
+}
+
+.form input[type="datetime-local"] {
+  background: transparent;
+  border: none;
+  padding: 1em 0;
+  color: var(--text-primary);
+}
+
+.form input[type="datetime-local"] {
+  color-scheme: dark;
+}
+
+.button {
+  background-color: #c19932;
+  color: white;
+  padding: 1em 1.5em;
+  border: none;
+  border-radius: 0.4rem;
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.2ch;
+  cursor: pointer;
+}

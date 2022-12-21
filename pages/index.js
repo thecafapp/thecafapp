@@ -4,16 +4,18 @@ import Meal from "../components/Meal";
 import Restaurant from "../components/Restaurant";
 import Timer from "../components/Timer";
 import Vote from "../components/Vote";
-import styles from "../styles/Home.module.css";
+import s from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
 import Memo from "../components/Memo";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [data, setData] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
   const [memo, setMemo] = useState({});
   const [showMemo, setShowMemo] = useState(false);
+  // const router = useRouter();
   useEffect(() => {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
@@ -45,7 +47,7 @@ export default function Home() {
     setShowMemo(false);
   };
   return (
-    <div className={styles.container}>
+    <div className={s.container}>
       <Head>
         <title>The Caf at MC</title>
         <meta
@@ -55,13 +57,19 @@ export default function Home() {
         <link rel="icon" href="/icons/icon.png" />
       </Head>
 
-      <main className={styles.main}>
-        <header className={styles.header}>
-          <h1>The Caf at MC</h1>
+      <main className={s.main}>
+        <header className={s.header}>
+          <h1
+          // onClick={() => {
+          //   router.push("/admin");
+          // }}
+          >
+            The Caf at MC
+          </h1>
         </header>
         {!data && (
-          <div className={styles.loading}>
-            <svg className={styles.spinner} viewBox="0 0 50 50">
+          <div className={s.loading}>
+            <svg className={s.spinner} viewBox="0 0 50 50">
               <circle
                 className="path"
                 cx="25"
@@ -74,27 +82,27 @@ export default function Home() {
           </div>
         )}
         {data && (
-          <div className={styles.content}>
+          <div className={s.content}>
             <Timer meal={data.meals[0]} />
             {data.meals.map((meal, i) => (
               <details key={i} open={i == 0}>
-                <summary className={styles.mealTitle}>{meal.name}</summary>
+                <summary className={s.mealTitle}>{meal.name}</summary>
                 <Meal meal={meal} />
               </details>
             ))}
-            <div className={styles.divider}></div>
+            <div className={s.divider}></div>
             <Vote currentMealtime={data.meals[0]} />
-            <div className={styles.divider}></div>
+            <div className={s.divider}></div>
             {memo && showMemo && (
               <>
                 <Memo memo={memo} closeMemo={closeMemo} />
-                <div className={styles.divider}></div>
+                <div className={s.divider}></div>
               </>
             )}
-            <h3 className={styles.mealTitle} style={{ marginBottom: "0.5em" }}>
+            <h3 className={s.mealTitle} style={{ marginBottom: "0.5em" }}>
               Other Dining
             </h3>
-            <div className={styles.restaurants}>
+            <div className={s.restaurants}>
               {restaurants
                 .sort((a) => {
                   if (a.hours.current == true) {
@@ -107,11 +115,11 @@ export default function Home() {
                   <Restaurant restaurant={rr} key={i} />
                 ))}
             </div>
-            <p className={styles.notice}>
+            <p className={s.notice}>
               <b>Notice:</b> this section may vary on breaks and holidays
             </p>
-            <div className={styles.divider}></div>
-            <p className={styles.disclaimer}>
+            <div className={s.divider}></div>
+            <p className={s.disclaimer}>
               All data comes from the{" "}
               <a
                 href="https://www.mc.edu/offices/food/"

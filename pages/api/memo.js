@@ -17,5 +17,22 @@ export default async function handler(req, res) {
     } else {
       res.status(404).json({ memo_id: -1 });
     }
+  } else if (req.method == "POST") {
+    const meta = await collection
+      .find({ last_id: { $exists: true } })
+      .toArray();
+    const password = meta[0].password;
+    const memo_id = meta[0].last_id;
+    if (req.headers["x-password"] == password) {
+      let body = JSON.parse(req.body);
+      if (!body) {
+        res.send(400);
+      }
+      body.memo_id = memo_id + 1;
+      await collection.insertOne(body);
+      res.status(201);
+    } else {
+      res.status(401).send();
+    }
   }
 }

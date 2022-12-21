@@ -12,6 +12,10 @@
   color: var(--text-secondary);
 }
 
+.mealInfo ul {
+  line-height: 1.1em;
+}
+
 .mealFoods {
   list-style-type: none;
   color: var(--text-primary);

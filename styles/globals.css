@@ -1,3 +1,25 @@
+@font-face {
+  font-family: "PS Fournier Std";
+  src: url("/assets/std.woff2");
+}
+
+@font-face {
+  font-family: "PS Fournier Grand";
+  src: url("/assets/bold.woff2");
+}
+
+@font-face {
+  font-family: "New Atten";
+  src: url("/assets/body.woff2");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "New Atten";
+  src: url("/assets/bodybold.woff2");
+  font-weight: bold;
+}
+
 html {
   --text-primary: #0c2340;
   --text-secondary: #2e6983;
@@ -20,9 +42,8 @@ html {
 
 html,
 body {
-  font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, Segoe UI,
-    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: "New Atten", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: var(--bg-primary);
 }
 
@@ -67,4 +88,8 @@ details[open] summary:after {
   transform: translateY(3px);
   display: inline-block;
   margin-left: 0.25em;
+}
+
+p {
+  line-height: 1.1em;
 }

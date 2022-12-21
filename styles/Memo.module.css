@@ -16,14 +16,17 @@
 
 .memo h4:after {
   content: "ANNOUNCEMENT";
-  font-size: 0.75em;
+  font-size: 0.65em;
   background-color: var(--text-secondary);
   color: var(--bg-primary);
   padding: 0.1em 0.4em;
-  line-height: 1.4em;
-  display: block;
-  margin-left: 0.5em;
+  padding-bottom: 0;
+  margin-left: 0.75em;
   border-radius: 0.35em;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 .memo p {

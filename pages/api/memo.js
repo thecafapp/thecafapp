@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { memo } from "react";
 export default async function handler(req, res) {
   const client = new MongoClient(process.env.CAFMONGO);
   const dbName = "info";
@@ -25,12 +26,16 @@ export default async function handler(req, res) {
     const memo_id = meta[0].last_id;
     if (req.headers["x-password"] == password) {
       let body = JSON.parse(req.body);
-      if (!body) {
-        res.send(400);
+      if (!body.memo_text || !body.memo_title || !memo.expiresAt) {
+        res.status(400).send();
       }
       body.memo_id = memo_id + 1;
+      await collection.updateOne(
+        { last_id: memo_id },
+        { $set: { last_id: memo_id + 1 } }
+      );
       await collection.insertOne(body);
-      res.status(201);
+      res.status(201).send();
     } else {
       res.status(401).send();
     }

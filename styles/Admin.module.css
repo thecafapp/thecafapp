@@ -21,7 +21,8 @@
 }
 
 .form input[type="text"],
-.form textarea {
+.form textarea,
+.form input[type="password"] {
   background: transparent;
   font-size: 1.2rem;
   border: none;
@@ -32,7 +33,8 @@
   transition: border 250ms;
 }
 
-.form input[type="text"]:focus {
+.form input[type="text"]:focus,
+.form input[type="password"]:focus {
   border-bottom-color: #c19932;
 }
 

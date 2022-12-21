@@ -61,7 +61,7 @@ export default function Admin() {
             />
             <input
               name="password"
-              type="text"
+              type="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}

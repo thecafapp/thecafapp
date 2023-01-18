@@ -29,7 +29,9 @@ export default async function handler(req, res) {
       if (!body.memo_text || !body.memo_title || !memo.expiresAt) {
         res.status(400).send();
       }
+      body.expiresAt = new Date(body.expiresAt);
       body.memo_id = memo_id + 1;
+      console.log(body);
       await collection.updateOne(
         { last_id: memo_id },
         { $set: { last_id: memo_id + 1 } }

@@ -4,7 +4,6 @@ import a from "../styles/Admin.module.css";
 import { useState } from "react";
 
 export default function Admin() {
-  const d = new Date();
   const [memo_title, setMemoTitle] = useState("");
   const [memo_text, setMemoText] = useState("");
   const [expiresAt, setExpiresAt] = useState("2023-01-01T00:00");

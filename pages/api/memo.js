@@ -25,7 +25,7 @@ export default async function handler(req, res) {
     const memo_id = meta[0].last_id;
     if (req.headers["x-password"] == password) {
       let body = JSON.parse(req.body);
-      if (!body.memo_text || !body.memo_title || !memo.expiresAt) {
+      if (!body.memo_text || !body.memo_title || !body.expiresAt) {
         res.status(400).send();
       }
       body.expiresAt = new Date(body.expiresAt);

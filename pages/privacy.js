@@ -37,9 +37,9 @@ export default function Privacy() {
               except on TheCaf.me.
               <br />
               <br />
-              If you'd like your data to be deleted, log into TheCaf.me, click
-              your profile picture, and select the Delete Account button. We
-              will do our best to scrub all personal info from our servers.
+              If you&apos;d like your data to be deleted, log into TheCaf.me,
+              click your profile picture, and select the Delete Account button.
+              We will do our best to scrub all personal info from our servers.
             </p>
           </div>
         </div>

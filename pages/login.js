@@ -36,6 +36,7 @@ function Login() {
             },
           ],
           signInSuccessUrl: "/",
+          signInFlow: "popup",
         });
       });
     } else if (user) {

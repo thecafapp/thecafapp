@@ -7,7 +7,6 @@ export default function Leaderboard({ memo, closeMemo }) {
   const user = useFirebaseUser();
   const [leaderboard, setLeaderboard] = useState([]);
   useEffect(() => {
-    if (!user) return;
     fetch(`/api/leaderboard`)
       .then((res) => res.json())
       .then((json) => {

@@ -24,7 +24,7 @@ export default async function handler(req, res) {
         .toArray();
       if (users.length > 0) {
         res
-          .setHeader("Cache-Control", "max-age=170, public")
+          .setHeader("Cache-Control", "max-age=600, public")
           .status(200)
           .json({ leaderboard: users });
       } else {

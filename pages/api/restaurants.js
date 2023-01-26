@@ -71,8 +71,10 @@ export default async function handler(req, res) {
       name: "Corner Grill",
       hours: {
         "M-T": {
-          open: "4:30 PM",
-          close: "8:30 PM",
+          // open: "4:30 PM",
+          // close: "8:30 PM",
+          open: null,
+          close: null,
         },
         F: {
           open: null,

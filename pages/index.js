@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import Meal from "../components/Meal";
 import Restaurant from "../components/Restaurant";
@@ -8,15 +9,19 @@ import s from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
 import Memo from "../components/Memo";
-import { useRouter } from "next/router";
+import Leaderboard from "../components/Leaderboard";
+import useFirebaseUser from "../hooks/useFirebaseUser";
+// import { useRouter } from "next/router";
 
 export default function Home() {
   const [data, setData] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
   const [memo, setMemo] = useState({});
   const [showMemo, setShowMemo] = useState(false);
+  const user = useFirebaseUser();
   // const router = useRouter();
   useEffect(() => {
+    console.log(user);
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
@@ -59,13 +64,13 @@ export default function Home() {
 
       <main className={s.main}>
         <header className={s.header}>
-          <h1
-          // onClick={() => {
-          //   router.push("/admin");
-          // }}
-          >
-            The Caf at MC
-          </h1>
+          <h1>The Caf at MC</h1>
+          <Link href="/login" role="button">
+            <img
+              src={user ? user.photoURL : "/account.svg"}
+              className={s.authImage}
+            />
+          </Link>
         </header>
         {!data && (
           <div className={s.loading}>
@@ -119,8 +124,10 @@ export default function Home() {
               <b>Notice:</b> this section may vary on breaks and holidays
             </p>
             <div className={s.divider}></div>
+            <Leaderboard />
+            <div className={s.divider}></div>
             <p className={s.disclaimer}>
-              All data comes from the{" "}
+              Meal and hour data comes from the{" "}
               <a
                 href="https://www.mc.edu/offices/food/"
                 target="_blank"
@@ -128,7 +135,8 @@ export default function Home() {
               >
                 official MC website
               </a>
-              . This dashboard was created by{" "}
+              .<br />
+              This dashboard was created by{" "}
               <a
                 href="https://micahlindley.com"
                 target="_blank"

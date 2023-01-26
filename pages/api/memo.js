@@ -1,5 +1,4 @@
 import { MongoClient } from "mongodb";
-import { memo } from "react";
 export default async function handler(req, res) {
   const client = new MongoClient(process.env.CAFMONGO);
   const dbName = "info";

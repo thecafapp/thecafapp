@@ -1,13 +1,15 @@
 .header {
   text-align: center;
   background: rgba(18, 34, 62, 0.9);
-  padding: 1.25rem 0;
+  padding: 1.25rem 1rem;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
   position: fixed;
   width: 100%;
   z-index: 10;
   backdrop-filter: blur(5px);
   user-select: none;
+  display: grid;
+  grid-template-columns: 2em auto 2em;
 }
 
 .header h1 {
@@ -15,6 +17,24 @@
   font-weight: normal;
   font-family: "PS Fournier Grand", sans-serif;
   font-size: 1.5em;
+  text-align: center;
+  grid-column: 2 / 2;
+}
+
+.header img {
+  height: 2rem;
+  border-radius: 100%;
+  border: 2px solid #c19932;
+  cursor: pointer;
+}
+
+.header img[src="/account.svg"],
+.header img[src="/back.svg"] {
+  border: none;
+}
+
+.header img .header img:active {
+  filter: brightness(0.8);
 }
 
 .content {

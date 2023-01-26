@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Rating } from "react-simple-star-rating";
+import useFirebaseUser from "../hooks/useFirebaseUser";
 import styles from "../styles/Vote.module.css";
+
 Modal.setAppElement("#__next");
 export default function Vote({ currentMealtime }) {
   const [dailyRating, setDailyRating] = useState(null);
@@ -9,14 +11,16 @@ export default function Vote({ currentMealtime }) {
   const [canRate, setCanRate] = useState(true);
   const [myRating, setMyRating] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const user = useFirebaseUser();
   useEffect(() => {
     getRating();
+    console.log(user);
   }, []);
   const getRating = (noCache) => {
     fetch(
-      `/api/ratings?id=${window.localStorage.getItem(
-        "iden"
-      )}&_vercel_no_cache=${noCache || 0}`
+      `/api/ratings?id=${
+        user ? user.uid : window.localStorage.getItem("iden")
+      }&_vercel_no_cache=${noCache || 0}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -26,10 +30,18 @@ export default function Vote({ currentMealtime }) {
       });
   };
   const sendRating = () => {
-    fetch(`/api/ratings?id=${window.localStorage.getItem("iden")}`, {
-      method: "POST",
-      body: JSON.stringify({ rating: myRating, expires: currentMealtime.end }),
-    })
+    fetch(
+      `/api/ratings?id=${
+        user ? user.uid : window.localStorage.getItem("iden")
+      }&idType=${user ? "user" : "anon"}`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          rating: myRating,
+          expires: currentMealtime.end,
+        }),
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         closeModal();

@@ -1,0 +1,80 @@
+.leaderboard {
+  display: block;
+  background-color: rgba(23, 43, 77, 0.15);
+  padding: 1em;
+  border-radius: 0.4em;
+  margin-bottom: 0.5em;
+  position: relative;
+  box-shadow: 0 0.2em 0.4em rgba(0, 0, 0, 0.2);
+}
+
+.leaderboard h4 {
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: var(--text-secondary);
+  display: flex;
+}
+
+.leaderboard h4:after {
+  content: "NEW";
+  font-size: 0.65em;
+  background-color: var(--text-secondary);
+  color: var(--bg-primary);
+  padding: 0.1em 0.4em;
+  padding-bottom: 0;
+  margin-left: 0.75em;
+  border-radius: 0.35em;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  float: right;
+}
+
+.leaderboard ol {
+  color: var(--text-primary);
+  list-style-type: none;
+  list-style-position: inside;
+  counter-reset: item;
+}
+
+.leaderboard li {
+  counter-increment: item;
+  display: flex;
+}
+
+.leaderboard li:before {
+  content: "#" counter(item);
+  font-weight: bold;
+  opacity: 0.5;
+  margin-right: 0.5em;
+  color: #f7c23b;
+}
+
+.close {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-family: "Material Symbols Outlined";
+  user-select: none;
+}
+
+.points {
+  opacity: 0.6;
+}
+
+.line {
+  border-bottom: 1px dotted white;
+  flex-grow: 1;
+  margin-left: 1em;
+  margin-right: 1em;
+  opacity: 0.3;
+  transform: translateY(-50%);
+}
+
+.join {
+  font-size: 0.8em;
+  opacity: 0.6;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 1em;
+}

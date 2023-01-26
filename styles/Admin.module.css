@@ -7,6 +7,10 @@
   color: var(--text-primary);
 }
 
+.form.login {
+  text-align: center;
+}
+
 .form h2 {
   margin-bottom: 0.5rem;
   font-family: "PS Fournier Std", sans-serif;
@@ -64,4 +68,30 @@
   text-transform: uppercase;
   letter-spacing: 0.2ch;
   cursor: pointer;
+}
+
+.button:last-of-type {
+  background-color: rgb(192, 30, 30);
+  margin-left: 0.5em;
+}
+
+.buttons {
+  margin-top: 1rem;
+}
+
+.login p {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+.disclaimer {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  opacity: 0.6;
+  width: 100% !important;
+}
+
+.displayName {
+  margin-bottom: 0.1em !important;
 }

@@ -1,13 +1,30 @@
 import { MongoClient } from "mongodb";
+import firebaseAdmin from "firebase-admin";
+const firebaseApp = firebaseAdmin.initializeApp({
+  credential: firebaseAdmin.credential.cert({
+    type: "service_account",
+    project_id: "thecaf-dotme",
+    private_key_id: "cf90b96c985183503d6e95b91ef09d985702709b",
+    private_key: process.env.FIREBASE_PRIVATE_KEY,
+    client_email: process.env.FIREBASE_EMAIL,
+    client_id: "103347218908101696305",
+    auth_uri: "https://accounts.google.com/o/oauth2/auth",
+    token_uri: "https://oauth2.googleapis.com/token",
+    auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+    client_x509_cert_url:
+      "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-c3key%40thecaf-dotme.iam.gserviceaccount.com",
+  }),
+});
 export default async function handler(req, res) {
   const client = new MongoClient(process.env.CAFMONGO);
   const dbName = "info";
   await client.connect();
   const db = client.db(dbName);
-  const collection = db.collection("ratings");
+  const ratingsCollection = db.collection("ratings");
+  const usersCollection = db.collection("users");
   if (req.method == "GET") {
     if (req.query.id) {
-      const ratings = await collection.find({}).toArray();
+      const ratings = await ratingsCollection.find({}).toArray();
       let avg = 0,
         numItems = 0,
         alreadyRated = false;
@@ -33,15 +50,44 @@ export default async function handler(req, res) {
     }
   } else if (req.method == "POST") {
     const body = JSON.parse(req.body);
-    console.log(body);
     if (req.query.id && body.rating && body.expires) {
-      collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
-      const expiry = new Date(body.expires);
-      await collection.insertOne({
-        uid: req.query.id,
-        rating: body.rating,
-        expireAt: expiry,
-      });
+      if (req.query.idType == "user") {
+        const auth = firebaseApp.auth();
+        auth.getUser(req.query.id).then(async (user) => {
+          if (!user) res.status(401).json({ error: "Unknown user UID" });
+          ratingsCollection.createIndex(
+            { expireAt: 1 },
+            { expireAfterSeconds: 0 }
+          );
+          const expiry = new Date(body.expires);
+          await ratingsCollection.insertOne({
+            uid: req.query.id,
+            rating: body.rating,
+            expireAt: expiry,
+          });
+          await usersCollection.updateOne(
+            { uid: req.query.id },
+            {
+              $inc: { points: 10 },
+              $set: {
+                uid: req.query.id,
+                name: user.displayName.replace(" (student)", ""),
+              },
+            },
+            {
+              upsert: true,
+            }
+          );
+        });
+      } else {
+        // collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
+        // const expiry = new Date(body.expires);
+        // await collection.insertOne({
+        //   uid: req.query.id,
+        //   rating: body.rating,
+        //   expireAt: expiry,
+        // });
+      }
       res.status(200).json({ status: "success" });
     } else {
       res.status(400).json({

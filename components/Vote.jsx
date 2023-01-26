@@ -13,13 +13,14 @@ export default function Vote({ currentMealtime }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const user = useFirebaseUser();
   useEffect(() => {
-    getRating();
-    console.log(user);
-  }, []);
-  const getRating = (noCache) => {
+    if (user || user == false) {
+      getRating(0, user);
+    }
+  }, [user]);
+  const getRating = async (noCache, personalUser) => {
     fetch(
       `/api/ratings?id=${
-        user ? user.uid : window.localStorage.getItem("iden")
+        personalUser ? personalUser.uid : window.localStorage.getItem("iden")
       }&_vercel_no_cache=${noCache || 0}`
     )
       .then((res) => res.json())
@@ -46,7 +47,7 @@ export default function Vote({ currentMealtime }) {
       .then(() => {
         closeModal();
         setCanRate(false);
-        getRating(1);
+        getRating(1, user);
       });
   };
   const openModal = (rating) => {

@@ -70,7 +70,7 @@
   cursor: pointer;
 }
 
-.button:last-of-type {
+.button:nth-of-type(2) {
   background-color: rgb(192, 30, 30);
   margin-left: 0.5em;
 }

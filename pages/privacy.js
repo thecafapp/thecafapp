@@ -35,6 +35,11 @@ export default function Privacy() {
               Google grants us access to your email, profile picture, and other
               personal data. We do not share or transmit that data anywhere
               except on TheCaf.me.
+              <br />
+              <br />
+              If you'd like your data to be deleted, log into TheCaf.me, click
+              your profile picture, and select the Delete Account button. We
+              will do our best to scrub all personal info from our servers.
             </p>
           </div>
         </div>

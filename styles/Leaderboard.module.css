@@ -16,7 +16,7 @@
 }
 
 .leaderboard h4:after {
-  content: "NEW";
+  content: "BETA";
   font-size: 0.65em;
   background-color: var(--text-secondary);
   color: var(--bg-primary);

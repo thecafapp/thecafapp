@@ -54,9 +54,13 @@ function Login() {
     firebase.auth().signOut();
   };
   const deleteUser = () => {
-    alert(
-      "Sorry, this functionality isn't ready yet.  Please email hi@micahlindley.com if your data needs to be deleted."
-    );
+    fetch(`/api/account?id=${user.uid}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(() => {
+        signOutUser();
+      });
   };
   return (
     <div className={s.container}>

@@ -54,13 +54,18 @@ function Login() {
     firebase.auth().signOut();
   };
   const deleteUser = () => {
-    fetch(`/api/account?id=${user.uid}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then(() => {
-        signOutUser();
-      });
+    const shouldDelete = confirm(
+      "Are you sure?  This will permanently remove all your points and you'll have to start from nothing if you sign up again."
+    );
+    if (shouldDelete) {
+      fetch(`/api/account?id=${user.uid}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then(() => {
+          signOutUser();
+        });
+    }
   };
   return (
     <div className={s.container}>

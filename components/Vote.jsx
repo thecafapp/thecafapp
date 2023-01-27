@@ -108,7 +108,9 @@ export default function Vote({ currentMealtime }) {
                 <p>You can only vote during mealtimes.</p>
               )
             ) : (
-              <p>You&apos;ve provided your rating for the day. Thank you!</p>
+              <p>
+                You&apos;ve provided your rating for this mealtime. Thank you!
+              </p>
             )}
           </div>
         </div>

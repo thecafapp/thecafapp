@@ -80,9 +80,12 @@ export default async function handler(req, res) {
           );
         });
       } else {
-        collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
+        ratingsCollection.createIndex(
+          { expireAt: 1 },
+          { expireAfterSeconds: 0 }
+        );
         const expiry = new Date(body.expires);
-        await collection.insertOne({
+        await ratingsCollection.insertOne({
           uid: req.query.id,
           rating: body.rating,
           expireAt: expiry,

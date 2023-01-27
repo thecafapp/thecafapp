@@ -78,6 +78,7 @@ export default async function handler(req, res) {
               upsert: true,
             }
           );
+          res.status(200).json({ status: "success" });
         });
       } else {
         ratingsCollection.createIndex(
@@ -90,8 +91,8 @@ export default async function handler(req, res) {
           rating: body.rating,
           expireAt: expiry,
         });
+        res.status(200).json({ status: "success" });
       }
-      res.status(200).json({ status: "success" });
     } else {
       res.status(400).json({
         error:

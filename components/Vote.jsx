@@ -17,7 +17,7 @@ export default function Vote({ currentMealtime }) {
       getRating(0, user);
     }
   }, [user]);
-  const getRating = async (noCache, personalUser) => {
+  const getRating = async (noCache, personalUser, forceNoRate) => {
     fetch(
       `/api/ratings?id=${
         personalUser ? personalUser.uid : window.localStorage.getItem("iden")
@@ -25,7 +25,7 @@ export default function Vote({ currentMealtime }) {
     )
       .then((res) => res.json())
       .then((json) => {
-        setCanRate(!json.alreadyRated);
+        setCanRate(forceNoRate == true ? false : !json.alreadyRated);
         setDailyRating(json.average);
         setNumItems(json.numItems);
       });
@@ -47,7 +47,7 @@ export default function Vote({ currentMealtime }) {
       .then(() => {
         closeModal();
         setCanRate(false);
-        getRating(1, user);
+        getRating(1, user, true);
       });
   };
   const openModal = (rating) => {

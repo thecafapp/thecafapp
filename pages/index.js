@@ -153,7 +153,7 @@ export default function Home() {
               >
                 Shoot me a DM
               </a>
-              .<Link href="/privacy">Privacy Policy</Link>
+              . <Link href="/privacy">Privacy Policy</Link>
             </p>
           </div>
         )}

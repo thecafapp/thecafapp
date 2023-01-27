@@ -20,11 +20,11 @@ export default async function handler(req, res) {
       const users = await collection
         .find({})
         .sort({ points: -1 })
-        .limit(5)
+        .limit(10)
         .toArray();
       if (users.length > 0) {
         res
-          .setHeader("Cache-Control", "max-age=600, public")
+          .setHeader("Cache-Control", "max-age=300, public")
           .status(200)
           .json({ leaderboard: users });
       } else {

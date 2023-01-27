@@ -80,13 +80,13 @@ export default async function handler(req, res) {
           );
         });
       } else {
-        // collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
-        // const expiry = new Date(body.expires);
-        // await collection.insertOne({
-        //   uid: req.query.id,
-        //   rating: body.rating,
-        //   expireAt: expiry,
-        // });
+        collection.createIndex({ expireAt: 1 }, { expireAfterSeconds: 0 });
+        const expiry = new Date(body.expires);
+        await collection.insertOne({
+          uid: req.query.id,
+          rating: body.rating,
+          expireAt: expiry,
+        });
       }
       res.status(200).json({ status: "success" });
     } else {

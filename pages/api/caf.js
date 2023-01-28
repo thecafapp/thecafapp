@@ -27,11 +27,15 @@ export default async function handler(req, res) {
   menu.forEach((meal) => {
     let items = [];
     const time = meal.querySelector("p").textContent.trim();
-    meal.querySelectorAll("span ul").forEach((item) => {
-      item.querySelectorAll("li").forEach((food) => {
-        items.push(food.textContent.trim());
+    meal
+      .querySelectorAll(
+        meal.querySelectorAll("span ul").length > 0 ? "span ul" : "ul"
+      )
+      .forEach((item) => {
+        item.querySelectorAll("li").forEach((food) => {
+          items.push(food.textContent.trim());
+        });
       });
-    });
     json.meals.push({
       name: meal.querySelector("h4").textContent.trim(),
       start: generateDate(time.split("-")[0].trim()),

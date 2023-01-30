@@ -30,6 +30,13 @@ html {
   --leaderboard-num: #a17914;
 }
 
+#firebaseui-auth-container .mdl-button {
+  box-shadow: none !important;
+  border-radius: 4px !important;
+  width: max-content !important;
+  font-family: "Product Sans", "Roboto", sans-serif;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     --text-primary: #d0ccc6;
@@ -39,6 +46,13 @@ html {
     --grad-1: #826215;
     --grad-2: #1e7186;
     --leaderboard-num: #f7c23b;
+  }
+  #firebaseui-auth-container .mdl-button {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+  }
+  #firebaseui-auth-container .firebaseui-idp-text {
+    color: white !important;
   }
 }
 

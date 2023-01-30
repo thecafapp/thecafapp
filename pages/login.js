@@ -115,7 +115,10 @@ function Login() {
           <div className={s.content}>
             <div className={classNames(a.form, a.login)}>
               <h2>Login to TheCaf.me</h2>
-              <div id="firebaseui-auth-container"></div>
+              <div
+                id="firebaseui-auth-container"
+                data-shape="rectangular"
+              ></div>
               <p>
                 Become a partner, start rating your meals, and get on the
                 leaderboard!

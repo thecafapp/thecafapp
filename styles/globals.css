@@ -27,6 +27,7 @@ html {
   --bg-secondary: #ddefff;
   --grad-1: #dca627;
   --grad-2: #268da8;
+  --leaderboard-num: #a17914;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +38,7 @@ html {
     --bg-secondary: #222426;
     --grad-1: #826215;
     --grad-2: #1e7186;
+    --leaderboard-num: #f7c23b;
   }
 }
 

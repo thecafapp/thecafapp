@@ -47,7 +47,7 @@
   font-weight: bold;
   opacity: 0.5;
   margin-right: 0.5em;
-  color: #f7c23b;
+  color: var(--leaderboard-num);
 }
 
 .close {

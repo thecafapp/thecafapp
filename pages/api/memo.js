@@ -8,6 +8,7 @@ export default async function handler(req, res) {
   if (req.method == "GET") {
     const memos = await collection
       .find({ memo_text: { $exists: true } })
+      .sort({ memo_id: -1 })
       .toArray();
     if (memos.length > 0) {
       res

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
           " " +
           new Date(Date.now()).getFullYear() +
           "CST"
-      ) - 3600000 // add 3600000 for Daylight Savings Time
+      ) - 3600000 // add 3600000 for Daylight Savings Time, 0 for not
     );
   };
   json.date = new Date(

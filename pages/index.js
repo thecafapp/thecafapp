@@ -11,6 +11,7 @@ import InstallPrompt from "../components/InstallPrompt";
 import Memo from "../components/Memo";
 import Leaderboard from "../components/Leaderboard";
 import useFirebaseUser from "../hooks/useFirebaseUser";
+import TransitionWarning from "../components/TransitionWarning";
 // import { useRouter } from "next/router";
 
 export default function Home() {
@@ -18,6 +19,8 @@ export default function Home() {
   const [restaurants, setRestaurants] = useState([]);
   const [memo, setMemo] = useState({});
   const [showMemo, setShowMemo] = useState(false);
+  const [menuError, setMenuError] = useState(false);
+  const [needsTransition, setNeedsTransition] = useState(false);
   const user = useFirebaseUser();
   // const router = useRouter();
   useEffect(() => {
@@ -25,10 +28,17 @@ export default function Home() {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
+    if (window.location.hostname == "temp.micahlindley.com") {
+      setNeedsTransition(true);
+    }
     fetch("/api/caf")
       .then((res) => res.json())
       .then((info) => {
-        setData(info);
+        if (info.error) {
+          setMenuError(true);
+        } else {
+          setData(info);
+        }
       });
     fetch("/api/restaurants")
       .then((res) => res.json())
@@ -72,7 +82,7 @@ export default function Home() {
             />
           </Link>
         </header>
-        {!data && (
+        {!data && !menuError && (
           <div className={s.loading}>
             <svg className={s.spinner} viewBox="0 0 50 50">
               <circle
@@ -86,18 +96,29 @@ export default function Home() {
             </svg>
           </div>
         )}
-        {data && (
+
+        {(data || menuError) && (
           <div className={s.content}>
-            <Timer meal={data.meals[0]} />
-            {data.meals.map((meal, i) => (
-              <details key={i} open={i == 0}>
-                <summary className={s.mealTitle}>{meal.name}</summary>
-                <Meal meal={meal} />
-              </details>
-            ))}
-            <div className={s.divider}></div>
-            <Vote currentMealtime={data.meals[0]} />
-            <div className={s.divider}></div>
+            {needsTransition && (
+              <>
+                <TransitionWarning />
+                <div className={s.divider}></div>
+              </>
+            )}
+            {!menuError && (
+              <>
+                {<Timer meal={data.meals[0]} />}
+                {data.meals.map((meal, i) => (
+                  <details key={i} open={i == 0}>
+                    <summary className={s.mealTitle}>{meal.name}</summary>
+                    <Meal meal={meal} />
+                  </details>
+                ))}
+                <div className={s.divider}></div>
+                <Vote currentMealtime={data.meals[0]} />
+                <div className={s.divider}></div>
+              </>
+            )}
             {memo && showMemo && (
               <>
                 <Memo memo={memo} closeMemo={closeMemo} />

@@ -1,0 +1,19 @@
+.card {
+  display: block;
+  background-color: rgba(255, 0, 0, 0.15);
+  padding: 1em;
+  border-radius: 0.4em;
+  margin-bottom: 0.5em;
+  position: relative;
+}
+
+.card h2 {
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: var(--text-secondary);
+  display: flex;
+}
+
+.card p {
+  color: var(--text-primary);
+}

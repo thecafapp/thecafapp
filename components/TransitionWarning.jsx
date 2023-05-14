@@ -20,8 +20,8 @@ export default function TransitionWarning() {
         <a href="https://thecaf.app" target="_blank" rel="noreferrer">
           thecaf.app
         </a>
-        ! {copy} This version will be discontinued in October and you won't be
-        able to access the app, and some features may break before then.
+        ! {copy} This version will be discontinued in October and you won&apos;t
+        be able to access the app, and some features may break before then.
       </p>
     </div>
   );

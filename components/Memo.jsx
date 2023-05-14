@@ -4,7 +4,7 @@ export default function Memo({ memo, closeMemo }) {
   return (
     <div className={styles.memo}>
       <h4>{memo.memo_title}</h4>
-      <p>{memo.memo_text}</p>
+      <p dangerouslySetInnerHTML={{ __html: memo.memo_text }} />
       {memo.dismissable && (
         <span
           title="Dismiss message"

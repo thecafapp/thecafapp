@@ -16,7 +16,7 @@ export default function TransitionWarning() {
     <div className={styles.card}>
       <h2>App Transition</h2>
       <p>
-        We're transitioning to a new domain,{" "}
+        We are transitioning to a new domain,{" "}
         <a href="https://thecaf.app" target="_blank" rel="noreferrer">
           thecaf.app
         </a>

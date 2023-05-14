@@ -28,7 +28,10 @@ export default function Home() {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
-    if (window.location.hostname == "temp.micahlindley.com") {
+    if (
+      window.location.hostname == "temp.micahlindley.com" ||
+      window.location.hostname == "thecaf.me"
+    ) {
       setNeedsTransition(true);
     }
     fetch("/api/caf")

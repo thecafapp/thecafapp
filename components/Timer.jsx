@@ -3,7 +3,7 @@ import ft from "friendly-time";
 import { stringify as du } from "simple-duration";
 import { useEffect, useState } from "react";
 
-export default function Timer({ meal }) {
+export default function Timer({ meal, error }) {
   const [method, setMethod] = useState(null);
   const [date, setDate] = useState(new Date());
   useEffect(() => {
@@ -30,27 +30,39 @@ export default function Timer({ meal }) {
     <>
       {method && (
         <div className={styles.timerParent} onClick={toggleMethod}>
-          <span title="Swap time views" className={styles.timerSwap}>
-            swap_horiz
-          </span>
-          {meal.start >= date && (
-            <>
-              <p>Next mealtime starts {method == "exact" && " in"}</p>
-              <h2>
-                {method == "relative"
-                  ? ft(new Date(meal.start))
-                  : du(meal.start / 1000 - date.getTime() / 1000, "m")}
-              </h2>
-            </>
+          {!error && (
+            <span title="Swap time views" className={styles.timerSwap}>
+              swap_horiz
+            </span>
           )}
-          {meal.start < date && (
+          {!error ? (
             <>
-              <p>This mealtime ends</p>
-              <h2>
-                {method == "relative"
-                  ? ft(new Date(meal.end))
-                  : du(meal.end / 1000 - date.getTime() / 1000, "m")}
-              </h2>
+              {" "}
+              {meal.start >= date && (
+                <>
+                  <p>Next mealtime starts {method == "exact" && " in"}</p>
+                  <h2>
+                    {method == "relative"
+                      ? ft(new Date(meal.start))
+                      : du(meal.start / 1000 - date.getTime() / 1000, "m")}
+                  </h2>
+                </>
+              )}
+              {meal.start < date && (
+                <>
+                  <p>This mealtime ends</p>
+                  <h2>
+                    {method == "relative"
+                      ? ft(new Date(meal.end))
+                      : du(meal.end / 1000 - date.getTime() / 1000, "m")}
+                  </h2>
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <p>Menu loading error</p>
+              <h2>No menu available</h2>
             </>
           )}
         </div>

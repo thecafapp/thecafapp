@@ -106,6 +106,8 @@ export default function Home() {
               <>
                 <TransitionWarning />
                 <div className={s.divider}></div>
+                <Timer error={true} />
+                <div className={s.divider}></div>
               </>
             )}
             {!menuError && (

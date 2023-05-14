@@ -15,9 +15,13 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0"
         />
-        <meta property="og:title" content="The Caf at MC" />
+        <meta property="og:title" content="The Caf App" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://thecaf.app" />
+        <meta
+          property="og:image"
+          content="https://thecaf.app/assets/opengraph.png"
+        />
         <meta
           property="og:description"
           content="Access hours and menus from the cafeteria at Mississippi College."

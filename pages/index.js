@@ -106,11 +106,9 @@ export default function Home() {
               <>
                 <TransitionWarning />
                 <div className={s.divider}></div>
-                <Timer error={true} />
-                <div className={s.divider}></div>
               </>
             )}
-            {!menuError && (
+            {!menuError ? (
               <>
                 {<Timer meal={data.meals[0]} />}
                 {data.meals.map((meal, i) => (
@@ -121,6 +119,11 @@ export default function Home() {
                 ))}
                 <div className={s.divider}></div>
                 <Vote currentMealtime={data.meals[0]} />
+                <div className={s.divider}></div>
+              </>
+            ) : (
+              <>
+                <Timer error={true} />
                 <div className={s.divider}></div>
               </>
             )}

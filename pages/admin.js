@@ -27,7 +27,7 @@ export default function Admin() {
         <title>Admin | The Caf at MC</title>
         <meta
           name="description"
-          content="Admin page to submit alerts to TheCaf.me"
+          content="Admin page to submit alerts to The Caf App"
         />
         <link rel="icon" href="/icons/icon.png" />
       </Head>

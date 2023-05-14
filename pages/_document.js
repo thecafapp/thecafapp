@@ -17,7 +17,7 @@ export default function Document() {
         />
         <meta property="og:title" content="The Caf at MC" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://thecaf.me" />
+        <meta property="og:url" content="https://thecaf.app" />
         <meta
           property="og:description"
           content="Access hours and menus from the cafeteria at Mississippi College."

@@ -1,5 +1,5 @@
 {
-  "name": "cafinfo",
+  "name": "thecafapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,15 +11,15 @@
   "dependencies": {
     "classnames": "^2.3.2",
     "crypto-random-string": "^5.0.0",
-    "firebase": "^9.16.0",
-    "firebase-admin": "^11.5.0",
+    "firebase": "^9.22.0",
+    "firebase-admin": "^11.8.0",
     "firebaseui": "^6.0.2",
     "friendly-time": "^1.1.1",
     "jsdom": "^20.0.3",
-    "mongodb": "^4.13.0",
+    "mongodb": "^4.16.0",
     "next": "12.3.1",
     "next-pwa": "^5.6.0",
-    "nextjs-google-analytics": "^2.3.0",
+    "nextjs-google-analytics": "^2.3.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",

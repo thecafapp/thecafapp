@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
-  authDomain: "login.thecaf.me", // login.thecaf.me
+  authDomain: "login.thecaf.app",
   projectId: "thecaf-dotme",
   storageBucket: "thecaf-dotme.appspot.com",
   appId: "1:545159752910:web:bd66c8c0e7e0b2d0d6f49f",
@@ -114,7 +114,7 @@ function Login() {
         ) : (
           <div className={s.content}>
             <div className={classNames(a.form, a.login)}>
-              <h2>Login to TheCaf.me</h2>
+              <h2>Login to The Caf App</h2>
               <div
                 id="firebaseui-auth-container"
                 data-shape="rectangular"

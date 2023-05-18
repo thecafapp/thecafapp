@@ -3,7 +3,7 @@ import styles from "../styles/TransitionWarning.module.css";
 
 export default function TransitionWarning() {
   const [copy, setCopy] = useState(
-    "It looks like you're still using the old version.  Please switch as soon as you can!"
+    "You've been redirected from the old URL.  Please switch as soon as you can!"
   );
   useEffect(() => {
     if (window.matchMedia("(display-mode: standalone)").matches) {
@@ -16,12 +16,12 @@ export default function TransitionWarning() {
     <div className={styles.card}>
       <h2>App Transition</h2>
       <p>
-        We are transitioning to a new domain,{" "}
+        You've been redirected to our new URL,{" "}
         <a href="https://thecaf.app" target="_blank" rel="noreferrer">
           thecaf.app
         </a>
-        ! {copy} This version will be discontinued in October and you won&apos;t
-        be able to access the app, and some features may break before then.
+        ! {copy} The old URL will be discontinued in October and you won&apos;t
+        be able to access the app.
       </p>
     </div>
   );

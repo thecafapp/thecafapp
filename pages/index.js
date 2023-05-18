@@ -14,6 +14,8 @@ import useFirebaseUser from "../hooks/useFirebaseUser";
 import TransitionWarning from "../components/TransitionWarning";
 // import { useRouter } from "next/router";
 
+const SHIM_API = true;
+
 export default function Home() {
   const [data, setData] = useState(null);
   const [restaurants, setRestaurants] = useState([]);
@@ -31,7 +33,7 @@ export default function Home() {
     if (window.location.href.includes("?redir")) {
       setNeedsTransition(true);
     }
-    fetch("/api/caf")
+    fetch(`/api/caf${SHIM_API ? "?shim=true" : ""}`)
       .then((res) => res.json())
       .then((info) => {
         if (info.error) {
@@ -96,7 +98,6 @@ export default function Home() {
             </svg>
           </div>
         )}
-
         {(data || menuError) && (
           <div className={s.content}>
             {needsTransition && (
@@ -180,6 +181,8 @@ export default function Home() {
                 Shoot me a DM
               </a>
               . <Link href="/privacy">Privacy Policy</Link>
+              {" - "}
+              <Link href="/docs">API Docs</Link>
             </p>
           </div>
         )}

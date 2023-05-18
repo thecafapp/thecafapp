@@ -1,0 +1,37 @@
+import s from "../styles/Home.module.css";
+import t from "../styles/Docs.module.css";
+import classNames from "classnames";
+
+<main className={s.main}>
+  <header className={s.header}>
+    <h1>API Documentation</h1>
+  </header>
+  <div className={classNames(s.content, t.parent)}>
+  
+  # `/api/caf`
+  Gets the food in the caf for the day as a list of meals and their times.
+  
+  ### Queries
+| query  | type     | description               | optional |
+|--------|----------|---------------------------|----------|
+| shim   | `Bool`   | use fake data for testing | yes      |
+
+ ### Response
+```json
+{
+  date: Date,
+  meals: [{
+    name: String,
+    start: Date,
+    end: Date,
+    times: String,
+    menu: [
+      String
+    ]
+  }]
+}
+```
+
+  </div>
+</main>
+;

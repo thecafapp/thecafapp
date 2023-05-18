@@ -1,0 +1,41 @@
+.parent {
+  color: var(--text-primary);
+}
+
+.parent h1 {
+  margin: 0.7rem 0;
+}
+
+.parent h3 {
+  margin: 0.5em 0;
+}
+
+.parent code {
+  padding: 0.2em 0.35em;
+  margin-bottom: 0.4em;
+  background-color: var(--bg-secondary);
+  border-radius: 0.4em;
+}
+
+.parent p {
+  margin-bottom: 0.5rem;
+}
+
+.parent td,
+.parent th {
+  border: 1px solid var(--text-secondary);
+  padding: 1em;
+}
+
+.parent table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.parent pre {
+  line-height: 1.5em;
+  width: 100%;
+  background-color: var(--bg-secondary);
+  border-radius: 0.4em;
+  padding: 0.5em;
+}

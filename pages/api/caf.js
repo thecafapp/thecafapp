@@ -1,8 +1,26 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const parser = require("jsdom");
 const { JSDOM } = parser;
 export default async function handler(req, res) {
   const json = { meals: [], date: "" };
+  const generateDate = (time, date) => {
+    return (
+      new Date(date + ", " + time + " " + new Date().getFullYear() + "CST") -
+      3600000 // set to 3600000 for Daylight Savings Time, 0 for not
+    );
+  };
+  if (req.query.shim) {
+    json.meals = [
+      {
+        name: "Lunch",
+        start: generateDate("11:00 AM", "August 4"),
+        end: generateDate("3:00 PM", "August 4"),
+        times: "11:00AM - 3:00PM",
+        menu: ["Spaghetti", "Italian Bread"],
+      },
+    ];
+    res.setHeader("Cache-Control", "max-age=60, public").status(200).json(json);
+    return;
+  }
   const result = await fetch("https://www.mc.edu/offices/food/caf");
   const data = await result.text();
   const dom = new JSDOM(data);
@@ -10,21 +28,7 @@ export default async function handler(req, res) {
     const page = dom.window.document.querySelector("article.content");
     const menu = page.querySelector(".items").querySelectorAll(".item");
     const menuDate = page.querySelector("h3").textContent.trim();
-    const generateDate = (time) => {
-      return (
-        new Date(
-          menuDate +
-            ", " +
-            time +
-            " " +
-            new Date(Date.now()).getFullYear() +
-            "CST"
-        ) - 3600000 // add 3600000 for Daylight Savings Time, 0 for not
-      );
-    };
-    json.date = new Date(
-      menuDate + ", 0:00" + new Date(Date.now()).getFullYear() + "CST"
-    );
+    json.date = generateDate(Date.now(), menuDate);
     menu.forEach((meal) => {
       let items = [];
       const time = meal.querySelector("p").textContent.trim();

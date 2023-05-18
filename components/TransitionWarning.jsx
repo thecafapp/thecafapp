@@ -16,7 +16,7 @@ export default function TransitionWarning() {
     <div className={styles.card}>
       <h2>App Transition</h2>
       <p>
-        You've been redirected to our new URL,{" "}
+        You&apos;ve been redirected to our new URL,{" "}
         <a href="https://thecaf.app" target="_blank" rel="noreferrer">
           thecaf.app
         </a>

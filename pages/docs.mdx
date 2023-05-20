@@ -8,7 +8,7 @@ import classNames from "classnames";
   </header>
   <div className={classNames(s.content, t.parent)}>
   
-  # `/api/caf`
+  # `GET /api/caf`
   Gets the food in the caf for the day as a list of meals and their times.
   
   ### Queries
@@ -16,7 +16,7 @@ import classNames from "classnames";
 |--------|----------|---------------------------|----------|
 | shim   | `Bool`   | use fake data for testing | yes      |
 
- ### Response
+  ### Response
 ```json
 {
   date: Date,
@@ -28,6 +28,20 @@ import classNames from "classnames";
     menu: [
       String
     ]
+  }]
+}
+```
+
+  # `GET /api/leaderboard`
+  Gets a list of the top users sorted by points (number of reviews * 10).
+  
+  ### Response
+```json
+{
+  leaderboard: [{
+    name: String,
+    points: Number,
+    uid: String
   }]
 }
 ```

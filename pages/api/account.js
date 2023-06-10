@@ -4,7 +4,7 @@ const firebaseApp = firebaseAdmin.initializeApp({
   credential: firebaseAdmin.credential.cert({
     type: "service_account",
     project_id: "thecaf-dotme",
-    private_key_id: "cf90b96c985183503d6e95b91ef09d985702709b",
+    private_key_id: "5d24fb90d04cf25e5252d26f388584a9817eb81d",
     private_key: process.env.FIREBASE_PRIVATE_KEY,
     client_email: process.env.FIREBASE_EMAIL,
     client_id: "103347218908101696305",

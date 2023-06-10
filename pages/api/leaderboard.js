@@ -9,11 +9,13 @@ export default async function handler(req, res) {
     if (req.query.id) {
       const user = await collection.findOne({ uid: req.query.id });
       if (user) {
+        client.close();
         res
           .setHeader("Cache-Control", "max-age=170, public")
           .status(200)
           .json(user);
       } else {
+        client.close();
         res.status(404).json({ error: "User not found" });
       }
     } else {
@@ -23,11 +25,13 @@ export default async function handler(req, res) {
         .limit(10)
         .toArray();
       if (users.length > 0) {
+        client.close();
         res
           .setHeader("Cache-Control", "max-age=300, public")
           .status(200)
           .json({ leaderboard: users });
       } else {
+        client.close();
         res.status(404).json({ error: "No users in leaderboard" });
       }
     }

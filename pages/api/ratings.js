@@ -39,11 +39,13 @@ export default async function handler(req, res) {
       if (numItems == 0) {
         avg = 0;
       }
+      client.close();
       res
         .setHeader("Cache-Control", "max-age=30, public")
         .status(200)
         .json({ average: avg.toFixed(1), numItems, alreadyRated });
     } else {
+      client.close();
       res
         .status(400)
         .json({ error: "You must provide a unique consistent UID." });
@@ -57,36 +59,9 @@ export default async function handler(req, res) {
         })
         .then(async (document) => {
           if (!document) {
-            if (req.query.idType == "user") {
-              const auth = firebaseApp.auth();
-              auth.getUser(req.query.id).then(async (user) => {
-                if (!user) res.status(401).json({ error: "Unknown user UID" });
-                ratingsCollection.createIndex(
-                  { expireAt: 1 },
-                  { expireAfterSeconds: 0 }
-                );
-                const expiry = new Date(body.expires);
-                await ratingsCollection.insertOne({
-                  uid: req.query.id,
-                  rating: body.rating,
-                  expireAt: expiry,
-                });
-                await usersCollection.updateOne(
-                  { uid: req.query.id },
-                  {
-                    $inc: { points: 10 },
-                    $set: {
-                      uid: req.query.id,
-                      name: user.displayName.replace(" (student)", ""),
-                    },
-                  },
-                  {
-                    upsert: true,
-                  }
-                );
-                res.status(200).json({ status: "success" });
-              });
-            } else {
+            const auth = firebaseApp.auth();
+            auth.getUser(req.query.id).then(async (user) => {
+              if (!user) res.status(401).json({ error: "Unknown user UID" });
               ratingsCollection.createIndex(
                 { expireAt: 1 },
                 { expireAfterSeconds: 0 }
@@ -97,13 +72,29 @@ export default async function handler(req, res) {
                 rating: body.rating,
                 expireAt: expiry,
               });
+              await usersCollection.updateOne(
+                { uid: req.query.id },
+                {
+                  $inc: { points: 10 },
+                  $set: {
+                    uid: req.query.id,
+                    name: user.displayName.replace(" (student)", ""),
+                  },
+                },
+                {
+                  upsert: true,
+                }
+              );
+              client.close();
               res.status(200).json({ status: "success" });
-            }
+            });
           } else {
+            client.close();
             res.status(403).json({ status: "illegal" });
           }
         });
     } else {
+      client.close();
       res.status(400).json({
         error:
           "You must provide a unique consistent UID, expiry, and a rating.",

@@ -1,0 +1,46 @@
+.foodName {
+  flex: 1;
+  text-align: left;
+}
+
+.foodRating {
+  color: var(--leaderboard-num);
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: auto auto;
+  line-height: 1;
+  margin-left: 1rem;
+}
+
+.foodRating:after {
+  content: "star";
+  font-family: "Material Symbols Outlined";
+  line-height: 0.7;
+  margin-left: 0.25em;
+}
+
+.foodRating[data-rating="0"] {
+  color: var(--text-secondary);
+}
+
+.menuItem {
+  display: flex;
+  background-color: var(--bg-primary);
+  border-radius: 0.4rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.menuItem:last-of-type {
+  margin-bottom: 0;
+}
+
+.rate {
+  background: var(--bg-secondary);
+}
+
+.rate .foodName {
+  height: min-content;
+  align-self: center;
+}

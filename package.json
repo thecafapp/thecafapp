@@ -11,11 +11,12 @@
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
-    "@next/mdx": "^13.4.2",
+    "@micahlt/react-simple-star-rating": "^5.1.9",
+    "@next/mdx": "^13.4.4",
     "classnames": "^2.3.2",
     "crypto-random-string": "^5.0.0",
-    "firebase": "^9.22.0",
-    "firebase-admin": "^11.8.0",
+    "firebase": "^9.22.2",
+    "firebase-admin": "^11.9.0",
     "firebaseui": "^6.0.2",
     "friendly-time": "^1.1.1",
     "jsdom": "^20.0.3",
@@ -26,7 +27,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-modal": "^3.16.1",
-    "react-simple-star-rating": "^5.1.7",
     "remark-gfm": "^3.0.1",
     "simple-duration": "^1.1.0"
   },

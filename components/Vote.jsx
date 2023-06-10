@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { Rating } from "react-simple-star-rating";
+import { Rating } from "@micahlt/react-simple-star-rating";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import styles from "../styles/Vote.module.css";
+import RateModal from "./RateModal";
+import { useRouter } from "next/router";
 
 Modal.setAppElement("#__next");
 export default function Vote({ currentMealtime }) {
@@ -12,6 +14,7 @@ export default function Vote({ currentMealtime }) {
   const [myRating, setMyRating] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const user = useFirebaseUser();
+  const router = useRouter();
   useEffect(() => {
     if (user || user == false) {
       getRating(0, user);
@@ -30,11 +33,11 @@ export default function Vote({ currentMealtime }) {
         setNumItems(json.numItems);
       });
   };
-  const sendRating = () => {
+  const sendRating = (foodRatings) => {
     fetch(
       `/api/ratings?id=${
         user ? user.uid : window.localStorage.getItem("iden")
-      }&idType=${user ? "user" : "anon"}`,
+      }`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -49,10 +52,29 @@ export default function Vote({ currentMealtime }) {
         setCanRate(false);
         getRating(1, user, true);
       });
+    foodRatings.forEach((food) => {
+      if (typeof food.rating === "number") {
+        fetch(
+          `/api/food?name=${food.name}&id=${
+            user ? user.uid : window.localStorage.getItem("iden")
+          }`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              rating: food.rating,
+            }),
+          }
+        );
+      }
+    });
   };
   const openModal = (rating) => {
-    setMyRating(rating);
-    setIsOpen(true);
+    if (user?.uid) {
+      setMyRating(rating);
+      setIsOpen(true);
+    } else {
+      router.push("/login");
+    }
   };
   const closeModal = () => {
     setIsOpen(false);
@@ -83,14 +105,12 @@ export default function Vote({ currentMealtime }) {
             className={styles.alertModal}
             overlayClassName={styles.alertOverlay}
           >
-            <span className="material-symbols-outlined">reviews</span>
-            <h2>Rate {myRating} stars?</h2>
-            <button className={styles.cancelButton} onClick={closeModal}>
-              Cancel
-            </button>
-            <button className={styles.submitButton} onClick={sendRating}>
-              Submit
-            </button>
+            <RateModal
+              myRating={myRating}
+              closeModal={closeModal}
+              sendRating={sendRating}
+              meal={currentMealtime}
+            />
           </Modal>
           <div className={styles.voteButtonCell}>
             {canRate ? (
@@ -102,6 +122,7 @@ export default function Vote({ currentMealtime }) {
                     allowFraction={true}
                     fillColor="#dca627"
                     className={styles.rating}
+                    allowHover={window.matchMedia("(pointer: coarse)").matches}
                   />
                 </>
               ) : (

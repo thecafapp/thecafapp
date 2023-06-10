@@ -4,8 +4,7 @@ export default async function handler(req, res) {
   const json = { meals: [], date: "" };
   const generateDate = (time, date) => {
     return (
-      new Date(date + ", " + time + " " + new Date().getFullYear() + "CST") -
-      3600000 // set to 3600000 for Daylight Savings Time, 0 for not
+      new Date(`${date},${time} ${new Date().getFullYear()} CST`) - 3600000 // set to 3600000 for Daylight Savings Time, 0 for not
     );
   };
   if (req.query.shim) {
@@ -15,7 +14,13 @@ export default async function handler(req, res) {
         start: generateDate("11:00 AM", "August 4"),
         end: generateDate("3:00 PM", "August 4"),
         times: "11:00AM - 3:00PM",
-        menu: ["Spaghetti", "Italian Bread"],
+        menu: [
+          "Spaghetti",
+          "Italian Pasta",
+          "Spinach",
+          "Salad",
+          "Breakfast Bar",
+        ],
       },
     ];
     res.setHeader("Cache-Control", "max-age=60, public").status(200).json(json);

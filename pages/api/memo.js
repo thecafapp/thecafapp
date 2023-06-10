@@ -11,11 +11,13 @@ export default async function handler(req, res) {
       .sort({ memo_id: -1 })
       .toArray();
     if (memos.length > 0) {
+      client.close();
       res
         .setHeader("Cache-Control", "max-age=120, public")
         .status(200)
         .json(memos[0]);
     } else {
+      client.close();
       res.status(404).json({ memo_id: -1 });
     }
   } else if (req.method == "POST") {
@@ -31,7 +33,6 @@ export default async function handler(req, res) {
       }
       body.expiresAt = new Date(body.expiresAt);
       body.memo_id = memo_id + 1;
-      console.log(body);
       await collection.updateOne(
         { last_id: memo_id },
         { $set: { last_id: memo_id + 1 } }

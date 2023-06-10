@@ -12,7 +12,6 @@ import Memo from "../components/Memo";
 import Leaderboard from "../components/Leaderboard";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import TransitionWarning from "../components/TransitionWarning";
-// import { useRouter } from "next/router";
 
 const SHIM_API = false;
 
@@ -24,9 +23,7 @@ export default function Home() {
   const [menuError, setMenuError] = useState(false);
   const [needsTransition, setNeedsTransition] = useState(false);
   const user = useFirebaseUser();
-  // const router = useRouter();
   useEffect(() => {
-    console.log(user);
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
@@ -50,7 +47,6 @@ export default function Home() {
     fetch("/api/memo")
       .then((res) => res.json())
       .then((info) => {
-        console.log(info);
         setMemo(info);
         if (info.memo_id <= Number(localStorage.getItem("lm"))) {
           setShowMemo(false);
@@ -73,7 +69,6 @@ export default function Home() {
         />
         <link rel="icon" href="/icons/icon.png" />
       </Head>
-
       <main className={s.main}>
         <header className={s.header}>
           <h1>The Caf at MC</h1>
@@ -163,7 +158,7 @@ export default function Home() {
                 official MC website
               </a>
               .<br />
-              This dashboard was created by{" "}
+              This app was created by{" "}
               <a
                 href="https://micahlindley.com"
                 target="_blank"

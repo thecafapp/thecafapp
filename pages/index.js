@@ -129,18 +129,20 @@ export default function Home() {
             <h3 className={s.mealTitle} style={{ marginBottom: "0.5em" }}>
               Other Dining
             </h3>
-            <div className={s.restaurants}>
-              {restaurants
-                .sort((a) => {
-                  if (a.hours.current == true) {
-                    return -1;
-                  } else {
-                    return 1;
-                  }
-                })
-                .map((rr, i) => (
-                  <Restaurant restaurant={rr} key={i} />
-                ))}
+            <div className={s.restWrapper}>
+              <div className={s.restaurants}>
+                {restaurants
+                  .sort((a) => {
+                    if (a.hours.current == true) {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  })
+                  .map((rr, i) => (
+                    <Restaurant restaurant={rr} key={i} />
+                  ))}
+              </div>
             </div>
             <p className={s.notice}>
               <b>Notice:</b> this section may vary on breaks and holidays

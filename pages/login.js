@@ -98,8 +98,8 @@ function Login() {
                 )}
                 <br />
                 <br />
-                Each rating nets you ten points. Rate more meals and move up the
-                leaderboard!
+                Each meal rating nets you ten points, and rating individual meal
+                items gets extra. Rate more meals and move up the leaderboard!
               </p>
               <div className={a.buttons}>
                 <button className={a.button} onClick={signOutUser}>

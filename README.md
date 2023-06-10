@@ -1,5 +1,5 @@
 # The Caf App
-The Caf is a webapp that acts as an easy way to access hours and the menu from the cafeteria.  It's a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The Caf App is a webapp that acts as an easy way to access hours and the menu from the cafeteria.  It's a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 

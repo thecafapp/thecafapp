@@ -30,7 +30,7 @@ export default async function handler(req, res) {
       if (foods.length > 0) {
         client.close();
         res
-          .setHeader("Cache-Control", "max-age=30, public")
+          .setHeader("Cache-Control", "max-age=300, public")
           .status(200)
           .json(foods[0]);
       } else {

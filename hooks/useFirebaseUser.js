@@ -11,7 +11,11 @@ function useFirebaseUser(props) {
     storageBucket: "thecaf-dotme.appspot.com",
     appId: "1:545159752910:web:bd66c8c0e7e0b2d0d6f49f",
   };
-  firebase.initializeApp(firebaseConfig);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  } else {
+    firebase.app();
+  }
   const auth = getAuth();
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

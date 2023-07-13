@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "../styles/Leaderboard.module.css";
 
 export default function Leaderboard({ memo, closeMemo }) {
   const user = useFirebaseUser();
+  const router = useRouter();
   const [leaderboard, setLeaderboard] = useState([]);
   useEffect(() => {
     fetch(`/api/leaderboard`)
@@ -20,7 +22,14 @@ export default function Leaderboard({ memo, closeMemo }) {
       <ol>
         {leaderboard &&
           leaderboard.map((u) => (
-            <li key={u.name + 1010}>
+            <li
+              key={u.uid}
+              role="link"
+              onClick={() => {
+                router.push(`/user/${u.uid}`);
+              }}
+              title="Open user profile"
+            >
               <span>{u.name}</span>
               <span className={styles.line}></span>
               <span className={styles.points}>{u.points} pts</span>

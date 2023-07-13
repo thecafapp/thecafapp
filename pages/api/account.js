@@ -30,8 +30,7 @@ export default async function handler(req, res) {
       });
     } else {
       res.status(400).json({
-        error:
-          "You must provide a unique consistent UID, expiry, and a rating.",
+        error: "You must provide a correct UID.",
       });
     }
   }

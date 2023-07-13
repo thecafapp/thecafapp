@@ -1,0 +1,47 @@
+.points {
+  color: var(--leaderboard-num);
+}
+
+.subheading {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  font-size: 0.85em;
+  margin-bottom: 0.5em;
+}
+
+.badges {
+  display: flex;
+}
+
+.badge {
+  height: 2em;
+  width: max-content;
+  border-radius: 2em;
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-bottom: 0.5em;
+  margin-right: 0.5em;
+}
+
+.badgeIcon {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 2em;
+  width: 2em;
+  border-radius: 2em;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  text-align: center;
+}
+
+.badgeIcon span {
+  font-family: "Material Symbols Outlined";
+  line-height: 1;
+}
+
+.badgeText {
+  padding: 0.5em;
+  padding-right: 1em;
+}

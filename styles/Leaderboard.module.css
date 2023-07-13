@@ -40,6 +40,7 @@
 .leaderboard li {
   counter-increment: item;
   display: flex;
+  cursor: pointer;
 }
 
 .leaderboard li:before {

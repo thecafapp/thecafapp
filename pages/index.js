@@ -13,7 +13,7 @@ import Leaderboard from "../components/Leaderboard";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import TransitionWarning from "../components/TransitionWarning";
 
-const SHIM_API = false;
+const SHIM_API = true;
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -180,6 +180,12 @@ export default function Home() {
               . <Link href="/privacy">Privacy Policy</Link>
               {" - "}
               <Link href="/docs">API Docs</Link>
+              {process.env.NODE_ENV === "development" && (
+                <>
+                  {" - "}
+                  <Link href="/admin">Admin</Link>
+                </>
+              )}
             </p>
           </div>
         )}

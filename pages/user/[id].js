@@ -11,22 +11,24 @@ export default function User() {
   const [user, setUser] = useState(null);
   const [badges, setBadges] = useState([]);
   useEffect(() => {
-    fetch(`/api/leaderboard?id=${router.query.id}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setUser(json);
-        if (json.badges) {
-          let badgeString = "";
-          json.badges.forEach((badge) => {
-            badgeString += `${badge},`;
-          });
-          fetch(`/api/badges?ids=${badgeString}`)
-            .then((res) => res.json())
-            .then((json) => {
-              setBadges(json);
+    if (router.query.id) {
+      fetch(`/api/leaderboard?id=${router.query.id}`)
+        .then((res) => res.json())
+        .then((json) => {
+          setUser(json);
+          if (json.badges) {
+            let badgeString = "";
+            json.badges.forEach((badge) => {
+              badgeString += `${badge},`;
             });
-        }
-      });
+            fetch(`/api/badges?ids=${badgeString}`)
+              .then((res) => res.json())
+              .then((json) => {
+                setBadges(json);
+              });
+          }
+        });
+    }
   }, [router.query]);
   return (
     <div className={s.container}>

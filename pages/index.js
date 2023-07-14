@@ -71,6 +71,7 @@ export default function Home() {
       </Head>
       <main className={s.main}>
         <header className={s.header}>
+          <img src="/caf.svg" />
           <h1>The Caf at MC</h1>
           <Link href="/login" role="button">
             <img

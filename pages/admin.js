@@ -19,7 +19,7 @@ export default function Admin() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
     logIn(null, localStorage.getItem("admin-pass"));
-    fetch("/api/badges?all=true", {
+    fetch("/api/badges?all=true&vercel-no-cache=1", {
       method: "GET",
     })
       .then((res) => res.json())

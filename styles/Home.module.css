@@ -29,6 +29,7 @@
 }
 
 .header img[src="/account.svg"],
+.header img[src="/caf.svg"],
 .header img[src="/back.svg"] {
   border: none;
 }

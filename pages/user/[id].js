@@ -33,16 +33,25 @@ export default function User() {
   return (
     <div className={s.container}>
       <Head>
-        <title>User | The Caf at MC</title>
-        <meta name="description" content="Privacy policy for The Caf App" />
-        <link rel="icon" href="/icons/icon.png" />
+        <title>{user ? user.name : "User"} | The Caf at MC</title>
+        <meta
+          name="description"
+          content="View this user's profile on The Caf App"
+        />
       </Head>
       <main className={s.main}>
         <header className={s.header}>
           <Link href="/">
-            <img src="/back.svg" />
+            <img src="/back.svg" alt="Back" />
           </Link>
           <h1>{user ? user.name : "loading..."}</h1>
+          <img
+            src="/share.svg"
+            onClick={() => {
+              window.navigator.share(window.location.href);
+            }}
+            alt="Share"
+          />
         </header>
         <div className={s.content}>
           {user && (

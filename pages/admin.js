@@ -84,7 +84,7 @@ export default function Admin() {
       body: JSON.stringify({
         color: badge_color,
         name: badge_name,
-        id: badge_id,
+        id: Number(badge_id),
         icon: badge_icon,
       }),
     });

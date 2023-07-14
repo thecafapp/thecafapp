@@ -18,6 +18,23 @@ export default async function handler(req, res) {
         client.close();
         res.status(404).json({ error: "User not found" });
       }
+    } else if (req.query.q) {
+      // await collection.createIndex({ name: "text" });
+      const user = await collection
+        .find({
+          $text: { $search: req.query.q },
+        })
+        .toArray();
+      if (user[0]) {
+        client.close();
+        res
+          .setHeader("Cache-Control", "max-age=7200, public")
+          .status(200)
+          .json(user);
+      } else {
+        client.close();
+        res.status(204).json({ error: "No users found" });
+      }
     } else {
       const users = await collection
         .find({})

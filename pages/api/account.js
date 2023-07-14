@@ -21,17 +21,34 @@ export default async function handler(req, res) {
   await client.connect();
   const db = client.db(dbName);
   const usersCollection = db.collection("users");
+  const metaCollection = db.collection("db-meta");
   if (req.method == "DELETE") {
     if (req.query.id) {
       const auth = firebaseApp.auth();
       auth.deleteUser(req.query.id).then(async () => {
         await usersCollection.deleteOne({ uid: req.query.id });
+        client.close();
         res.status(200).json({ status: "success" });
       });
     } else {
       res.status(400).json({
         error: "You must provide a correct UID.",
       });
+    }
+  } else if (req.method == "PUT") {
+    if (req.query.password) {
+      const meta = await metaCollection
+        .find({ last_id: { $exists: true } })
+        .toArray();
+      const password = meta[0].password;
+      client.close();
+      if (req.query.password === password) {
+        res.status(200).send();
+      } else {
+        res.status(401).send();
+      }
+    } else {
+      res.status(301).send();
     }
   }
 }

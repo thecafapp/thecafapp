@@ -51,6 +51,10 @@
   color: var(--leaderboard-num);
 }
 
+.leaderboard li:hover {
+  color: var(--leaderboard-num);
+}
+
 .close {
   position: absolute;
   top: 1em;

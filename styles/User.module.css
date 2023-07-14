@@ -35,14 +35,17 @@
   place-content: center;
   place-items: center;
   text-align: center;
+  color: #fff;
 }
 
 .badgeIcon span {
   font-family: "Material Symbols Outlined";
   line-height: 1;
+  color: #fff;
 }
 
 .badgeText {
   padding: 0.5em;
   padding-right: 1em;
+  color: #fff;
 }

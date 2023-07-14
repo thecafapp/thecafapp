@@ -56,6 +56,7 @@ export default function User() {
                   <div
                     className={u.badge}
                     style={{ backgroundColor: badge.color }}
+                    key={badge.id}
                   >
                     <div className={u.badgeIcon}>
                       <span>{badge.icon}</span>

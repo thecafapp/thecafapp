@@ -48,7 +48,7 @@ export default function User() {
           <img
             src="/share.svg"
             onClick={() => {
-              window.navigator.share(window.location.href);
+              window.navigator.share({ url: window.location.href });
             }}
             alt="Share"
           />

@@ -45,16 +45,16 @@ export default function Document() {
           rel="icon"
           type="image/png"
           sizes="192x192"
-          href="/icons/icon192.png"
+          href="/assets/icon192.png"
         />
         <link
           rel="icon"
           type="image/png"
           sizes="512x512"
-          href="/icons/icon.png"
+          href="/assets/icon.png"
         />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/icons/icon192.png" />
+        <link rel="shortcut icon" href="/assets/icon192.png" />
         <link
           rel="apple-touch-startup-image"
           media="screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"

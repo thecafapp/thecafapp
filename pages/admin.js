@@ -23,7 +23,10 @@ export default function Admin() {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((json) => setBadges(json));
+      .then((json) => {
+        setBadges(json);
+        setBadgeSetId(json[0]);
+      });
   }, []);
   useEffect(() => {
     setBadgeSetUser(users[0]?.uid);

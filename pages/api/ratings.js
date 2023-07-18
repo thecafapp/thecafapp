@@ -71,6 +71,7 @@ export default async function handler(req, res) {
                 uid: req.query.id,
                 rating: body.rating,
                 expireAt: expiry,
+                time: Date.now(),
               });
               await usersCollection.updateOne(
                 { uid: req.query.id },

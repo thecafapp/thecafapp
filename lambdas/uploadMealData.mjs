@@ -22,12 +22,13 @@ export const handler = async () => {
     mealRatings: ratings,
   };
   const file = Buffer.from(JSON.stringify(masterObject), "utf8");
+  const dateString = new Date(cafJson.meals[0].start);
   const date = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   })
-    .format(new Date(cafJson.meals[0].start))
+    .format(dateString)
     .replaceAll("/", "-");
   // fetch url from a preauthed request in Oracle Console
   const bucketUpload = await fetch(

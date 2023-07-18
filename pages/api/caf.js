@@ -58,7 +58,7 @@ export default async function handler(req, res) {
   } catch {
     res
       .setHeader("Cache-Control", "max-age=60, public")
-      .status(204)
+      .status(200)
       .json({ error: true });
   }
 }

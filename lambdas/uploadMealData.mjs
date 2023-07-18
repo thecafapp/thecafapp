@@ -43,8 +43,8 @@ export const handler = async () => {
       body: file,
     }
   );
-  if (bucketUpload.ok) {
-    console.log("Request done");
+  await client.close();
+  if (await bucketUpload.ok) {
     return { message: "uploaded ok" };
   } else {
     return {
@@ -52,5 +52,7 @@ export const handler = async () => {
     };
   }
 };
+
+handler();
 
 // listing URL: https://objectstorage.us-ashburn-1.oraclecloud.com/p/nyWTgMiuwyM7ad_-U0mT0LZIRCpLijIJ-atkcnVtIs5ny9ceQ7IGr5YTXp_LwlOh/n/idosm4hvvvj8/b/cafapp-data-bucket/o?fields=timeCreated

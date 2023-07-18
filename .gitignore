@@ -35,4 +35,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
+# Lambda builds
+lambdas/*.zip
+lambdas/node_modules

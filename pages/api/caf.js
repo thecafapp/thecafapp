@@ -11,9 +11,9 @@ export default async function handler(req, res) {
     json.meals = [
       {
         name: "Lunch",
-        start: generateDate("11:00 AM", "August 4"),
-        end: generateDate("3:00 PM", "August 4"),
-        times: "11:00AM - 3:00PM",
+        start: generateDate("11:00 PM", "July 15"),
+        end: generateDate("3:00 AM", "July 15"),
+        times: "11:00PM - 3:00AM",
         menu: [
           "Spaghetti",
           "Italian Pasta",
@@ -58,7 +58,7 @@ export default async function handler(req, res) {
   } catch {
     res
       .setHeader("Cache-Control", "max-age=60, public")
-      .status(200)
+      .status(204)
       .json({ error: true });
   }
 }

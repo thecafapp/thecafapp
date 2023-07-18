@@ -10,8 +10,8 @@ export const handler = async () => {
   const db = client.db(dbName);
   const foodsCollection = db.collection("foods");
   const ratingsCollection = db.collection("ratings");
-  const foods = await foodsCollection.find().toArray();
-  const ratings = await ratingsCollection.find().toArray();
+  const foods = await foodsCollection.find().project({ _id: 0 }).toArray();
+  const ratings = await ratingsCollection.find().project({ uid: 0 }).toArray();
   const cafFetch = await fetch(`https://thecaf.app/api/caf?shim=true`);
   const cafJson = await cafFetch.json();
   masterObject.mealName = cafJson.meals[0].name;

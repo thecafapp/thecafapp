@@ -13,7 +13,7 @@ import Leaderboard from "../components/Leaderboard";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import TransitionWarning from "../components/TransitionWarning";
 
-const SHIM_API = false;
+const SHIM_API = true;
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -169,16 +169,11 @@ export default function Home() {
               >
                 Micah Lindley
               </a>
-              .<br />
-              Is something wrong?{" "}
-              <a
-                href="https://instagram.com/micahtlindley"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Shoot me a DM
-              </a>
-              . <Link href="/privacy">Privacy Policy</Link>
+              .
+              <br />
+              <Link href="/privacy">Privacy Policy</Link>
+              {" - "}
+              <Link href="/privacy">Contact</Link>
               {" - "}
               <Link href="/docs">API Docs</Link>
               {process.env.NODE_ENV === "development" && (

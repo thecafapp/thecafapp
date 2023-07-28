@@ -12,16 +12,9 @@ export const handler = async () => {
   const ratingsCollection = db.collection("ratings");
   const foods = await foodsCollection.find().project({ _id: 0 }).toArray();
   const ratings = await ratingsCollection.find().project({ uid: 0 }).toArray();
-  const cafFetch = await fetch(`https://thecaf.app/api/caf?shim=true`);
+  const cafFetch = await fetch(`${process.env.CAFAPI}/caf`);
   const cafJson = await cafFetch.json();
-  masterObject.mealName = cafJson.meals[0].name;
-  masterObject.menu = cafJson.meals[0].menu;
-  masterObject = {
-    ...masterObject,
-    foodRatings: foods,
-    mealRatings: ratings,
-  };
-  const file = Buffer.from(JSON.stringify(masterObject), "utf8");
+  const mealName = cafJson.meals[0].name.toLowerCase();
   const dateString = new Date(cafJson.meals[0].start);
   const date = new Intl.DateTimeFormat("en-US", {
     year: "numeric",
@@ -30,11 +23,23 @@ export const handler = async () => {
   })
     .format(dateString)
     .replaceAll("/", "-");
+  const existingFileReq = await fetch(
+    `${process.env.CAFBUCKETGETURL}-${date}.json`
+  );
+  if (existingFileReq.ok) {
+    masterObject = await existingFileReq.json();
+  } else {
+    masterObject = {};
+  }
+  masterObject[mealName] = {
+    menu: cafJson.meals[0].menu,
+    foodRatings: foods,
+    mealRatings: ratings,
+  };
+  const file = Buffer.from(JSON.stringify(masterObject), "utf8");
   // fetch url from a preauthed request in Oracle Console
   const bucketUpload = await fetch(
-    `${
-      process.env.CAFBUCKETURL
-    }-${date}-${cafJson.meals[0].name.toLowerCase()}.json`,
+    `${process.env.CAFBUCKETPUTURL}-${date}.json`,
     {
       method: "PUT",
       headers: {

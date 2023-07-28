@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         },
         F: {
           open: "7:30 AM",
-          close: "3:00 PM",
+          close: "2:00 PM",
         },
         "S-S": {
           open: null,

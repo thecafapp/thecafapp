@@ -173,7 +173,7 @@ export default function Home() {
               <br />
               <Link href="/privacy">Privacy Policy</Link>
               {" - "}
-              <Link href="https://instagram.com/micahtlindley">Contact</Link>
+              <Link href="https://instagram.com/the.caf.app">Contact</Link>
               {" - "}
               <Link href="/docs">API Docs</Link>
               {process.env.NODE_ENV === "development" && (

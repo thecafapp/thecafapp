@@ -11,9 +11,9 @@ export default async function handler(req, res) {
     json.meals = [
       {
         name: "Lunch",
-        start: generateDate("11:00 PM", "July 12"),
-        end: generateDate("3:00 AM", "July 13"),
-        times: "11:00PM - 3:00AM",
+        start: generateDate("7:00 PM", "July 31"),
+        end: generateDate("9:30 PM", "July 31"),
+        times: "7:00PM - 9:30PM",
         menu: [
           "Spaghetti",
           "Italian Pasta",

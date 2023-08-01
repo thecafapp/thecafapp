@@ -6,10 +6,15 @@ const client = new MongoClient(process.env.CAFMONGO);
 export const handler = async () => {
   let masterObject = {};
   const cafFetch = await fetch(`${process.env.CAFAPI}/caf?shim=true`);
-  if (!cafFetch.ok) return { message: "caf API internal error" };
+  if (!cafFetch.ok) {
+    console.log("caf API internal error");
+    return { message: "caf API internal error" };
+  }
   const cafJson = await cafFetch.json();
-  if (cafJson.error || !cafJson.meals)
+  if (cafJson.error || !cafJson.meals) {
+    console.log("not uploaded because no meals found");
     return { message: "not uploaded because no meals found" };
+  }
   const mealName = cafJson.meals[0].name.toLowerCase();
   const dateString = new Date(cafJson.meals[0].start);
   const date = new Intl.DateTimeFormat("en-US", {
@@ -20,7 +25,7 @@ export const handler = async () => {
     .format(dateString)
     .replaceAll("/", "-");
   const distanceFromMealEnd = cafJson.meals[0].end - Date.now();
-  if (distanceFromMealEnd > 0 && distanceFromMealEnd <= 500000) {
+  if (distanceFromMealEnd > 0 && distanceFromMealEnd <= 300000) {
     const dbName = "info";
     await client.connect();
     const db = client.db(dbName);
@@ -59,13 +64,16 @@ export const handler = async () => {
     );
     await client.close();
     if (await bucketUpload.ok) {
+      console.log("uploaded to Oracle");
       return { message: "uploaded to Oracle" };
     } else {
+      console.log("upload failed at Oracle up step");
       return {
         message: "upload failed at Oracle up step",
       };
     }
   } else {
+    console.log("not uploaded because not close to meal end");
     return {
       message: "not uploaded because not close to meal end",
     };

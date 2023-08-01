@@ -26,6 +26,7 @@ export const handler = async () => {
     .replaceAll("/", "-");
   const distanceFromMealEnd = cafJson.meals[0].end - Date.now();
   if (distanceFromMealEnd > 0 && distanceFromMealEnd <= 300000) {
+    console.log("close to meal end");
     const dbName = "info";
     await client.connect();
     const db = client.db(dbName);

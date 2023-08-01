@@ -10,10 +10,10 @@ export default async function handler(req, res) {
   if (req.query.shim) {
     json.meals = [
       {
-        name: "Lunch",
+        name: "Dinner",
         start: generateDate("7:00 PM", "July 31"),
-        end: generateDate("9:30 PM", "July 31"),
-        times: "7:00PM - 9:30PM",
+        end: generateDate("9:45 PM", "July 31"),
+        times: "7:00PM - 9:45PM",
         menu: [
           "Spaghetti",
           "Italian Pasta",

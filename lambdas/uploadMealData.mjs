@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 const client = new MongoClient(process.env.CAFMONGO);
 export const handler = async () => {
   let masterObject = {};
-  const cafFetch = await fetch(`${process.env.CAFAPI}/caf?shim=true`);
+  const cafFetch = await fetch(`${process.env.CAFAPI}/caf`);
   if (!cafFetch.ok) {
     console.log("caf API internal error");
     return { message: "caf API internal error" };

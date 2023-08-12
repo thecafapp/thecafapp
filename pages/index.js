@@ -1,17 +1,31 @@
 import Head from "next/head";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Meal from "../components/Meal";
 import Restaurant from "../components/Restaurant";
 import Timer from "../components/Timer";
-import Vote from "../components/Vote";
 import s from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
-import Memo from "../components/Memo";
-import Leaderboard from "../components/Leaderboard";
+const Leaderboard = dynamic(() => import("../components/Leaderboard"), {
+  ssr: false,
+});
 import useFirebaseUser from "../hooks/useFirebaseUser";
-import TransitionWarning from "../components/TransitionWarning";
+const Meal = dynamic(() => import("../components/Meal"), {
+  ssr: false,
+});
+const Memo = dynamic(() => import("../components/Memo"), {
+  ssr: false,
+});
+const Vote = dynamic(() => import("../components/Vote"), {
+  ssr: false,
+});
+const TransitionWarning = dynamic(
+  () => import("../components/TransitionWarning"),
+  {
+    ssr: false,
+  }
+);
 
 const SHIM_API = false;
 

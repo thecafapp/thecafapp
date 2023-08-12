@@ -2,6 +2,10 @@
 import remarkGfm from "remark-gfm";
 import nextPWA from "next-pwa";
 import withMDX from "@next/mdx";
+import withBundleAnalyzer from "@next/bundle-analyzer";
+const nextBundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 const withPWA = nextPWA({
   dest: "public",
 });
@@ -24,4 +28,4 @@ const nextConfig = {
   swcMinify: true,
 };
 
-export default nextMDX(withPWA(nextConfig));
+export default nextBundleAnalyzer(nextMDX(withPWA(nextConfig)));

@@ -13,7 +13,7 @@ import Leaderboard from "../components/Leaderboard";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import TransitionWarning from "../components/TransitionWarning";
 
-const SHIM_API = false;
+const SHIM_API = true;
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -112,7 +112,7 @@ export default function Home() {
                   </details>
                 ))}
                 <div className={s.divider}></div>
-                <Vote currentMealtime={data.meals[0]} />
+                <Vote currentMealtime={data.meals[0]} shimData={SHIM_API} />
                 <div className={s.divider}></div>
               </>
             ) : (

@@ -7,9 +7,9 @@ import RateModal from "./RateModal";
 import { useRouter } from "next/router";
 
 Modal.setAppElement("#__next");
-export default function Vote({ currentMealtime }) {
-  const [dailyRating, setDailyRating] = useState(null);
-  const [numItems, setNumItems] = useState(null);
+export default function Vote({ currentMealtime, shimData = false }) {
+  const [mealRating, setMealRating] = useState(shimData ? 4.5 : null);
+  const [numOfRatings, setNumOfRatings] = useState(shimData ? 17 : null);
   const [canRate, setCanRate] = useState(true);
   const [myRating, setMyRating] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -29,8 +29,8 @@ export default function Vote({ currentMealtime }) {
       .then((res) => res.json())
       .then((json) => {
         setCanRate(forceNoRate == true ? false : !json.alreadyRated);
-        setDailyRating(json.average);
-        setNumItems(json.numItems);
+        setMealRating(json.average);
+        setNumOfRatings(json.numItems);
       });
   };
   const sendRating = (foodRatings) => {
@@ -81,7 +81,7 @@ export default function Vote({ currentMealtime }) {
   };
   return (
     <>
-      {typeof dailyRating == Number ? (
+      {typeof mealRating == Number ? (
         <div className={styles.voteSkeleton}>
           <h3>Loading ratings...</h3>
         </div>
@@ -90,7 +90,7 @@ export default function Vote({ currentMealtime }) {
           <div className={styles.votePercentageCell}>
             <p>Meal rating</p>
             <h2>
-              {dailyRating}{" "}
+              {mealRating}{" "}
               <span
                 className="material-symbols-outlined"
                 style={{ marginLeft: 5 }}
@@ -98,7 +98,7 @@ export default function Vote({ currentMealtime }) {
                 star
               </span>
             </h2>
-            <p className={styles.voteNumber}>{numItems} ratings</p>
+            <p className={styles.voteNumber}>{numOfRatings} ratings</p>
           </div>
           <Modal
             isOpen={modalIsOpen}

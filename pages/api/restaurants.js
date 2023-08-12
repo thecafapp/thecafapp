@@ -1,16 +1,15 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 export default async function handler(req, res) {
   const restaurants = [
     {
-      name: "Starbucks",
+      name: "Chick-Fil-A",
       hours: {
         "M-T": {
-          open: "7:30 AM",
-          close: "9:00 PM",
+          open: "10:30 AM",
+          close: "7:00 PM",
         },
         F: {
-          open: "7:30 AM",
-          close: "2:00 PM",
+          open: "10:30 AM",
+          close: "3:00 PM",
         },
         "S-S": {
           open: null,
@@ -18,10 +17,10 @@ export default async function handler(req, res) {
           current: false,
         },
       },
-      image: "/assets/restaurants/starbucks.jpg",
-      link: "https://goo.gl/maps/BYP1dH3bNZihewrv8",
-      location: "Speed Library",
-      color: "#004302",
+      image: "/assets/restaurants/chick-fil-a.jpg",
+      location: "Lower Alumni",
+      link: "https://goo.gl/maps/h86wkkoe8XtnvoKg8",
+      color: "#a00000",
     },
     {
       name: "Einstein's",
@@ -46,15 +45,15 @@ export default async function handler(req, res) {
       color: "#6f5e00",
     },
     {
-      name: "Chick-Fil-A",
+      name: "Starbucks",
       hours: {
         "M-T": {
-          open: "10:30 AM",
-          close: "7:00 PM",
+          open: "7:30 AM",
+          close: "9:00 PM",
         },
         F: {
-          open: "10:30 AM",
-          close: "3:00 PM",
+          open: "7:30 AM",
+          close: "2:00 PM",
         },
         "S-S": {
           open: null,
@@ -62,10 +61,10 @@ export default async function handler(req, res) {
           current: false,
         },
       },
-      image: "/assets/restaurants/chick-fil-a.jpg",
-      location: "Lower Alumni",
-      link: "https://goo.gl/maps/h86wkkoe8XtnvoKg8",
-      color: "#a00000",
+      image: "/assets/restaurants/starbucks.jpg",
+      link: "https://goo.gl/maps/BYP1dH3bNZihewrv8",
+      location: "Speed Library",
+      color: "#004302",
     },
     {
       name: "Corner Grill",

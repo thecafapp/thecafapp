@@ -13,7 +13,7 @@ import Leaderboard from "../components/Leaderboard";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import TransitionWarning from "../components/TransitionWarning";
 
-const SHIM_API = true;
+const SHIM_API = false;
 
 export default function Home() {
   const [data, setData] = useState(null);

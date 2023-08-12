@@ -19,7 +19,6 @@ export default async function handler(req, res) {
         res.status(404).json({ error: "User not found" });
       }
     } else if (req.query.q) {
-      // await collection.createIndex({ name: "text" });
       const user = await collection
         .find({
           $text: { $search: req.query.q },
@@ -37,7 +36,7 @@ export default async function handler(req, res) {
       }
     } else {
       const users = await collection
-        .find({})
+        .find({ points: { $gt: 0 } })
         .sort({ points: -1 })
         .limit(10)
         .toArray();

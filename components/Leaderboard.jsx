@@ -8,9 +8,17 @@ export default function Leaderboard({ memo, closeMemo }) {
   const user = useFirebaseUser();
   const router = useRouter();
   const [leaderboard, setLeaderboard] = useState([]);
+  const [noUsers, setNoUsers] = useState(false);
   useEffect(() => {
     fetch(`/api/leaderboard`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          setNoUsers(true);
+          return { leaderboard: [] };
+        }
+      })
       .then((json) => {
         setLeaderboard(json.leaderboard);
       });
@@ -19,6 +27,16 @@ export default function Leaderboard({ memo, closeMemo }) {
   return (
     <div className={styles.leaderboard}>
       <h4>Top Reviewers Leaderboard</h4>
+      {noUsers && (
+        <div className={styles.noUsers}>
+          <h5>No leaders yet!</h5>
+          <p>
+            Looks like nobody has points yet.
+            <br />
+            Go rate your meal and be the first!
+          </p>
+        </div>
+      )}
       <ol>
         {leaderboard &&
           leaderboard.map((u) => (

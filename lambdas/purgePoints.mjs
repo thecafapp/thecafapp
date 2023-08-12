@@ -16,7 +16,7 @@ export const handler = async () => {
   await client.connect();
   const db = client.db("info");
   const meta = db.collection("db-meta");
-  const dbMeta = await meta.findOne();
+  const dbMeta = await meta.findOne({ purge_key: { $exists: true } });
   const purgeKey = dbMeta.purge_key;
   const purgeInput = prompt("Enter the purge key from db-meta: ");
   if (purgeInput !== purgeKey) {

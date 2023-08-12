@@ -67,10 +67,17 @@
   color-scheme: dark;
 }
 
+.formInputContainer input[type="checkbox"] {
+  text-align: left;
+  place-self: flex-start;
+  width: max-content;
+  margin-bottom: 0;
+  margin-left: 1em;
+}
+
 .form .formInputContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .form .formInputContainer span {

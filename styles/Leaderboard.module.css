@@ -15,7 +15,7 @@
   display: flex;
 }
 
-.leaderboard h4:after {
+/* .leaderboard h4:after {
   content: "BETA";
   font-size: 0.65em;
   background-color: var(--text-secondary);
@@ -28,7 +28,7 @@
   align-items: center;
   text-align: center;
   float: right;
-}
+} */
 
 .leaderboard ol {
   color: var(--text-primary);
@@ -82,4 +82,22 @@
   color: var(--text-secondary);
   text-align: center;
   margin-top: 1em;
+}
+
+.noUsers {
+  background: var(--grad-1);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1em 0.5em;
+  border-radius: 0.4em;
+  color: var(--text-primary);
+}
+
+.noUsers h5 {
+  font-size: 1em;
+}
+
+.noUsers p {
+  font-size: 0.9em;
 }

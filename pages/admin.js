@@ -2,8 +2,10 @@ import Head from "next/head";
 import s from "../styles/Home.module.css";
 import a from "../styles/Admin.module.css";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Admin() {
+  const router = useRouter();
   const [memo_title, setMemoTitle] = useState("");
   const [memo_text, setMemoText] = useState("");
   const [badge_name, setBadgeText] = useState("");
@@ -11,6 +13,7 @@ export default function Admin() {
   const [badge_color, setBadgeColor] = useState("#ff3a3a");
   const [badge_id, setBadgeId] = useState();
   const [expiresAt, setExpiresAt] = useState("2023-01-01T00:00");
+  const [dismissable, setDismissable] = useState(false);
   const [password, setPassword] = useState("");
   const [users, setUsers] = useState([]);
   const [badges, setBadges] = useState([]);
@@ -52,7 +55,14 @@ export default function Admin() {
         memo_title,
         memo_text,
         expiresAt: new Date(expiresAt),
+        dismissable,
       }),
+    }).then((res) => {
+      if (res.ok) {
+        router.push("/");
+      } else {
+        alert("Error, try again");
+      }
     });
   };
   const searchUsers = (e) => {
@@ -144,6 +154,15 @@ export default function Admin() {
                   value={expiresAt}
                   onChange={(e) => setExpiresAt(e.target.value)}
                 />
+                <div className={a.formInputContainer}>
+                  <label for="dismissable">Dismissable?</label>
+                  <input
+                    type="checkbox"
+                    name="dismissable"
+                    value={dismissable}
+                    onChange={(e) => setDismissable(e.target.value)}
+                  />
+                </div>
                 <br />
                 <button className={a.button} onClick={submitMemo}>
                   Publish
@@ -200,7 +219,7 @@ export default function Admin() {
                 >
                   {badges.map((badge) => (
                     <option value={badge.id} key={badge.id}>
-                      {badge.name}
+                      {badge.name} (#{badge.id})
                     </option>
                   ))}
                 </select>

@@ -8,11 +8,13 @@ export default async function handler(req, res) {
     );
   };
   if (req.query.shim) {
+    const mealEnd = Date.now() + 900000;
+    const cacheAge = Math.floor((mealEnd - Date.now()) / 1000) - 200;
     json.meals = [
       {
         name: "Dinner",
         start: Date.now() - 120000,
-        end: Date.now() + 900000,
+        end: mealEnd,
         times: "7:00PM - 9:45PM",
         menu: [
           "Spaghetti",
@@ -23,7 +25,10 @@ export default async function handler(req, res) {
         ],
       },
     ];
-    res.setHeader("Cache-Control", "max-age=60, public").status(200).json(json);
+    res
+      .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
+      .status(200)
+      .json(json);
     return;
   }
   const result = await fetch("https://www.mc.edu/offices/food/caf");
@@ -54,10 +59,15 @@ export default async function handler(req, res) {
         menu: items,
       });
     });
-    res.setHeader("Cache-Control", "max-age=60, public").status(200).json(json);
+    const currentMealEnd = json.meals[0].end;
+    const cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
+    res
+      .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
+      .status(200)
+      .json(json);
   } catch {
     res
-      .setHeader("Cache-Control", "max-age=60, public")
+      .setHeader("Cache-Control", "max-age=120, public")
       .status(200)
       .json({ error: true });
   }

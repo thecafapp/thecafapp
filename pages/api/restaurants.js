@@ -132,5 +132,5 @@ export default async function handler(req, res) {
     rr.hours = hours;
     json.restaurants.push(rr);
   });
-  res.setHeader("Cache-Control", "max-age=30, public").status(200).json(json);
+  res.setHeader("Cache-Control", "max-age=600, public").status(200).json(json);
 }

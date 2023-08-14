@@ -13,12 +13,15 @@ export default async function handler(req, res) {
     if (memos.length > 0) {
       client.close();
       res
-        .setHeader("Cache-Control", "max-age=120, public")
+        .setHeader("Cache-Control", "max-age=600, public")
         .status(200)
         .json(memos[0]);
     } else {
       client.close();
-      res.status(404).json({ memo_id: -1 });
+      res
+        .setHeader("Cache-Control", "max-age=60, public")
+        .status(404)
+        .json({ memo_id: -1 });
     }
   } else if (req.method == "POST") {
     const meta = await collection

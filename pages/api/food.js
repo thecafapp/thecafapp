@@ -38,11 +38,15 @@ export default async function handler(req, res) {
           .json(foods[0]);
       } else {
         client.close();
-        res.status(404).json({ error: "No matching foods." });
+        res
+          .setHeader("Cache-Control", "max-age=300, public")
+          .status(404)
+          .json({ error: "No matching foods." });
       }
     } else {
       client.close();
       res
+        .setHeader("Cache-Control", "max-age=300, public")
         .status(404)
         .json({ error: "You didn't include the food name querystring." });
     }

@@ -17,7 +17,8 @@ export default async function handler(req, res) {
           current: false,
         },
       },
-      image: "/assets/restaurants/chick-fil-a.jpg",
+      image:
+        "/_next/image?url=%2Fassets%2Frestaurants%2Fchick-fil-a.jpg&w=640&q=75",
       location: "Lower Alumni",
       link: "https://goo.gl/maps/h86wkkoe8XtnvoKg8",
       color: "#a00000",
@@ -39,7 +40,8 @@ export default async function handler(req, res) {
           current: false,
         },
       },
-      image: "/assets/restaurants/einsteins.jpg",
+      image:
+        "/_next/image?url=%2Fassets%2Frestaurants%2Feinsteins.jpg&w=640&q=75",
       location: "Lower Alumni",
       link: "https://goo.gl/maps/nTg1dEP7Xikz7Bv3A",
       color: "#6f5e00",
@@ -61,7 +63,8 @@ export default async function handler(req, res) {
           current: false,
         },
       },
-      image: "/assets/restaurants/starbucks.jpg",
+      image:
+        "/_next/image?url=%2Fassets%2Frestaurants%2Fstarbucks.jpg&w=640&q=75",
       link: "https://goo.gl/maps/BYP1dH3bNZihewrv8",
       location: "Speed Library",
       color: "#004302",
@@ -86,7 +89,7 @@ export default async function handler(req, res) {
           current: false,
         },
       },
-      image: "/assets/restaurants/corner.jpg",
+      image: "/_next/image?url=%2Fassets%2Frestaurants%2Fcorner.jpg&w=640&q=75",
       location: "Beside Bookstore",
       link: "https://goo.gl/maps/fvEkQuiK426JHWtZA",
       color: "#000c43",

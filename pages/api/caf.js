@@ -1,3 +1,4 @@
+// CACHE PLEASE
 const parser = require("jsdom");
 const { JSDOM } = parser;
 export default async function handler(req, res) {

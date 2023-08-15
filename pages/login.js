@@ -105,7 +105,7 @@ function Login() {
               </p>
               <button
                 className={a.button}
-                onClick={router.push(`/user/${user.uid}`)}
+                onClick={() => router.push(`/user/${user.uid}`)}
               >
                 Visit your profile
               </button>

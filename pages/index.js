@@ -187,9 +187,21 @@ export default function Home() {
               <br />
               <Link href="/privacy">Privacy Policy</Link>
               {" - "}
-              <Link href="https://instagram.com/the.caf.app">Contact</Link>
+              <a
+                href="https://instagram.com/the.caf.app"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Contact
+              </a>
               {" - "}
-              <Link href="/docs">API Docs</Link>
+              <a
+                href="https://github.com/micahlt/thecafapp/wiki/API-Documentation"
+                target="_blank"
+                rel="noreferrer"
+              >
+                API Docs
+              </a>
               {process.env.NODE_ENV === "development" && (
                 <>
                   {" - "}

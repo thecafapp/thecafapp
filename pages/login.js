@@ -102,6 +102,7 @@ function Login() {
                 <br />
                 Each meal rating nets you ten points, and rating individual meal
                 items gets extra. Rate more meals and move up the leaderboard!
+                <br />
               </p>
               <button
                 className={a.button}

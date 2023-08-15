@@ -33,7 +33,7 @@ export default function Vote({ currentMealtime, shimData = false }) {
         setNumOfRatings(json.numItems);
       });
   };
-  const sendRating = (foodRatings) => {
+  const sendRating = (foodRatings, overrideRating = null) => {
     fetch(
       `/api/ratings?id=${
         user ? user.uid : window.localStorage.getItem("iden")
@@ -41,7 +41,7 @@ export default function Vote({ currentMealtime, shimData = false }) {
       {
         method: "POST",
         body: JSON.stringify({
-          rating: myRating,
+          rating: overrideRating || myRating,
           expires: currentMealtime.end,
         }),
       }
@@ -71,7 +71,11 @@ export default function Vote({ currentMealtime, shimData = false }) {
   const openModal = (rating) => {
     if (user?.uid) {
       setMyRating(rating);
-      setIsOpen(true);
+      if (currentMealtime.menu.length < 1) {
+        sendRating([], rating);
+      } else {
+        setIsOpen(true);
+      }
     } else {
       router.push("/login");
     }

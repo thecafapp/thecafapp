@@ -8,8 +8,8 @@ import { useRouter } from "next/router";
 
 Modal.setAppElement("#__next");
 export default function Vote({ currentMealtime, shimData = false }) {
-  const [mealRating, setMealRating] = useState(shimData ? 4.5 : null);
-  const [numOfRatings, setNumOfRatings] = useState(shimData ? 17 : null);
+  const [mealRating, setMealRating] = useState(shimData ? 4.5 : 0);
+  const [numOfRatings, setNumOfRatings] = useState(shimData ? 17 : 0);
   const [canRate, setCanRate] = useState(true);
   const [myRating, setMyRating] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);

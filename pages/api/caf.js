@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   };
   const json = { meals: [], date: "" };
   const generateDate = (time, date) => {
-    console.log(`${time}, ${time} ${new Date().getFullYear()} CST`);
+    console.log(`${time}, ${date} ${new Date().getFullYear()} CST`);
     return (
       new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 3600000 // set to 3600000 for Daylight Savings Time, 0 for not
     );
@@ -74,9 +74,14 @@ export default async function handler(req, res) {
       .filter((day) => day.getAttribute("id") === currentDate)[0]
       .querySelectorAll(".menu-location");
     json.date = generateDate(
-      `${new Date().getHours()}:${new Date().getMinutes()}`,
+      new Date().toLocaleTimeString("en-US", {
+        hour12: true,
+        hour: "numeric",
+        minute: "2-digit",
+      }),
       new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
     );
+    console.log(json.date);
     menu.forEach((meal) => {
       let items = [];
       const mealName = meal.querySelector("h3").textContent.trim();
@@ -101,7 +106,14 @@ export default async function handler(req, res) {
         menu: items,
       });
     });
-    if (dayType === "Weekday") {
+    if (
+      dayType === "Weekday" &&
+      json.date <
+        generateDate(
+          mealTimes.Weekday.Breakfast.end,
+          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
+        )
+    ) {
       const breakfast = {
         name: "Breakfast",
         start: generateDate(

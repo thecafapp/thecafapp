@@ -17,7 +17,7 @@ export default function Meal({ meal }) {
           {meal.name === "Breakfast" && (
             <p>
               MC has stopped publishing the breakfast menu. Until they bring it
-              back, we don't have a way to reliably provide a menu.
+              back, we don&apos;t have a way to reliably provide a menu.
             </p>
           )}
         </div>

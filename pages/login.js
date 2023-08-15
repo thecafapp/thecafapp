@@ -9,6 +9,7 @@ import "firebase/compat/auth";
 import "firebaseui/dist/firebaseui.css";
 import { useEffect, useState } from "react";
 import useFirebaseUser from "../hooks/useFirebaseUser";
+import { useRouter } from "next/router";
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
   authDomain: "login.thecaf.app",
@@ -20,6 +21,7 @@ firebase.initializeApp(firebaseConfig);
 
 function Login() {
   const user = useFirebaseUser();
+  const router = useRouter();
   const [points, setPoints] = useState();
   useEffect(() => {
     let ui = null;
@@ -101,6 +103,12 @@ function Login() {
                 Each meal rating nets you ten points, and rating individual meal
                 items gets extra. Rate more meals and move up the leaderboard!
               </p>
+              <button
+                className={a.button}
+                onClick={router.push(`/user/${user.uid}`)}
+              >
+                Visit your profile
+              </button>
               <div className={a.buttons}>
                 <button className={a.button} onClick={signOutUser}>
                   Sign Out

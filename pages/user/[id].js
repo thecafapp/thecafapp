@@ -58,6 +58,7 @@ export default function User() {
             <div className={a.form}>
               <h2>
                 Collected <span className={u.points}>{user.points}</span> points
+                this year
               </h2>
               <p className={u.subheading}>
                 {badges.length === 0 && "No "}Badges

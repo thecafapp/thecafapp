@@ -1,13 +1,13 @@
 .prompt {
-  background-color: var(--bg-secondary);
+  background-color: var(--text-primary);
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--text-primary);
+  color: var(--bg-primary);
   border-radius: 0.4rem;
   padding: 1.5rem;
-  width: 90%;
+  width: calc(100% - 2em);
   bottom: 5vw;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
   z-index: 2;

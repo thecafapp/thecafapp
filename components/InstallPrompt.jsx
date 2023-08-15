@@ -25,7 +25,7 @@ export default function InstallPrompt() {
     <>
       {shouldShow && (
         <div className={styles.prompt}>
-          <h3>Install this webapp</h3>
+          <h3>Install The Caf App</h3>
           <p className={styles.instructions}>
             Click the Share icon in Safari and then select{" "}
             <b>Add to homescreen</b> for a better experience!

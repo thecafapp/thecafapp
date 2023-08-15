@@ -16,7 +16,7 @@ export default function InstallPrompt() {
     ) {
       setShouldShow(true);
     }
-  });
+  }, []);
   const dismiss = () => {
     window.localStorage.setItem("ir", "yes");
     setShouldShow(false);

@@ -93,19 +93,33 @@ export default async function handler(req, res) {
       });
       if (mealName === "Breakfast") needsBreakfast = false;
       const thisMealTimes = mealTimes[dayType][mealName];
-      json.meals.push({
-        name: mealName,
-        start: generateDate(
-          thisMealTimes.start,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        ),
-        end: generateDate(
+      if (
+        json.date <
+        generateDate(
           thisMealTimes.end,
           new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        ),
-        times: thisMealTimes.start + " - " + thisMealTimes.end,
-        menu: items,
-      });
+        )
+      ) {
+        json.meals.push({
+          name: mealName,
+          start: generateDate(
+            thisMealTimes.start,
+            new Date().toLocaleString("en-US", {
+              month: "long",
+              day: "numeric",
+            })
+          ),
+          end: generateDate(
+            thisMealTimes.end,
+            new Date().toLocaleString("en-US", {
+              month: "long",
+              day: "numeric",
+            })
+          ),
+          times: thisMealTimes.start + " - " + thisMealTimes.end,
+          menu: items,
+        });
+      }
     });
     if (
       dayType === "Weekday" &&

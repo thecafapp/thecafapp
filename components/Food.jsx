@@ -45,7 +45,7 @@ export default function Food({
       <span className={styles.foodName}>{food}</span>
       {rating && !rateMode && (
         <span className={styles.foodRating} data-rating={rating}>
-          {rating}
+          {Number(rating).toFixed(1)}
         </span>
       )}
       {rateMode && (

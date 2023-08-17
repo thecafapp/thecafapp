@@ -93,33 +93,19 @@ export default async function handler(req, res) {
       });
       if (mealName === "Breakfast") needsBreakfast = false;
       const thisMealTimes = mealTimes[dayType][mealName];
-      if (
-        json.date <
-        generateDate(
+      json.meals.push({
+        name: mealName,
+        start: generateDate(
+          thisMealTimes.start,
+          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
+        ),
+        end: generateDate(
           thisMealTimes.end,
           new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        )
-      ) {
-        json.meals.push({
-          name: mealName,
-          start: generateDate(
-            thisMealTimes.start,
-            new Date().toLocaleString("en-US", {
-              month: "long",
-              day: "numeric",
-            })
-          ),
-          end: generateDate(
-            thisMealTimes.end,
-            new Date().toLocaleString("en-US", {
-              month: "long",
-              day: "numeric",
-            })
-          ),
-          times: thisMealTimes.start + " - " + thisMealTimes.end,
-          menu: items,
-        });
-      }
+        ),
+        times: thisMealTimes.start + " - " + thisMealTimes.end,
+        menu: items,
+      });
     });
     if (
       dayType === "Weekday" &&
@@ -144,6 +130,11 @@ export default async function handler(req, res) {
       };
       if (needsBreakfast) json.meals.unshift(breakfast);
     }
+    json.meals = json.meals.filter((item) => {
+      if (item.end > Date.now()) return true;
+      else return false;
+    });
+    console.log(json);
     const currentMealEnd = json.meals[0].end;
     const cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     res

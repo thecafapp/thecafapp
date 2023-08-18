@@ -70,7 +70,8 @@ export default async function handler(req, res) {
     ).slice(-2)}-${("0" + String(date.getDate())).slice(-2)}`;
     const page = dom.window.document.querySelector("article.content");
     const allDates = page.querySelectorAll(".menu-date");
-    const dayType = date.getDay() < 5 ? "Weekday" : "Weekend";
+    const dayType =
+      date.getDay() > 1 && date.getDay() < 6 ? "Weekday" : "Weekend";
     const menu = Array.from(allDates)
       .filter((day) => day.getAttribute("id") === currentDate)[0]
       .querySelectorAll(".menu-location");
@@ -131,6 +132,7 @@ export default async function handler(req, res) {
       if (needsBreakfast) json.meals.unshift(breakfast);
     }
     json.meals = json.meals.filter((item) => {
+      console.log(item.name);
       if (item.end > Date.now()) return true;
       else return false;
     });

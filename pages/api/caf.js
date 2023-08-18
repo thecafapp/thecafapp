@@ -30,7 +30,7 @@ export default async function handler(req, res) {
   };
   const json = { meals: [], date: "" };
   const generateDate = (time, date) => {
-    console.log(`${time}, ${date} ${new Date().getFullYear()} CST`);
+    // console.log(`${time}, ${date} ${new Date().getFullYear()} CST`);
     return (
       new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 3600000 // set to 3600000 for Daylight Savings Time, 0 for not
     );
@@ -83,7 +83,6 @@ export default async function handler(req, res) {
       }),
       new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
     );
-    console.log(json.date);
     menu.forEach((meal) => {
       let items = [];
       const mealName = meal.querySelector("h3").textContent.trim();
@@ -132,11 +131,9 @@ export default async function handler(req, res) {
       if (needsBreakfast) json.meals.unshift(breakfast);
     }
     json.meals = json.meals.filter((item) => {
-      console.log(item.name);
       if (item.end > Date.now()) return true;
       else return false;
     });
-    console.log(json);
     const currentMealEnd = json.meals[0].end;
     const cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     res

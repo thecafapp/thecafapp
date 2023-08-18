@@ -109,3 +109,7 @@ details[open] summary:after {
 p {
   line-height: 1.1em;
 }
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}

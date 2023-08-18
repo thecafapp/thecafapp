@@ -82,10 +82,12 @@
 
 .alertModal {
   height: max-content;
+  max-height: 80vh;
+  overflow: scroll;
   width: 80vw;
   max-width: 500px;
   position: fixed;
-  top: 50%;
+  top: calc(50% + 2em);
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;

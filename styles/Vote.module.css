@@ -82,9 +82,9 @@
 
 .alertModal {
   height: max-content;
-  max-height: 80vh;
+  max-height: 85vh;
   overflow: scroll;
-  width: 80vw;
+  width: 90vw;
   max-width: 500px;
   position: fixed;
   top: calc(50% + 2em);

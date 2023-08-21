@@ -64,14 +64,24 @@ export default async function handler(req, res) {
   const dom = new JSDOM(data);
   try {
     let needsBreakfast = true;
+    const altDate = generateDate(
+      new Date().toLocaleTimeString("en-US", {
+        hour12: true,
+        hour: "numeric",
+        minute: "2-digit",
+      }),
+      new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
+    );
     const date = new Date();
+    console.log(date.toLocaleString());
     const currentDate = `${date.getFullYear()}-${(
       "0" + String(date.getMonth() + 1)
     ).slice(-2)}-${("0" + String(date.getDate())).slice(-2)}`;
     const page = dom.window.document.querySelector("article.content");
     const allDates = page.querySelectorAll(".menu-date");
     const dayType =
-      date.getDay() > 1 && date.getDay() < 6 ? "Weekday" : "Weekend";
+      date.getDay() > 0 && date.getDay() < 6 ? "Weekday" : "Weekend";
+    console.log(date.getDay());
     const menu = Array.from(allDates)
       .filter((day) => day.getAttribute("id") === currentDate)[0]
       .querySelectorAll(".menu-location");

@@ -145,7 +145,8 @@ export default async function handler(req, res) {
       else return false;
     });
     const currentMealEnd = json.meals[0].end;
-    const cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
+    let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
+    cacheAge = cacheAge < 900 ? cacheAge : 900;
     res
       .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
       .status(200)

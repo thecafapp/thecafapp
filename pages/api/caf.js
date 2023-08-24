@@ -98,7 +98,9 @@ export default async function handler(req, res) {
       const mealName = meal.querySelector("h3").textContent.trim();
       meal.querySelectorAll(".item ul").forEach((item) => {
         item.querySelectorAll("li").forEach((food) => {
-          items.push(food.textContent.trim());
+          if (food.textContent.trim().length > 0) {
+            items.push(food.textContent.trim());
+          }
         });
       });
       if (mealName === "Breakfast") needsBreakfast = false;

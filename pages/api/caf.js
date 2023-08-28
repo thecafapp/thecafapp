@@ -98,7 +98,10 @@ export default async function handler(req, res) {
       const mealName = meal.querySelector("h3").textContent.trim();
       meal.querySelectorAll(".item ul").forEach((item) => {
         item.querySelectorAll("li").forEach((food) => {
-          if (food.textContent.trim().length > 0) {
+          if (
+            food.textContent.trim().length > 0 &&
+            food.textContent.trim() != "Menu Not Available"
+          ) {
             items.push(food.textContent.trim());
           }
         });

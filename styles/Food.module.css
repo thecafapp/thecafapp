@@ -1,6 +1,7 @@
 .foodName {
   flex: 1;
   text-align: left;
+  text-transform: capitalize;
 }
 
 .foodRating {

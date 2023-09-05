@@ -35,7 +35,7 @@ export const handler = async () => {
     const foods = await foodsCollection.find().project({ _id: 0 }).toArray();
     const ratings = await ratingsCollection
       .find()
-      .project({ uid: 0 })
+      .project({ uid: 0, expiresAt: 0 })
       .toArray();
     const existingFileReq = await fetch(
       `${process.env.CAFBUCKETGETURL}-${date}.json`

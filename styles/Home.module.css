@@ -125,6 +125,7 @@
 
   .restaurants {
     margin-bottom: 1em;
+    scroll-behavior: smooth;
   }
 }
 

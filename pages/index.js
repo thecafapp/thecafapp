@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Restaurant from "../components/Restaurant";
 import Timer from "../components/Timer";
 import s from "../styles/Home.module.css";
@@ -36,6 +36,7 @@ export default function Home() {
   const [showMemo, setShowMemo] = useState(false);
   const [menuError, setMenuError] = useState(false);
   const [needsTransition, setNeedsTransition] = useState(false);
+  const restaurantsRef = useRef(null);
   const user = useFirebaseUser();
   useEffect(() => {
     if (!window.localStorage.getItem("iden")) {
@@ -69,6 +70,9 @@ export default function Home() {
         }
       });
   }, []);
+  const restaurantScroll = (e) => {
+    restaurantsRef.current.scrollBy(e.deltaY, 0);
+  };
   const closeMemo = () => {
     localStorage.setItem("lm", memo.memo_id);
     setShowMemo(false);
@@ -145,7 +149,11 @@ export default function Home() {
               Other Dining
             </h3>
             <div className={s.restWrapper}>
-              <div className={s.restaurants}>
+              <div
+                className={s.restaurants}
+                onWheel={restaurantScroll}
+                ref={restaurantsRef}
+              >
                 {restaurants
                   .sort((a) => {
                     if (a.hours.current == true) {

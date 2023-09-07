@@ -78,6 +78,7 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 99;
 }
 
 .alertModal {
@@ -102,6 +103,7 @@
     "x x"
     "c d";
   outline: none;
+  z-index: 100;
 }
 
 .alertModal > span {

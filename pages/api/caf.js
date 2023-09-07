@@ -100,7 +100,8 @@ export default async function handler(req, res) {
         item.querySelectorAll("li").forEach((food) => {
           if (
             food.textContent.trim().length > 0 &&
-            food.textContent.trim() != "Menu Not Available"
+            food.textContent.trim() != "Menu Not Available" &&
+            !items.includes(food.textContent.trim())
           ) {
             items.push(food.textContent.trim());
           }

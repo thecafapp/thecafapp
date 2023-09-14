@@ -65,14 +65,6 @@ export default async function handler(req, res) {
   const dom = new JSDOM(data);
   try {
     let needsBreakfast = true;
-    const altDate = generateDate(
-      new Date().toLocaleTimeString("en-US", {
-        hour12: true,
-        hour: "numeric",
-        minute: "2-digit",
-      }),
-      new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-    );
     const date = new Date();
     console.log(date.toLocaleString());
     const currentDate = `${date.getFullYear()}-${(
@@ -156,13 +148,13 @@ export default async function handler(req, res) {
     let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     cacheAge = cacheAge < 900 ? cacheAge : 900;
     res
-      // .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
+      .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
       .status(200)
       .json(json);
   } catch (err) {
     console.log(err);
     res
-      // .setHeader("Cache-Control", "max-age=120, public")
+      .setHeader("Cache-Control", "max-age=120, public")
       .status(200)
       .json({ error: true });
   }

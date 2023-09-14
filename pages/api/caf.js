@@ -1,6 +1,7 @@
 // CACHE PLEASE
 const parser = require("jsdom");
 const { JSDOM } = parser;
+const { ignoreItems } = require("../../public/ignore-items.json");
 export default async function handler(req, res) {
   const mealTimes = {
     Weekday: {
@@ -96,12 +97,13 @@ export default async function handler(req, res) {
     menu.forEach((meal) => {
       let items = [];
       const mealName = meal.querySelector("h3").textContent.trim();
-      meal.querySelectorAll(".item ul").forEach((item) => {
+      meal.querySelectorAll(".item ul, .item ol").forEach((item) => {
         item.querySelectorAll("li").forEach((food) => {
           if (
             food.textContent.trim().length > 0 &&
             food.textContent.trim() != "Menu Not Available" &&
-            !items.includes(food.textContent.trim())
+            !items.includes(food.textContent.trim()) &&
+            !ignoreItems.includes(food.textContent.trim())
           ) {
             items.push(food.textContent.trim());
           }
@@ -154,13 +156,13 @@ export default async function handler(req, res) {
     let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     cacheAge = cacheAge < 900 ? cacheAge : 900;
     res
-      .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
+      // .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
       .status(200)
       .json(json);
   } catch (err) {
     console.log(err);
     res
-      .setHeader("Cache-Control", "max-age=120, public")
+      // .setHeader("Cache-Control", "max-age=120, public")
       .status(200)
       .json({ error: true });
   }

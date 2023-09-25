@@ -176,12 +176,10 @@ export default function Home() {
             <div className={s.divider}></div>
             <Leaderboard />
             <div className={s.divider}></div>
-            {user.email === "mtlindley@mc.edu" && (
-              <>
-                <PointTracker />
-                <div className={s.divider}></div>
-              </>
-            )}
+            <>
+              <PointTracker />
+              <div className={s.divider}></div>
+            </>
             <p className={s.disclaimer}>
               Meal and hour data comes from the{" "}
               <a

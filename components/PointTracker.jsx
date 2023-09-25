@@ -3,15 +3,17 @@ import Modal from "react-modal";
 import PointModal from "./PointModal";
 import styles from "../styles/PointTracker.module.css";
 import modalStyles from "../styles/Vote.module.css";
+import useFirebaseUser from "../hooks/useFirebaseUser";
 
 export default function PointTracker() {
   const [balance, setBalance] = useState("--.--");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const user = useFirebaseUser();
   const enoughFor = (itemCost) => {
     return Math.floor(balance / itemCost);
   };
   const fetchBalance = () => {
-    fetch(`/api/balance?id=iBwrzJeuabVTeetitsBWmjxxV4m2`)
+    fetch(`/api/balance?id=${user.uid}`)
       .then((res) => {
         return res.json();
       })

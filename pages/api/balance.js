@@ -70,7 +70,7 @@ export default async function handler(req, res) {
           res.status(200).json({ status: "success" });
         })
         .catch(() => {
-          res.status(401);
+          res.status(401).json({ error: "Auth error" });
         });
     } else {
       res.status(400).json({

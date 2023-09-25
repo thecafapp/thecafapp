@@ -52,7 +52,7 @@ export default function PointTracker() {
             <b>{enoughFor(3.25)}</b> Starbucks Caffe Lattes
           </li>
           <li>
-            <b>{enoughFor(5.0)}</b> Einstein's Regular Bagels
+            <b>{enoughFor(5.0)}</b> Einstein&apos;s Regular Bagels
           </li>
         </ul>
         <span

@@ -47,10 +47,13 @@ export default async function handler(req, res) {
         .json({ error: "You didn't include the food name querystring." });
     }
   } else if (req.method == "POST") {
-    console.log(req.cookies);
-    if (req.query.id && req.query.balance) {
+    const body = JSON.parse(req.body);
+    if (req.query.balance && body.token) {
       const id = req.query.id;
       const auth = firebaseApp.auth();
+      auth.verifyIdToken(body.token).then((decodedToken) => {
+        console.log("DECODEDTOKEN:", decodedToken.firebase.identities);
+      });
       auth.getUser(req.query.id).then(async (user) => {
         if (!user) res.status(401).json({ error: "Unknown user UID" });
         await usersCollection.updateOne(

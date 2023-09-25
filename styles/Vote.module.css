@@ -84,7 +84,7 @@
 .alertModal {
   height: max-content;
   max-height: 85vh;
-  overflow: scroll;
+  overflow: auto;
   width: 90vw;
   max-width: 500px;
   position: fixed;
@@ -151,6 +151,25 @@
 
 .foodRatings {
   grid-area: x;
+}
+
+.pointInput {
+  background-color: var(--bg-secondary);
+  border: none;
+  font-size: 2em;
+  width: 3.5em;
+  color: white;
+  text-align: center;
+  font-family: inherit;
+  font-weight: bold;
+  padding: 0.25em 0;
+  outline: none;
+  border-radius: 0.3rem;
+  transition: background-color 0.2s;
+}
+
+.pointInput:focus {
+  background-color: var(--grad-1);
 }
 
 @keyframes loading {

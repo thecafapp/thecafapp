@@ -20,6 +20,9 @@ const Memo = dynamic(() => import("../components/Memo"), {
 const Vote = dynamic(() => import("../components/Vote"), {
   ssr: false,
 });
+const PointTracker = dynamic(() => import("../components/PointTracker"), {
+  ssr: false,
+});
 const TransitionWarning = dynamic(
   () => import("../components/TransitionWarning"),
   {
@@ -173,6 +176,12 @@ export default function Home() {
             <div className={s.divider}></div>
             <Leaderboard />
             <div className={s.divider}></div>
+            {user.email === "mtlindley@mc.edu" && (
+              <>
+                <PointTracker />
+                <div className={s.divider}></div>
+              </>
+            )}
             <p className={s.disclaimer}>
               Meal and hour data comes from the{" "}
               <a

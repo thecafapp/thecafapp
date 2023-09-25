@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import firebase from "firebase/compat/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-function useFirebaseUser(props) {
+/**
+ * Gets a reactive Firebase user object
+ * @returns {import("firebase/auth").User}
+ */
+function useFirebaseUser() {
   const [authUser, setAuthUser] = useState(null);
   const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,

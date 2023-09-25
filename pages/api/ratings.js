@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method == "POST") {
     const body = JSON.parse(req.body);
-    if (req.query.id && body.rating && body.expires) {
+    if (req.query.id && body.rating && body.expires && body.token) {
       ratingsCollection
         .findOne({
           uid: req.query.id,

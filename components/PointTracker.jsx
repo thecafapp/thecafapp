@@ -13,6 +13,7 @@ export default function PointTracker() {
     return Math.floor(balance / itemCost);
   };
   const fetchBalance = () => {
+    if (!user) return;
     fetch(`/api/balance?id=${user.uid}`)
       .then((res) => {
         return res.json();
@@ -25,7 +26,7 @@ export default function PointTracker() {
         }
       });
   };
-  useEffect(fetchBalance, []);
+  useEffect(fetchBalance, [user]);
   return (
     <>
       <div className={styles.tracker}>

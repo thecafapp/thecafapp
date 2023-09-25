@@ -49,29 +49,28 @@ export default async function handler(req, res) {
   } else if (req.method == "POST") {
     const body = JSON.parse(req.body);
     if (req.query.balance && body.token) {
-      const id = req.query.id;
       const auth = firebaseApp.auth();
       auth.verifyIdToken(body.token).then((decodedToken) => {
-        console.log("DECODEDTOKEN:", decodedToken.firebase.identities);
+        res.status(200).json({ decodedToken });
       });
-      auth.getUser(req.query.id).then(async (user) => {
-        if (!user) res.status(401).json({ error: "Unknown user UID" });
-        await usersCollection.updateOne(
-          { uid: id },
-          {
-            $set: {
-              uid: req.query.id,
-              name: user.displayName.replace(" (student)", ""),
-              balance: balance,
-            },
-          },
-          {
-            upsert: true,
-          }
-        );
-        client.close();
-        res.status(200).json({ status: "success" });
-      });
+      // auth.getUser(req.query.id).then(async (user) => {
+      //   if (!user) res.status(401).json({ error: "Unknown user UID" });
+      //   await usersCollection.updateOne(
+      //     { uid: id },
+      //     {
+      //       $set: {
+      //         uid: req.query.id,
+      //         name: user.displayName.replace(" (student)", ""),
+      //         balance: balance,
+      //       },
+      //     },
+      //     {
+      //       upsert: true,
+      //     }
+      //   );
+      //   client.close();
+      //   res.status(200).json({ status: "success" });
+      // });
     } else {
       res.status(400).json({
         error:

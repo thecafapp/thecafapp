@@ -176,10 +176,12 @@ export default function Home() {
             <div className={s.divider}></div>
             <Leaderboard />
             <div className={s.divider}></div>
-            <>
-              <PointTracker />
-              <div className={s.divider}></div>
-            </>
+            {user && (
+              <>
+                <PointTracker />
+                <div className={s.divider}></div>
+              </>
+            )}
             <p className={s.disclaimer}>
               Meal and hour data comes from the{" "}
               <a

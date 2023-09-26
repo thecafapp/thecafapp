@@ -47,10 +47,8 @@ export default async function handler(req, res) {
         .json({ error: "You didn't include the food name querystring." });
     }
   } else if (req.method == "PUT") {
-    const body = JSON.parse(req.body);
-    if (req.query.balance && body.token) {
+    if (req.query.balance) {
       const auth = firebaseApp.auth();
-      console.log(body);
       auth
         .verifyIdToken(req.headers["X-Firebase-Token"])
         .then(async (user) => {

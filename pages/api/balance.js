@@ -46,10 +46,11 @@ export default async function handler(req, res) {
         .status(404)
         .json({ error: "You didn't include the food name querystring." });
     }
-  } else if (req.method == "POST") {
+  } else if (req.method == "PUT") {
     const body = JSON.parse(req.body);
     if (req.query.balance && body.token) {
       const auth = firebaseApp.auth();
+      console.log(body);
       auth
         .verifyIdToken(body.token)
         .then(async (user) => {

@@ -23,7 +23,7 @@ export default function PointModal({
     }
     user.getIdToken().then((idToken) => {
       fetch(`/api/balance?balance=${finalValue}`, {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify({
           token: idToken,
         }),

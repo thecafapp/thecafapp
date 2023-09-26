@@ -52,7 +52,7 @@ export default async function handler(req, res) {
       const auth = firebaseApp.auth();
       console.log(body);
       auth
-        .verifyIdToken(body.token)
+        .verifyIdToken(req.headers["X-Firebase-Token"])
         .then(async (user) => {
           await usersCollection.updateOne(
             { uid: id },
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
           res.status(200).json({ status: "success" });
         })
         .catch(() => {
-          res.status(401).json({ error: "Auth error" });
+          res.status(401).json({ error: "auth error" });
         });
     } else {
       res.status(400).json({

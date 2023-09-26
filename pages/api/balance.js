@@ -49,8 +49,9 @@ export default async function handler(req, res) {
   } else if (req.method == "PUT") {
     if (req.query.balance) {
       const auth = firebaseApp.auth();
+      console.log(req.headers);
       auth
-        .verifyIdToken(req.headers["X-Firebase-Token"])
+        .verifyIdToken(req.headers["x-firebase-token"])
         .then(async (user) => {
           await usersCollection.updateOne(
             { uid: id },

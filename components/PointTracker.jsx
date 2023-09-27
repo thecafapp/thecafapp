@@ -14,7 +14,11 @@ export default function PointTracker() {
     return Math.floor(balance / itemCost);
   };
   const fetchBalance = async () => {
-    if (!user) return;
+    if (!user) {
+      setBalance("--.--");
+      setModalScreen("manual");
+      return;
+    }
     fetch(`/api/balance`, {
       headers: {
         "X-Firebase-Token": await user.getIdToken(),
@@ -50,23 +54,40 @@ export default function PointTracker() {
           </span>{" "}
           points remaining
         </h2>
-        <p className={styles.usedFor}>
-          <span className={styles.usedForHeading}>That&apos;s enough for:</span>
-        </p>
-        <ul>
-          <li>
-            <b>{enoughFor(9.19)}</b> Chick-Fil-A Sandwich Meals
-          </li>
-          <li>
-            <b>{enoughFor(4.19)}</b> Chick-Fil-A Milkshakes
-          </li>
-          <li>
-            <b>{enoughFor(3.25)}</b> Starbucks Caffe Lattes
-          </li>
-          <li>
-            <b>{enoughFor(5.0)}</b> Einstein&apos;s Regular Bagels
-          </li>
-        </ul>
+        {balance != "0.00" && balance != "--.--" ? (
+          <>
+            <p className={styles.usedFor}>
+              <span className={styles.usedForHeading}>
+                That&apos;s enough for:
+              </span>
+            </p>
+            <ul>
+              <li>
+                <b>{enoughFor(9.19)}</b> Chick-Fil-A Sandwich Meals
+              </li>
+              <li>
+                <b>{enoughFor(4.19)}</b> Chick-Fil-A Milkshakes
+              </li>
+              <li>
+                <b>{enoughFor(3.25)}</b> Starbucks Caffe Lattes
+              </li>
+              <li>
+                <b>{enoughFor(5.0)}</b> Einstein&apos;s Regular Bagels
+              </li>
+            </ul>
+          </>
+        ) : (
+          <a
+            href="#"
+            className={styles.getStarted}
+            onClick={(e) => {
+              e.preventDefault();
+              setModalIsOpen(true);
+            }}
+          >
+            Get started with point tracking
+          </a>
+        )}
         <span
           title="Click to edit your points"
           className={styles.edit}
@@ -85,6 +106,7 @@ export default function PointTracker() {
           closeModal={() => setModalIsOpen(false)}
           currentPoints={balance}
           setBalance={setBalance}
+          setModalScreen={setModalScreen}
         />
       </Modal>
     </>

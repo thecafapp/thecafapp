@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       });
       client.close();
       return res
-        .setHeader("Cache-Control", "max-age=150, public")
+        .setHeader("Cache-Control", "max-age=20, public")
         .status(200)
         .json({ balance: Number(thisUser.balance) || null });
     } else if (req.method == "POST") {

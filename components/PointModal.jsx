@@ -4,6 +4,7 @@ import styles from "../styles/Vote.module.css";
 export default function PointModal({
   closeModal,
   setBalance,
+  setModalScreen,
   currentPoints = "0.00",
   initialMode = "auto",
 }) {
@@ -34,6 +35,7 @@ export default function PointModal({
       },
     });
     setBalance(finalValue);
+    setModalScreen("auto");
     closeModal();
   };
   return (

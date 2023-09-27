@@ -176,7 +176,7 @@ export default function Home() {
             <div className={s.divider}></div>
             <Leaderboard />
             <div className={s.divider}></div>
-            {user && user?.email === "mtlindley@mc.edu" && (
+            {user && (
               <>
                 <PointTracker />
                 <div className={s.divider}></div>

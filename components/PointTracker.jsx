@@ -8,6 +8,7 @@ import useFirebaseUser from "../hooks/useFirebaseUser";
 export default function PointTracker() {
   const [balance, setBalance] = useState("--.--");
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalScreen, setModalScreen] = useState("auto");
   const user = useFirebaseUser();
   const enoughFor = (itemCost) => {
     return Math.floor(balance / itemCost);
@@ -25,7 +26,9 @@ export default function PointTracker() {
       .then((json) => {
         try {
           setBalance(json?.balance?.toFixed(2) || "--.--");
+          if (Number(json.balance) == 0) setModalScreen("manual");
         } catch {
+          setModalScreen("manual");
           setBalance("--.--");
         }
       });
@@ -78,8 +81,10 @@ export default function PointTracker() {
         overlayClassName={modalStyles.alertOverlay}
       >
         <PointModal
+          initialMode={modalScreen}
           closeModal={() => setModalIsOpen(false)}
           currentPoints={balance}
+          setBalance={setBalance}
         />
       </Modal>
     </>

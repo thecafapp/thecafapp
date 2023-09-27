@@ -3,6 +3,7 @@ import useFirebaseUser from "../hooks/useFirebaseUser";
 import styles from "../styles/Vote.module.css";
 export default function PointModal({
   closeModal,
+  setBalance,
   currentPoints = "0.00",
   initialMode = "auto",
 }) {
@@ -27,6 +28,7 @@ export default function PointModal({
         "X-Firebase-Token": await user.getIdToken(),
       },
     });
+    setBalance(finalValue);
     closeModal();
   };
   return (
@@ -63,7 +65,7 @@ export default function PointModal({
       {mode === "manual" && (
         <>
           <div className={styles.heading}>
-            <h2>what is your balance?</h2>
+            <h2>what is your current balance?</h2>
             <p>
               or{" "}
               <a

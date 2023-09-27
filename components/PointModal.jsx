@@ -16,6 +16,11 @@ export default function PointModal({
     spendInput.current.focus();
   }, []);
   const user = useFirebaseUser();
+  const checkForSubmit = (e) => {
+    if (e.key === "Enter") {
+      submitPoints();
+    }
+  };
   const submitPoints = async () => {
     let finalValue = finalVal;
     if (mode === "auto") {
@@ -57,6 +62,7 @@ export default function PointModal({
               className={styles.pointInput}
               value={spendVal}
               onChange={(e) => setSpendVal(e.target.value)}
+              onKeyUp={(e) => checkForSubmit(e)}
               ref={spendInput}
             ></input>
           </div>
@@ -85,6 +91,7 @@ export default function PointModal({
               className={styles.pointInput}
               value={finalVal}
               onChange={(e) => setFinalVal(e.target.value)}
+              onKeyUp={(e) => checkForSubmit(e)}
             ></input>
           </div>
         </>

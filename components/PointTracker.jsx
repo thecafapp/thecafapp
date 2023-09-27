@@ -20,7 +20,7 @@ export default function PointTracker() {
       })
       .then((json) => {
         try {
-          setBalance(Number(json.balance.$numberDecimal).toFixed(2));
+          setBalance(json.balance.toFixed(2));
         } catch {
           setBalance("--.--");
         }

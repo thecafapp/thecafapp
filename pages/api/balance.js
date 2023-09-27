@@ -24,34 +24,23 @@ export default async function handler(req, res) {
   await client.connect();
   const db = client.db(dbName);
   const usersCollection = db.collection("users");
-  if (req.method == "GET") {
-    if (req.query.id) {
-      const id = decodeURIComponent(req.query.id);
-      const auth = firebaseApp.auth();
-      auth.getUser(req.query.id).then(async (user) => {
-        if (!user) res.status(401).json({ error: "Unknown user UID" });
-        const thisUser = await usersCollection.findOne({
-          uid: id,
-        });
-        client.close();
-        return res
-          .setHeader("Cache-Control", "max-age=150, public")
-          .status(200)
-          .json({ balance: thisUser.balance });
+  const auth = firebaseApp.auth();
+  try {
+    const user = await auth.verifyIdToken(req.headers["x-firebase-token"]);
+    if (!user) {
+      return res.status(401).json({ error: "unauthorized" });
+    }
+    if (req.method == "GET") {
+      const thisUser = await usersCollection.findOne({
+        uid: user.uid,
       });
-    } else {
       client.close();
       return res
         .setHeader("Cache-Control", "max-age=150, public")
-        .status(404)
-        .json({ error: "You didn't include the food name querystring." });
-    }
-  } else if (req.method == "POST") {
-    if (req.query.balance) {
-      const auth = firebaseApp.auth();
-      console.log(req.headers);
-      const user = await auth.verifyIdToken(req.headers["x-firebase-token"]);
-      if (user) {
+        .status(200)
+        .json({ balance: Number(thisUser.balance) || null });
+    } else if (req.method == "POST") {
+      if (req.query.balance) {
         await usersCollection.updateOne(
           { uid: user.uid },
           {
@@ -67,15 +56,15 @@ export default async function handler(req, res) {
         client.close();
         return res.status(200).json({ balance: req.query.balance });
       } else {
-        return res.status(401).json({ error: "auth error" });
+        return res.status(400).json({
+          error:
+            "You must provide a unique consistent UID, food name, and rating.",
+        });
       }
     } else {
-      return res.status(400).json({
-        error:
-          "You must provide a unique consistent UID, food name, and rating.",
-      });
+      return res.status(405).send();
     }
-  } else {
-    return res.status(405).send();
+  } catch {
+    return res.status(401).json({ error: "unauthorized" });
   }
 }

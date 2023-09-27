@@ -35,8 +35,10 @@ export default async function handler(req, res) {
         uid: user.uid,
       });
       client.close();
+      if (thisUser.balance) {
+        res.setHeader("Cache-Control", "max-age=20, public");
+      }
       return res
-        .setHeader("Cache-Control", "max-age=20, public")
         .status(200)
         .json({ balance: Number(thisUser.balance) || null });
     } else if (req.method == "POST") {

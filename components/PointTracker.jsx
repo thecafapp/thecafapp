@@ -32,7 +32,7 @@ export default function PointTracker() {
       .then((json) => {
         try {
           setBalance(json?.balance?.toFixed(2) || "--.--");
-          if (Number(json.balance) == 0) setModalScreen("manual");
+          setModalScreen("auto");
         } catch {
           setModalScreen("manual");
           setBalance("--.--");

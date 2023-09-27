@@ -21,12 +21,13 @@ export default function PointModal({
       setFinalVal(finalVal - spendVal);
       finalValue -= spendVal;
     }
-    fetch(`/api/balance?balance=${finalValue}`, {
+    await fetch(`/api/balance?balance=${finalValue}`, {
       method: "POST",
       headers: {
         "X-Firebase-Token": await user.getIdToken(),
       },
     });
+    closeModal();
   };
   return (
     <>

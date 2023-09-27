@@ -14,7 +14,7 @@ export default function PointTracker() {
   };
   const fetchBalance = async () => {
     if (!user) return;
-    fetch(`/api/balance?id=${user.uid}`, {
+    fetch(`/api/balance`, {
       headers: {
         "X-Firebase-Token": await user.getIdToken(),
       },
@@ -24,13 +24,15 @@ export default function PointTracker() {
       })
       .then((json) => {
         try {
-          setBalance(json.balance.toFixed(2));
+          setBalance(json?.balance?.toFixed(2) || "--.--");
         } catch {
           setBalance("--.--");
         }
       });
   };
-  useEffect(fetchBalance, [user]);
+  useEffect(() => {
+    fetchBalance();
+  }, [user]);
   return (
     <>
       <div className={styles.tracker}>

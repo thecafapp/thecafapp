@@ -12,9 +12,13 @@ export default function PointTracker() {
   const enoughFor = (itemCost) => {
     return Math.floor(balance / itemCost);
   };
-  const fetchBalance = () => {
+  const fetchBalance = async () => {
     if (!user) return;
-    fetch(`/api/balance?id=${user.uid}`)
+    fetch(`/api/balance?id=${user.uid}`, {
+      headers: {
+        "X-Firebase-Token": await user.getIdToken(),
+      },
+    })
       .then((res) => {
         return res.json();
       })

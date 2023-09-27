@@ -15,19 +15,17 @@ export default function PointModal({
     spendInput.current.focus();
   }, []);
   const user = useFirebaseUser();
-  const submitPoints = () => {
+  const submitPoints = async () => {
     let finalValue = finalVal;
     if (mode === "auto") {
       setFinalVal(finalVal - spendVal);
       finalValue -= spendVal;
     }
-    user.getIdToken().then((idToken) => {
-      fetch(`/api/balance?balance=${finalValue}`, {
-        method: "POST",
-        headers: {
-          "X-Firebase-Token": idToken,
-        },
-      });
+    fetch(`/api/balance?balance=${finalValue}`, {
+      method: "POST",
+      headers: {
+        "X-Firebase-Token": await user.getIdToken(),
+      },
     });
   };
   return (

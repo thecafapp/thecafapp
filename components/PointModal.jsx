@@ -23,7 +23,7 @@ export default function PointModal({
     }
     user.getIdToken().then((idToken) => {
       fetch(`/api/balance?balance=${finalValue}`, {
-        method: "PUT",
+        method: "POST",
         headers: {
           "X-Firebase-Token": idToken,
         },

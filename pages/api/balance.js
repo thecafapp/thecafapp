@@ -34,49 +34,48 @@ export default async function handler(req, res) {
           uid: id,
         });
         client.close();
-        res
+        return res
           .setHeader("Cache-Control", "max-age=150, public")
           .status(200)
           .json({ balance: thisUser.balance });
       });
     } else {
       client.close();
-      res
+      return res
         .setHeader("Cache-Control", "max-age=150, public")
         .status(404)
         .json({ error: "You didn't include the food name querystring." });
     }
-  } else if (req.method == "PUT") {
+  } else if (req.method == "POST") {
     if (req.query.balance) {
       const auth = firebaseApp.auth();
       console.log(req.headers);
-      auth
-        .verifyIdToken(req.headers["x-firebase-token"])
-        .then(async (user) => {
-          await usersCollection.updateOne(
-            { uid: id },
-            {
-              $set: {
-                uid: user.uid,
-                name: user.name.replace(" (student)", ""),
-                balance: balance,
-              },
+      const user = await auth.verifyIdToken(req.headers["x-firebase-token"]);
+      if (user) {
+        await usersCollection.updateOne(
+          { uid: user.uid },
+          {
+            $set: {
+              name: user.name.replace(" (student)", ""),
+              balance: req.query.balance,
             },
-            {
-              upsert: true,
-            }
-          );
-          client.close();
-          res.status(200).json({ status: "success" });
-        })
-        .catch(() => {
-          res.status(401).json({ error: "auth error" });
-        });
+          },
+          {
+            upsert: true,
+          }
+        );
+        client.close();
+        return res.status(200).json({ balance: req.query.balance });
+      } else {
+        return res.status(401).json({ error: "auth error" });
+      }
     } else {
-      res.status(400).json({
+      return res.status(400).json({
         error:
           "You must provide a unique consistent UID, food name, and rating.",
       });
     }
+  } else {
+    return res.status(405).send();
   }
 }

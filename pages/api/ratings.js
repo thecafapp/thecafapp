@@ -82,7 +82,7 @@ export default async function handler(req, res) {
                   $inc: { points: 10 },
                   $set: {
                     uid: user.uid,
-                    name: user.displayName.replace(" (student)", ""),
+                    name: user.name.replace(" (student)", ""),
                   },
                 },
                 {

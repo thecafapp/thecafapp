@@ -34,7 +34,7 @@ export default function Vote({ currentMealtime, shimData = false }) {
       });
   };
   const sendRating = async (foodRatings, overrideRating = null) => {
-    fetch(`/api/ratings?id=${user.uid}`, {
+    fetch(`/api/ratings`, {
       method: "POST",
       body: JSON.stringify({
         rating: overrideRating || myRating,

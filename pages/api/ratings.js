@@ -51,34 +51,37 @@ export default async function handler(req, res) {
         .json({ error: "You must provide a unique consistent UID." });
     }
   } else if (req.method == "POST") {
-    const body = JSON.parse(req.body);
-    if (req.query.id && body.rating && body.expires) {
-      ratingsCollection
-        .findOne({
-          uid: req.query.id,
-        })
-        .then(async (document) => {
-          if (!document) {
-            const auth = firebaseApp.auth();
-            auth.getUser(req.query.id).then(async (user) => {
-              if (!user) res.status(401).json({ error: "Unknown user UID" });
+    try {
+      const body = JSON.parse(req.body);
+      const auth = firebaseApp.auth();
+      const user = await auth.verifyIdToken(req.headers["x-firebase-token"]);
+      if (!user) {
+        return res.status(401).json({ error: "unauthorized" });
+      }
+      if (body.rating && body.expires) {
+        ratingsCollection
+          .findOne({
+            uid: user.uid,
+          })
+          .then(async (document) => {
+            if (!document) {
               ratingsCollection.createIndex(
                 { expireAt: 1 },
                 { expireAfterSeconds: 0 }
               );
               const expiry = new Date(body.expires);
               await ratingsCollection.insertOne({
-                uid: req.query.id,
+                uid: user.uid,
                 rating: body.rating,
                 expireAt: expiry,
                 time: Date.now(),
               });
               await usersCollection.updateOne(
-                { uid: req.query.id },
+                { uid: user.uid },
                 {
                   $inc: { points: 10 },
                   $set: {
-                    uid: req.query.id,
+                    uid: user.uid,
                     name: user.displayName.replace(" (student)", ""),
                   },
                 },
@@ -88,18 +91,20 @@ export default async function handler(req, res) {
               );
               client.close();
               res.status(200).json({ status: "success" });
-            });
-          } else {
-            client.close();
-            res.status(403).json({ status: "illegal" });
-          }
+            } else {
+              client.close();
+              res.status(403).json({ status: "illegal" });
+            }
+          });
+      } else {
+        client.close();
+        res.status(400).json({
+          error:
+            "You must provide a unique consistent UID, expiry, and a rating.",
         });
-    } else {
-      client.close();
-      res.status(400).json({
-        error:
-          "You must provide a unique consistent UID, expiry, and a rating.",
-      });
+      }
+    } catch {
+      return res.status(500).json({ error: "internal error" });
     }
   }
 }

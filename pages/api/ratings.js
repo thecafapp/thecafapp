@@ -51,9 +51,9 @@ export default async function handler(req, res) {
         .json({ error: "You must provide a unique consistent UID." });
     }
   } else if (req.method == "POST") {
+    const auth = firebaseApp.auth();
+    const body = JSON.parse(req.body);
     try {
-      const body = JSON.parse(req.body);
-      const auth = firebaseApp.auth();
       const user = await auth.verifyIdToken(req.headers["x-firebase-token"]);
       if (!user) {
         return res.status(401).json({ error: "unauthorized" });
@@ -90,15 +90,15 @@ export default async function handler(req, res) {
                 }
               );
               client.close();
-              res.status(200).json({ status: "success" });
+              return res.status(200).json({ status: "success" });
             } else {
               client.close();
-              res.status(403).json({ status: "illegal" });
+              return res.status(403).json({ status: "illegal" });
             }
           });
       } else {
         client.close();
-        res.status(400).json({
+        return res.status(400).json({
           error:
             "You must provide a unique consistent UID, expiry, and a rating.",
         });

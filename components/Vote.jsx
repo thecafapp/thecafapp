@@ -33,26 +33,24 @@ export default function Vote({ currentMealtime, shimData = false }) {
         setNumOfRatings(json.numItems);
       });
   };
-  const sendRating = (foodRatings, overrideRating = null) => {
-    fetch(
-      `/api/ratings?id=${
-        user ? user.uid : window.localStorage.getItem("iden")
-      }`,
-      {
-        method: "POST",
-        body: JSON.stringify({
-          rating: overrideRating || myRating,
-          expires: currentMealtime.end,
-        }),
-      }
-    )
+  const sendRating = async (foodRatings, overrideRating = null) => {
+    fetch(`/api/ratings?id=${user.uid}`, {
+      method: "POST",
+      body: JSON.stringify({
+        rating: overrideRating || myRating,
+        expires: currentMealtime.end,
+      }),
+      headers: {
+        "X-Firebase-Token": await user.getIdToken(),
+      },
+    })
       .then((res) => res.json())
       .then(() => {
         closeModal();
         setCanRate(false);
         getRating(1, user, true);
       });
-    foodRatings.forEach((food) => {
+    foodRatings.forEach(async (food) => {
       if (typeof food.rating === "number") {
         fetch(
           `/api/food?name=${food.name}&id=${
@@ -63,6 +61,9 @@ export default function Vote({ currentMealtime, shimData = false }) {
             body: JSON.stringify({
               rating: food.rating,
             }),
+            headers: {
+              "X-Firebase-Token": await user.getIdToken(),
+            },
           }
         );
       }

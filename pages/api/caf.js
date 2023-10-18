@@ -31,7 +31,6 @@ export default async function handler(req, res) {
   };
   const json = { meals: [], date: "" };
   const generateDate = (time, date) => {
-    // console.log(`${time}, ${date} ${new Date().getFullYear()} CST`);
     return (
       new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 3600000 // set to 3600000 for Daylight Savings Time, 0 for not
     );
@@ -66,7 +65,6 @@ export default async function handler(req, res) {
   try {
     let needsBreakfast = true;
     const date = new Date();
-    console.log(date.toLocaleString());
     const currentDate = `${date.getFullYear()}-${(
       "0" + String(date.getMonth() + 1)
     ).slice(-2)}-${("0" + String(date.getDate())).slice(-2)}`;
@@ -74,7 +72,6 @@ export default async function handler(req, res) {
     const allDates = page.querySelectorAll(".menu-date");
     const dayType =
       date.getDay() > 0 && date.getDay() < 6 ? "Weekday" : "Weekend";
-    console.log(date.getDay());
     const menu = Array.from(allDates)
       .filter((day) => day.getAttribute("id") === currentDate)[0]
       .querySelectorAll(".menu-location");
@@ -94,6 +91,7 @@ export default async function handler(req, res) {
           if (
             food.textContent.trim().length > 0 &&
             food.textContent.trim() != "Menu Not Available" &&
+            food.textContent.trim() != "TBD" &&
             !items.includes(food.textContent.trim()) &&
             !ignoreItems.includes(food.textContent.trim())
           ) {

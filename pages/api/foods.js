@@ -44,11 +44,17 @@ export default async function handler(req, res) {
           .json({ error: "No matching foods." });
       }
     } else {
+      let foods = await foodsCollection
+        .find({ ratings: { $gte: 10 } })
+        .sort({ rating: -1 })
+        .limit(5)
+        .toArray();
       client.close();
+      if (!foods) foods = [];
       res
-        .setHeader("Cache-Control", "max-age=300, public")
-        .status(404)
-        .json({ error: "You didn't include the food name querystring." });
+        .setHeader("Cache-Control", "max-age=1800, public")
+        .status(200)
+        .json({ topFoods: foods });
     }
   } else if (req.method == "POST") {
     const body = JSON.parse(req.body);

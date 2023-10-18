@@ -52,20 +52,15 @@ export default function Vote({ currentMealtime, shimData = false }) {
       });
     foodRatings.forEach(async (food) => {
       if (typeof food.rating === "number") {
-        fetch(
-          `/api/food?name=${food.name}&id=${
-            user ? user.uid : window.localStorage.getItem("iden")
-          }`,
-          {
-            method: "POST",
-            body: JSON.stringify({
-              rating: food.rating,
-            }),
-            headers: {
-              "X-Firebase-Token": await user.getIdToken(),
-            },
-          }
-        );
+        fetch(`/api/foods?name=${food.name}`, {
+          method: "POST",
+          body: JSON.stringify({
+            rating: food.rating,
+          }),
+          headers: {
+            "X-Firebase-Token": await user.getIdToken(),
+          },
+        });
       }
     });
   };

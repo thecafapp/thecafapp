@@ -13,7 +13,7 @@ export default function Food({
   const [rating, setRating] = useState(null);
   useEffect(() => {
     if (!rateMode) {
-      fetch(`/api/food?name=${encodeURIComponent(food)}`)
+      fetch(`/api/foods?name=${encodeURIComponent(food)}`)
         .then((res) => {
           if (res.ok) {
             return res.json();

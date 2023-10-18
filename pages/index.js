@@ -23,6 +23,9 @@ const Vote = dynamic(() => import("../components/Vote"), {
 const PointTracker = dynamic(() => import("../components/PointTracker"), {
   ssr: false,
 });
+const TopFoods = dynamic(() => import("../components/TopFoods"), {
+  ssr: false,
+});
 const TransitionWarning = dynamic(
   () => import("../components/TransitionWarning"),
   {
@@ -182,6 +185,8 @@ export default function Home() {
                 <div className={s.divider}></div>
               </>
             )}
+            <TopFoods />
+            <div className={s.divider}></div>
             <p className={s.disclaimer}>
               Meal and hour data comes from the{" "}
               <a

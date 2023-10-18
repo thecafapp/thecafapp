@@ -8,7 +8,7 @@ export default function Meal({ meal }) {
       {meal.menu.length > 0 ? (
         <ul className={styles.mealFoods}>
           {meal.menu.map((item, j) => (
-            <Food food={item} key={j} />
+            <Food food={item} mode="menu" key={j} />
           ))}
         </ul>
       ) : (

@@ -5,30 +5,40 @@ import styles from "../styles/Food.module.css";
 
 export default function Food({
   food,
-  rateMode,
+  mode = "menu",
   setRatings,
   setHasRated,
   ratings,
 }) {
   const [rating, setRating] = useState(null);
+  const [foodName, setFoodName] = useState("");
   useEffect(() => {
-    if (!rateMode) {
-      fetch(`/api/foods?name=${encodeURIComponent(food)}`)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            setRating("0");
-            return false;
-          }
-        })
-        .then((json) => {
-          if (json) {
-            setRating(json.rating);
-          }
-        });
+    console.log(food);
+    if (food) {
+      if (mode === "menu") {
+        setFoodName(food);
+        fetch(`/api/foods?name=${encodeURIComponent(food)}`)
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            } else {
+              setRating("0");
+              return false;
+            }
+          })
+          .then((json) => {
+            if (json) {
+              setRating(json.rating);
+            }
+          });
+      } else if (mode === "top") {
+        setRating(food.rating);
+        setFoodName(food.name);
+      } else if (mode === "rate") {
+        setFoodName(food);
+      }
     }
-  }, []);
+  }, [food]);
 
   const rateHandler = (num) => {
     let tempRatings = ratings;
@@ -41,14 +51,19 @@ export default function Food({
   };
 
   return (
-    <li className={classNames(styles.menuItem, rateMode ? styles.rate : "")}>
-      <span className={styles.foodName}>{food}</span>
-      {rating && !rateMode && (
+    <li
+      className={classNames(
+        styles.menuItem,
+        mode === "rate" ? styles.rate : ""
+      )}
+    >
+      <span className={styles.foodName}>{foodName}</span>
+      {rating && mode != "rate" && (
         <span className={styles.foodRating} data-rating={rating}>
           {Number(rating).toFixed(1)}
         </span>
       )}
-      {rateMode && (
+      {mode == "rate" && (
         <Rating
           onClick={rateHandler}
           size={20}

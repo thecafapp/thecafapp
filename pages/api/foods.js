@@ -47,7 +47,7 @@ export default async function handler(req, res) {
       let foods = await foodsCollection
         .find({ ratings: { $gte: 10 } })
         .sort({ rating: -1 })
-        .limit(5)
+        .limit(7)
         .toArray();
       client.close();
       if (!foods) foods = [];

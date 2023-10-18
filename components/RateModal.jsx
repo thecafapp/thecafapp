@@ -23,7 +23,7 @@ export default function RateModal({ myRating, closeModal, sendRating, meal }) {
           <Food
             food={item}
             key={i}
-            rateMode={true}
+            mode="rate"
             setRatings={setRatings}
             setHasRated={setHasRated}
             ratings={ratings}

@@ -53,10 +53,17 @@ export default async function handler(req, res) {
         .toArray();
       client.close();
       if (!foods) foods = [];
-      res
-        .setHeader("Cache-Control", "max-age=1800, public")
-        .status(200)
-        .json({ topFoods: foods });
+      if (findMethod === -1) {
+        res
+          .setHeader("Cache-Control", "max-age=1800, public")
+          .status(200)
+          .json({ topFoods: foods });
+      } else if (findMethod === 1) {
+        res
+          .setHeader("Cache-Control", "max-age=1800, public")
+          .status(200)
+          .json({ worstFoods: foods });
+      }
     }
   } else if (req.method == "POST") {
     const body = JSON.parse(req.body);

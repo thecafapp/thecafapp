@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   if (req.method == "GET") {
     if (req.query.name) {
       const foods = await foodsCollection
-        .find({ name: decodeURIComponent(req.query.name) })
+        .find({ name: decodeURIComponent(req.query.name).toLowerCase() })
         .toArray();
       if (foods.length > 0) {
         client.close();

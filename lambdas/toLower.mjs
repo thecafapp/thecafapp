@@ -6,6 +6,7 @@ async function mainFn() {
   const db = client.db(dbName);
   const foodsCollection = db.collection("foods");
   foodsCollection.updateMany({}, [{ $set: { name: { $toLower: "$name" } } }]);
+  console.log("done, Ctrl+C to exit");
 }
 
 mainFn();

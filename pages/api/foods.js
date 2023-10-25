@@ -73,11 +73,11 @@ export default async function handler(req, res) {
       auth.getUser(req.query.id).then(async (user) => {
         if (!user) res.status(401).json({ error: "Unknown user UID" });
         const food = await foodsCollection.findOne({
-          name: name,
+          name: name.toLowerCase(),
         });
         await foodsCollection.updateOne(
           {
-            name: name,
+            name: name.toLowerCase(),
           },
           {
             $set: {

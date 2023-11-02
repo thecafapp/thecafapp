@@ -103,7 +103,7 @@ export default function PointTracker() {
       )}
       <Modal
         isOpen={modalIsOpen}
-        className={modalStyles.alertModal}
+        className={modalStyles.pointModal}
         overlayClassName={modalStyles.alertOverlay}
       >
         <PointModal

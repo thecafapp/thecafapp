@@ -13,12 +13,12 @@
     "classnames": "^2.3.2",
     "crypto-random-string": "^5.0.0",
     "dotenv": "^16.3.1",
-    "firebase": "^10.4.0",
+    "firebase": "^10.5.2",
     "firebase-admin": "^11.11.0",
     "firebaseui": "^6.1.0",
     "friendly-time": "^1.1.1",
     "jsdom": "^22.1.0",
-    "mongodb": "^6.1.0",
+    "mongodb": "^6.2.0",
     "next": "13.5.4",
     "next-pwa": "^5.6.0",
     "nextjs-google-analytics": "^2.3.3",
@@ -29,7 +29,7 @@
     "simple-duration": "^1.1.0"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^13.5.5",
+    "@next/bundle-analyzer": "^13.5.6",
     "eslint": "8.51.0",
     "eslint-config-next": "13.5.3",
     "npm-run-all": "^4.1.5"

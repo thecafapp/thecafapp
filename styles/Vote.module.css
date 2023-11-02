@@ -106,26 +106,31 @@
   z-index: 100;
 }
 
-.alertModal > span {
+.alertModal > span,
+.pointModal > span {
   grid-area: a;
   margin-bottom: 0.5em;
 }
 
-.alertModal .heading {
+.alertModal .heading,
+.pointModal .heading {
   grid-area: b;
   margin-bottom: 0.5em;
 }
 
-.alertModal .heading h2 {
+.alertModal .heading h2,
+.pointModal .heading h2 {
   margin-bottom: 0.1em;
 }
 
-.alertModal .heading p {
+.alertModal .heading p,
+.pointModal .heading p {
   font-size: 0.9em;
   opacity: 0.5;
 }
 
-.alertModal .cancelButton {
+.alertModal .cancelButton,
+.pointModal .cancelButton {
   grid-area: c;
   margin: 1em 0.5em 0.5em 1em;
   color: var(--text-primary);
@@ -137,7 +142,8 @@
   cursor: pointer;
 }
 
-.alertModal .submitButton {
+.alertModal .submitButton,
+.pointModal .submitButton {
   grid-area: d;
   margin: 1em 1em 0.5em 0.5em;
   color: white;
@@ -170,6 +176,31 @@
 
 .pointInput:focus {
   background-color: var(--grad-1);
+}
+
+.pointModal {
+  height: 20rem;
+  max-height: 85vh;
+  overflow: auto;
+  width: 90vw;
+  max-width: 500px;
+  position: fixed;
+  top: calc(50% + 2em);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-radius: 0.4rem;
+  padding: 2em;
+  display: grid;
+  grid-template-areas:
+    "a a"
+    "b b"
+    "x x"
+    "c d";
+  outline: none;
+  z-index: 100;
 }
 
 @keyframes loading {

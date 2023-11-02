@@ -12,10 +12,11 @@ export default function PointModal({
   const [spendVal, setSpendVal] = useState("0.00");
   const [finalVal, setFinalVal] = useState(currentPoints);
   const spendInput = useRef(null);
+  const setInput = useRef(null);
   useEffect(() => {
-    if (!spendInput.current) return;
-    spendInput.current.focus();
-  }, []);
+    if (spendInput.current) spendInput.current.focus();
+    if (setInput.current) setInput.current.focus();
+  });
   const user = useFirebaseUser();
   const checkForSubmit = (e) => {
     if (e.key === "Enter") {
@@ -37,6 +38,11 @@ export default function PointModal({
     setBalance(finalValue);
     setModalScreen("auto");
     closeModal();
+  };
+  const updateFieldVal = (e) => {
+    if (e.target.value == 0) {
+      e.target.value = "";
+    }
   };
   return (
     <>
@@ -64,6 +70,7 @@ export default function PointModal({
               className={styles.pointInput}
               value={spendVal}
               onChange={(e) => setSpendVal(e.target.value)}
+              onFocus={updateFieldVal}
               onKeyUp={(e) => checkForSubmit(e)}
               ref={spendInput}
             ></input>
@@ -94,6 +101,7 @@ export default function PointModal({
               value={finalVal}
               onChange={(e) => setFinalVal(e.target.value)}
               onKeyUp={(e) => checkForSubmit(e)}
+              ref={setInput}
             ></input>
           </div>
         </>

@@ -75,14 +75,6 @@ export default async function handler(req, res) {
     const menu = Array.from(allDates)
       .filter((day) => day.getAttribute("id") === currentDate)[0]
       .querySelectorAll(".menu-location");
-    json.date = generateDate(
-      new Date().toLocaleTimeString("en-US", {
-        hour12: true,
-        hour: "numeric",
-        minute: "2-digit",
-      }),
-      new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-    );
     menu.forEach((meal) => {
       let items = [];
       const mealName = meal.querySelector("h3").textContent.trim();
@@ -117,7 +109,7 @@ export default async function handler(req, res) {
     });
     if (
       dayType === "Weekday" &&
-      json.date <
+      date <
         generateDate(
           mealTimes.Weekday.Breakfast.end,
           new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
@@ -136,6 +128,7 @@ export default async function handler(req, res) {
         times: `${mealTimes.Weekday.Breakfast.start} - ${mealTimes.Weekday.Breakfast.end}`,
         menu: [],
       };
+      console.log(breakfast);
       if (needsBreakfast) json.meals.unshift(breakfast);
     }
     json.meals = json.meals.filter((item) => {

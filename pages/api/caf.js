@@ -128,7 +128,6 @@ export default async function handler(req, res) {
         times: `${mealTimes.Weekday.Breakfast.start} - ${mealTimes.Weekday.Breakfast.end}`,
         menu: [],
       };
-      console.log(breakfast);
       if (needsBreakfast) json.meals.unshift(breakfast);
     }
     json.meals = json.meals.filter((item) => {

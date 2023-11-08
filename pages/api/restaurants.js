@@ -102,7 +102,7 @@ export default async function handler(req, res) {
           ", " +
           time +
           " CST"
-      ) - 3600000 // add 3600000 for Daylight Savings, 0 for not
+      ) - 0 // add 3600000 for Daylight Savings, 0 for not
     );
   };
   const json = { restaurants: [] };

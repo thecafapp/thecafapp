@@ -1,4 +1,4 @@
-import styles from "../styles/Timer.module.css";
+import styles from "../../styles/Timer.module.css";
 import ft from "friendly-time";
 import { stringify as du } from "simple-duration";
 import { useEffect, useState } from "react";

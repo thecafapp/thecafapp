@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/Meal.module.css";
-import Food from "./Food";
+import styles from "../../styles/Meal.module.css";
+import Food from "../Food";
 
 export default function TopFoods() {
   const [topFoods, setTopFoods] = useState([]);
@@ -14,7 +14,6 @@ export default function TopFoods() {
         }
       })
       .then((json) => {
-        console.log(json);
         setTopFoods(json.topFoods);
       });
   }, []);

@@ -13,7 +13,6 @@ export default function Food({
   const [rating, setRating] = useState(null);
   const [foodName, setFoodName] = useState("");
   useEffect(() => {
-    console.log(food);
     if (food) {
       if (mode === "menu") {
         setFoodName(food);

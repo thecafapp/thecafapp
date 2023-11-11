@@ -37,3 +37,10 @@
   font-weight: normal;
   margin-bottom: 0;
 }
+
+.mealTitle {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 0.25em;
+  color: var(--text-primary);
+}

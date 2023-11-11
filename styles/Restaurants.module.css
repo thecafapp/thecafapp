@@ -1,0 +1,72 @@
+.title {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: var(--text-primary);
+}
+
+.restaurants {
+  display: inline-flex;
+  width: calc(100% + 2em);
+  margin-left: -1em;
+  overflow-x: auto;
+  flex-direction: row;
+  position: static;
+}
+
+.restaurants::-webkit-scrollbar {
+  -webkit-appearance: none;
+  display: none;
+}
+
+@media only screen and (min-width: 530px) {
+  .wrapper {
+    position: relative;
+  }
+
+  .wrapper:before {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--bg-primary));
+    position: absolute;
+    right: -1em;
+    top: 0;
+    z-index: 2;
+  }
+
+  .restaurants::-webkit-scrollbar {
+    -webkit-appearance: initial !important;
+    display: initial !important;
+    width: 5px;
+    height: 9px;
+  }
+
+  /* Track */
+  .restaurants::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+  }
+
+  /* Handle */
+  .restaurants::-webkit-scrollbar-thumb {
+    background: var(--bg-secondary);
+    border: 2px solid var(--bg-primary);
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  .restaurants::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .restaurants {
+    margin-bottom: 1em;
+    scroll-behavior: smooth;
+  }
+}
+
+.notice {
+  font-size: 0.85em;
+  color: var(--text-primary);
+}

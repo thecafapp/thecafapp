@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import PointModal from "./PointModal";
-import styles from "../styles/PointTracker.module.css";
-import modalStyles from "../styles/Vote.module.css";
-import useFirebaseUser from "../hooks/useFirebaseUser";
+import PointModal from "../PointModal";
+import styles from "../../styles/PointTracker.module.css";
+import modalStyles from "../../styles/Vote.module.css";
+import useFirebaseUser from "../../hooks/useFirebaseUser";
 
 export default function PointTracker() {
   const [balance, setBalance] = useState("--.--");
@@ -45,7 +45,7 @@ export default function PointTracker() {
   }, [user]);
   return (
     <>
-      {loaded && (
+      {loaded && user && (
         <div className={styles.tracker}>
           <h4>Point Tracker</h4>
           <h2 className={styles.remaining}>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useFirebaseUser from "../hooks/useFirebaseUser";
+import useFirebaseUser from "../../hooks/useFirebaseUser";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import styles from "../styles/Leaderboard.module.css";
+import styles from "../../styles/Leaderboard.module.css";
 
 export default function Leaderboard({ memo, closeMemo }) {
   const user = useFirebaseUser();

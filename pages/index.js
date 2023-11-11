@@ -1,31 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
-import Restaurant from "../components/Restaurant";
-import Timer from "../components/Timer";
+import { useEffect, useState } from "react";
+import Timer from "../components/blocks/Timer";
 import s from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
-const Leaderboard = dynamic(() => import("../components/Leaderboard"), {
-  ssr: false,
-});
 import useFirebaseUser from "../hooks/useFirebaseUser";
-const Meal = dynamic(() => import("../components/Meal"), {
-  ssr: false,
-});
-const Memo = dynamic(() => import("../components/Memo"), {
-  ssr: false,
-});
-const Vote = dynamic(() => import("../components/Vote"), {
-  ssr: false,
-});
-const PointTracker = dynamic(() => import("../components/PointTracker"), {
-  ssr: false,
-});
-const TopFoods = dynamic(() => import("../components/TopFoods"), {
-  ssr: false,
-});
+import RenderBlocks from "../components/RenderBlocks";
 const TransitionWarning = dynamic(
   () => import("../components/TransitionWarning"),
   {
@@ -36,13 +18,13 @@ const TransitionWarning = dynamic(
 const SHIM_API = false;
 
 export default function Home() {
-  const [data, setData] = useState(null);
-  const [restaurants, setRestaurants] = useState([]);
+  const [cafData, setCafData] = useState(null);
   const [memo, setMemo] = useState({});
+  const [renderLayout, setRenderLayout] = useState(null);
   const [showMemo, setShowMemo] = useState(false);
   const [menuError, setMenuError] = useState(false);
   const [needsTransition, setNeedsTransition] = useState(false);
-  const restaurantsRef = useRef(null);
+
   const user = useFirebaseUser();
   useEffect(() => {
     if (!window.localStorage.getItem("iden")) {
@@ -51,20 +33,23 @@ export default function Home() {
     if (window.location.href.includes("?redir")) {
       setNeedsTransition(true);
     }
+
+    fetch("/layout.json")
+      .then((res) => res.json())
+      .then((json) => {
+        setRenderLayout(json);
+      });
+
     fetch(`/api/caf${SHIM_API ? "?shim=true" : ""}`)
       .then((res) => res.json())
       .then((info) => {
         if (info.error) {
           setMenuError(true);
         } else {
-          setData(info);
+          setCafData(info);
         }
       });
-    fetch("/api/restaurants")
-      .then((res) => res.json())
-      .then((info) => {
-        setRestaurants(info.restaurants);
-      });
+
     fetch("/api/memo")
       .then((res) => res.json())
       .then((info) => {
@@ -76,9 +61,7 @@ export default function Home() {
         }
       });
   }, []);
-  const restaurantScroll = (e) => {
-    restaurantsRef.current.scrollBy(e.deltaY, 0);
-  };
+
   const closeMemo = () => {
     localStorage.setItem("lm", memo.memo_id);
     setShowMemo(false);
@@ -104,7 +87,7 @@ export default function Home() {
             />
           </Link>
         </header>
-        {!data && !menuError && (
+        {!cafData && !menuError && (
           <div className={s.loading}>
             <svg className={s.spinner} viewBox="0 0 50 50">
               <circle
@@ -118,7 +101,7 @@ export default function Home() {
             </svg>
           </div>
         )}
-        {(data || menuError) && (
+        {(cafData || menuError) && (
           <div className={s.content}>
             {needsTransition && (
               <>
@@ -126,69 +109,19 @@ export default function Home() {
                 <div className={s.divider}></div>
               </>
             )}
-            {!menuError ? (
-              <>
-                {<Timer meal={data.meals[0]} />}
-                {data.meals.map((meal, i) => (
-                  <details key={i} open={i == 0}>
-                    <summary className={s.mealTitle}>{meal.name}</summary>
-                    <Meal meal={meal} />
-                  </details>
-                ))}
-                <div className={s.divider}></div>
-                <Vote currentMealtime={data.meals[0]} shimData={SHIM_API} />
-                <div className={s.divider}></div>
-              </>
-            ) : (
-              <>
-                <Timer error={true} />
-                <div className={s.divider}></div>
-              </>
+            {renderLayout && (
+              <RenderBlocks
+                renderLayout={renderLayout}
+                cafData={cafData}
+                shimData={SHIM_API}
+                memo={memo}
+                closeMemo={closeMemo}
+                showMemo={showMemo}
+                menuError={menuError}
+              />
             )}
-            {memo && showMemo && (
-              <>
-                <Memo memo={memo} closeMemo={closeMemo} />
-                <div className={s.divider}></div>
-              </>
-            )}
-            <h3 className={s.mealTitle} style={{ marginBottom: "0.5em" }}>
-              Other Dining
-            </h3>
-            <div className={s.restWrapper}>
-              <div
-                className={s.restaurants}
-                onWheel={restaurantScroll}
-                ref={restaurantsRef}
-              >
-                {restaurants
-                  .sort((a) => {
-                    if (a.hours.current == true) {
-                      return -1;
-                    } else {
-                      return 1;
-                    }
-                  })
-                  .map((rr, i) => (
-                    <Restaurant restaurant={rr} key={i} />
-                  ))}
-              </div>
-            </div>
-            <p className={s.notice}>
-              <b>Notice:</b> this section may vary on breaks and holidays
-            </p>
-            <div className={s.divider}></div>
-            <Leaderboard />
-            <div className={s.divider}></div>
-            {user && (
-              <>
-                <PointTracker />
-                <div className={s.divider}></div>
-              </>
-            )}
-            <TopFoods />
-            <div className={s.divider}></div>
             <p className={s.disclaimer}>
-              Meal and hour data comes from the{" "}
+              Meal data comes from the{" "}
               <a
                 href="https://www.mc.edu/offices/food/"
                 target="_blank"

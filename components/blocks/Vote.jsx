@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Rating } from "@micahlt/react-simple-star-rating";
-import useFirebaseUser from "../hooks/useFirebaseUser";
-import styles from "../styles/Vote.module.css";
-import RateModal from "./RateModal";
+import useFirebaseUser from "../../hooks/useFirebaseUser";
+import styles from "../../styles/Vote.module.css";
+import RateModal from "../RateModal";
 import { useRouter } from "next/router";
 
 Modal.setAppElement("#__next");

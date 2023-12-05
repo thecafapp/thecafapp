@@ -13,7 +13,7 @@
     "classnames": "^2.3.2",
     "crypto-random-string": "^5.0.0",
     "dotenv": "^16.3.1",
-    "firebase": "^10.6.0",
+    "firebase": "^10.7.0",
     "firebase-admin": "^11.11.0",
     "firebaseui": "^6.1.0",
     "friendly-time": "^1.1.1",

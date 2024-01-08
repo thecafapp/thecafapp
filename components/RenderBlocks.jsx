@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 const Timer = dynamic(() => import("./blocks/Timer"), {
   ssr: false,
 });
@@ -70,7 +71,7 @@ export default function RenderBlocks({
         switch (blockName) {
           case "Timer": {
             tempArray[tempArray.length - 1].props = {
-              meal: cafData.meals[0],
+              meal: cafData?.meals[0] || null,
               error: menuError,
             };
             break;
@@ -102,12 +103,14 @@ export default function RenderBlocks({
   }, [cafData, memo, showMemo]);
   return (
     <div>
-      {toRender.map((Component, index) => (
-        <Component.component
-          key={index}
-          {...Component.props}
-        ></Component.component>
-      ))}
+      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        {toRender.map((Component, index) => (
+          <Component.component
+            key={index}
+            {...Component.props}
+          ></Component.component>
+        ))}
+      </ErrorBoundary>
     </div>
   );
 }

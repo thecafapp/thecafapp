@@ -41,11 +41,16 @@ export default function Home() {
       });
 
     fetch(`/api/caf${SHIM_API ? "?shim=true" : ""}`)
-      .then((res) => res.json())
-      .then((info) => {
-        if (info.error) {
-          setMenuError(true);
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
         } else {
+          setMenuError(true);
+          return false;
+        }
+      })
+      .then((info) => {
+        if (info) {
           setCafData(info);
         }
       });

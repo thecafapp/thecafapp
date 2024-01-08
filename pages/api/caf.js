@@ -143,9 +143,6 @@ export default async function handler(req, res) {
       .json(json);
   } catch (err) {
     console.log(err);
-    res
-      .setHeader("Cache-Control", "max-age=120, public")
-      .status(200)
-      .json({ error: true });
+    res.setHeader("Cache-Control", "max-age=120, public").status(500);
   }
 }

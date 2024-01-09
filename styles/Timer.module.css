@@ -9,6 +9,7 @@
   user-select: none;
   box-shadow: 0 0.1em 0.4em rgba(0, 0, 0, 0.3);
   position: relative;
+  cursor: pointer;
 }
 
 .timerParent h2 {

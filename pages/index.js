@@ -2,7 +2,6 @@ import Head from "next/head";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import Timer from "../components/blocks/Timer";
 import s from "../styles/Home.module.css";
 import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";

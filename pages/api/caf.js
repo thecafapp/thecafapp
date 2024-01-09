@@ -84,6 +84,7 @@ export default async function handler(req, res) {
             food.textContent.trim().length > 0 &&
             food.textContent.trim() != "Menu Not Available" &&
             food.textContent.trim() != "TBD" &&
+            food.textContent.trim() != "Closed" &&
             !items.includes(food.textContent.trim()) &&
             !ignoreItems.includes(food.textContent.trim())
           ) {

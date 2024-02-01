@@ -35,7 +35,7 @@ export default function PointModal({
         "X-Firebase-Token": await user.getIdToken(),
       },
     });
-    setBalance(finalValue);
+    setBalance(finalValue.toFixed(2));
     setModalScreen("auto");
     closeModal();
   };

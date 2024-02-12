@@ -12,7 +12,7 @@
     "@micahlt/react-simple-star-rating": "^5.1.9",
     "classnames": "^2.5.1",
     "crypto-random-string": "^5.0.0",
-    "dotenv": "^16.4.1",
+    "dotenv": "^16.4.3",
     "firebase": "^10.7.2",
     "firebase-admin": "^12.0.0",
     "firebaseui": "^6.1.0",

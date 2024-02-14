@@ -3,6 +3,7 @@ import styles from "../styles/InstallPrompt.module.css";
 
 export default function InstallPrompt() {
   const [shouldShow, setShouldShow] = useState(false);
+  // This checks if a device is on iOS/iPadOS and is not running in standalone mode
   useEffect(() => {
     var ua = window.navigator.userAgent;
     var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);

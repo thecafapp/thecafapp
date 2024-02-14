@@ -9,7 +9,7 @@ export default function PointModal({
   initialMode = "auto",
 }) {
   const [mode, setMode] = useState(initialMode);
-  const [spendVal, setSpendVal] = useState("0.00");
+  const [spendVal, setSpendVal] = useState("");
   const [finalVal, setFinalVal] = useState(currentPoints);
   const spendInput = useRef(null);
   const setInput = useRef(null);
@@ -101,6 +101,7 @@ export default function PointModal({
               value={finalVal}
               onChange={(e) => setFinalVal(e.target.value)}
               onKeyUp={(e) => checkForSubmit(e)}
+              onFocus={updateFieldVal}
               ref={setInput}
             ></input>
           </div>

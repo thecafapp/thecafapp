@@ -81,36 +81,44 @@ export default async function handler(req, res) {
       .querySelectorAll(".menu-location");
     menu.forEach((meal) => {
       let items = [];
-      const mealName = meal.querySelector("h3").textContent.trim();
-      meal.querySelectorAll(".item ul, .item ol").forEach((item) => {
-        item.querySelectorAll("li").forEach((food) => {
-          if (
-            food.textContent.trim().length > 0 &&
-            food.textContent.trim() != "Menu Not Available" &&
-            food.textContent.trim() != "TBD" &&
-            food.textContent.trim() != "Closed" &&
-            !items.includes(food.textContent.trim()) &&
-            !ignoreItems.includes(food.textContent.trim())
-          ) {
-            items.push(food.textContent.trim());
-          }
+      if (meal.querySelector("h3").textContent) {
+        const mealName = meal.querySelector("h3").textContent.trim();
+        meal.querySelectorAll(".item ul, .item ol").forEach((item) => {
+          item.querySelectorAll("li").forEach((food) => {
+            if (
+              food.textContent.trim().length > 0 &&
+              food.textContent.trim() != "Menu Not Available" &&
+              food.textContent.trim() != "TBD" &&
+              food.textContent.trim() != "Closed" &&
+              !items.includes(food.textContent.trim()) &&
+              !ignoreItems.includes(food.textContent.trim())
+            ) {
+              items.push(food.textContent.trim());
+            }
+          });
         });
-      });
-      if (mealName === "Breakfast") needsBreakfast = false;
-      const thisMealTimes = mealTimes[dayType][mealName];
-      json.meals.push({
-        name: mealName,
-        start: generateDate(
-          thisMealTimes.start,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        ),
-        end: generateDate(
-          thisMealTimes.end,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        ),
-        times: thisMealTimes.start + " - " + thisMealTimes.end,
-        menu: items,
-      });
+        if (mealName === "Breakfast") needsBreakfast = false;
+        const thisMealTimes = mealTimes[dayType][mealName];
+        json.meals.push({
+          name: mealName,
+          start: generateDate(
+            thisMealTimes.start,
+            new Date().toLocaleString("en-US", {
+              month: "long",
+              day: "numeric",
+            })
+          ),
+          end: generateDate(
+            thisMealTimes.end,
+            new Date().toLocaleString("en-US", {
+              month: "long",
+              day: "numeric",
+            })
+          ),
+          times: thisMealTimes.start + " - " + thisMealTimes.end,
+          menu: items,
+        });
+      }
     });
     if (
       dayType === "Weekday" &&

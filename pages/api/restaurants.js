@@ -69,31 +69,6 @@ export default async function handler(req, res) {
       location: "Speed Library",
       color: "#004302",
     },
-    {
-      name: "Corner Grill",
-      hours: {
-        "M-T": {
-          // open: "4:30 PM",
-          // close: "8:30 PM",
-          open: null,
-          close: null,
-        },
-        F: {
-          open: null,
-          close: null,
-          current: false,
-        },
-        "S-S": {
-          open: null,
-          close: null,
-          current: false,
-        },
-      },
-      image: "/_next/image?url=%2Fassets%2Frestaurants%2Fcorner.jpg&w=640&q=75",
-      location: "Beside Bookstore",
-      link: "https://goo.gl/maps/fvEkQuiK426JHWtZA",
-      color: "#000c43",
-    },
   ];
   const generateDate = (time) => {
     return (

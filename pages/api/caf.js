@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   const json = { meals: [], date: "" };
   const generateDate = (time, date) => {
     return (
-      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 0 // set to 3600000 for Daylight Savings Time, 0 for not
+      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 3600000 // set to 3600000 for Daylight Savings Time, 0 for not
     );
   };
   if (req.query.shim) {

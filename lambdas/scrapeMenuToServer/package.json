@@ -1,12 +1,12 @@
 {
-  "name": "cafapp-lambdas",
+  "name": "cafapp-lambda-scrape-menu-to-server",
   "version": "1.0.2",
-  "description": "AWS Lambda scripts for The Caf App",
-  "main": "uploadMealData.mjs",
+  "description": "AWS Lambda script for The Caf App",
+  "main": "scrapeMenuToServer.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "zip -r uploadMealData.zip .",
-    "deploy": "aws lambda update-function-code --function-name uploadMealData --region us-east-1 --zip-file fileb://./uploadMealData.zip",
+    "build": "zip -r scrapeMenuToServer.zip .",
+    "deploy": "aws lambda update-function-code --function-name scrapeMenuToServer --region us-east-1 --zip-file fileb://./scrapeMenuToServer.zip",
     "publish": "npm-run-all build deploy"
   },
   "repository": {
@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "dotenv": "^16.3.1",
+    "jsdom": "^24.1.0",
     "mongodb": "^5.8.0",
-    "node-fetch": "^3.3.1",
-    "prompt-sync": "^4.2.0"
+    "node-fetch": "^3.3.1"
   }
 }

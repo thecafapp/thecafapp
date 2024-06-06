@@ -36,5 +36,5 @@ yarn-error.log*
 next-env.d.ts
 
 # Lambda builds
-lambdas/*.zip
-lambdas/node_modules
+lambdas/*/*.zip
+lambdas/*/node_modules

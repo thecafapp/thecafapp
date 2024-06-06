@@ -4,21 +4,25 @@
  *       All rights reserved         *
 \*************************************/
 
-const parser = require("jsdom");
+import { config } from "dotenv";
+config({ path: "./.env.local" });
+import fetch from "node-fetch";
+import { MongoClient } from "mongodb";
+const mongo = new MongoClient(process.env.CAFMONGO);
+import parser from "jsdom";
 // JSDOM is used to parse the HTML from the MC Cafeteria website
 const { JSDOM } = parser;
 // Import custom ignorelist for items that should not be displayed
-const { ignoreItems } = require("../../public/ignore-items.json");
+const ignoreItems = ["*Seafood Night*"];
 
-/* This is the main scraper function.
-   1) gets the current date and time in CST.
-   2) Checks if it is a weekday or weekend.
+/* This is the main scraper function.  It:
+   1) Gets the current date and time in CST.
    3) Gets the menu for the current day.
    4) Filters out items that are on the ignore list.
    5) Creates a JSON object with the meals for the day.
    6) Stores that object in the MongoDB database
  */
-export default async function handler(req, res) {
+export const handler = async () => {
   // Define hardcoded mealtimes for the MC Cafeteria
   const mealTimes = {
     Weekday: {
@@ -47,32 +51,7 @@ export default async function handler(req, res) {
     },
   };
   // Initialize the JSON object that will eventually hold the day's information and be stored in Mongo
-  const json = { meals: [], date: "" };
-  // Decide whether or not the API should be shimmed for testing
-  if (req.query.shim) {
-    const mealEnd = Date.now() + 900000;
-    const cacheAge = Math.floor((mealEnd - Date.now()) / 1000) - 200;
-    json.meals = [
-      {
-        name: "Dinner",
-        start: Date.now() - 120000,
-        end: mealEnd,
-        times: "7:00PM - 9:45PM",
-        menu: [
-          "Spaghetti",
-          "Italian Pasta",
-          "Spinach",
-          "Salad",
-          "Breakfast Bar",
-        ],
-      },
-    ];
-    res
-      .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
-      .status(200)
-      .json(json);
-    return;
-  }
+  const json = { meals: [], date: "", updatedAt: new Date() };
   /**
    * Generates a date object from a time and date string
    * @param {String} time - time string in the format "HH:MM AM/PM"
@@ -215,15 +194,19 @@ export default async function handler(req, res) {
     // });
     // Get the end time of the current meal
     const currentMealEnd = json.meals[0].end;
-    // Set the cache age to the time until the next meal ends
-    let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
-    cacheAge = cacheAge < 900 ? cacheAge : 900;
-    res
-      .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
-      .status(200)
-      .json(json);
+    // Upload the JSON object to the MongoDB database
+    const dbName = "info";
+    await mongo.connect();
+    const db = mongo.db(dbName);
+    const menuCollection = db.collection("menu");
+    await menuCollection.replaceOne({ date: json.date }, json, {
+      upsert: true,
+    });
+    return { message: "Uploaded to MongoDB successfully" };
   } catch (err) {
     console.log(err);
-    res.setHeader("Cache-Control", "max-age=120, public").status(500);
+    return { message: "Error uploading to MongoDB", errorMsg: err.message };
   }
-}
+};
+
+handler();

@@ -39,7 +39,7 @@ export default function Home() {
         setRenderLayout(json);
       });
 
-    fetch(`/api/caf${SHIM_API ? "?shim=true" : ""}`)
+    fetch(`/api/menu${SHIM_API ? "?shim=true" : ""}`)
       .then((res) => {
         if (res.ok) {
           return res.json();

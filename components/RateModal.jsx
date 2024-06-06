@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import Food from "./Food";
 import styles from "../styles/Vote.module.css";
+
+/**
+ * @desc Popup modal for rating a meal.  Appears after a user has used the Vote block to set the meal rating and allows the user to set individual ratings for different foods within the meal.
+ */
 export default function RateModal({ myRating, closeModal, sendRating, meal }) {
   const [hasRated, setHasRated] = useState(false);
   const [ratings, setRatings] = useState([]);

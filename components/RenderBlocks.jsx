@@ -28,6 +28,11 @@ const PointTracker = dynamic(() => import("./blocks/PointTracker"), {
 const TopFoods = dynamic(() => import("./blocks/TopFoods"), {
   ssr: false,
 });
+
+/**
+ * @desc Renders all blocks for the app based on the default layout or a custom layout.
+ * @see {@link ./components/blocks/README.md}
+ */
 export default function RenderBlocks({
   renderLayout = [
     "Timer",

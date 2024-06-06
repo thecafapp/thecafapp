@@ -1,6 +1,9 @@
 import styles from "../../styles/Memo.module.css";
 import d from "../../styles/Divider.module.css";
 
+/**
+ * @desc Block that provides a customizable message or alert set in the admin panel.
+ */
 export default function Memo({ memo, closeMemo, showMemo }) {
   return (
     <>

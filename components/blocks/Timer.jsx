@@ -3,6 +3,9 @@ import ft from "friendly-time";
 import { stringify as du } from "simple-duration";
 import { useEffect, useState } from "react";
 
+/**
+ * @desc Block that provides a countdown to the current meal's end time if a meal is in session or the next meal's start time if a meal is not in session.
+ */
 export default function Timer({ meal, error }) {
   const [method, setMethod] = useState(null);
   const [date, setDate] = useState(new Date());

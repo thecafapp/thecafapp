@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import styles from "../styles/Vote.module.css";
+
+/**
+ * @desc Popup modal to set the user's current meal points.  Allows setting points in both a relative manner (by subtracting a single transaction) and an absolute manner (by inputting an exact balance).
+ */
 export default function PointModal({
   closeModal,
   setBalance,

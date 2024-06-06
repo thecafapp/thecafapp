@@ -1,5 +1,8 @@
 import styles from "../styles/Restaurant.module.css";
 
+/**
+ * @desc Card that shows information regarding an on-campus dining location other than the cafeteria.  Shows hours, current open status, and provides a link to a Google Maps location.
+ */
 export default function Restaurant({ restaurant: rr }) {
   return (
     <a

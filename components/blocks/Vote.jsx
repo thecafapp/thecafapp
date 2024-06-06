@@ -7,6 +7,10 @@ import RateModal from "../RateModal";
 import { useRouter } from "next/router";
 
 Modal.setAppElement("#__next");
+
+/**
+ * @desc Block that provides a 0.5-5 star rating selector for users to rate the current meal and also displays the current rating of the meal.
+ */
 export default function Vote({ currentMealtime, shimData = false }) {
   const [mealRating, setMealRating] = useState(shimData ? 4.5 : 0);
   const [numOfRatings, setNumOfRatings] = useState(shimData ? 17 : 0);

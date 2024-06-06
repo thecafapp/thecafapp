@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/InstallPrompt.module.css";
 
+/**
+ * @desc Fallback install prompt for iOS and iPadOS devices. Checks if a device is on iOS/iPadOS and is not running in standalone mode, then renders a popup at the bottom of the screen.
+ */
 export default function InstallPrompt() {
   const [shouldShow, setShouldShow] = useState(false);
-  // This checks if a device is on iOS/iPadOS and is not running in standalone mode
   useEffect(() => {
     var ua = window.navigator.userAgent;
     var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);

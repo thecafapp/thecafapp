@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import styles from "../../styles/Meal.module.css";
 import Food from "../Food";
 
+/**
+ * @desc Block that provides a list of the top foods served at the cafeteria based on user ratings.
+ */
 export default function TopFoods() {
   const [topFoods, setTopFoods] = useState([]);
   useEffect(() => {

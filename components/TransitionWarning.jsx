@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "../styles/TransitionWarning.module.css";
 
+/**
+ * @deprecated
+ * @desc Warning for users to transition to the new URL - thecaf.app
+ */
 export default function TransitionWarning() {
   const [copy, setCopy] = useState(
     "You've been redirected from the old URL.  Please switch as soon as you can!"

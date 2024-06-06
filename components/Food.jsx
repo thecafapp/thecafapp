@@ -3,6 +3,9 @@ import { Rating } from "@micahlt/react-simple-star-rating";
 import classNames from "classnames";
 import styles from "../styles/Food.module.css";
 
+/**
+ * @desc Food component rendered in the meal menu, top foods list, and the rating modal.
+ */
 export default function Food({
   food,
   mode = "menu",

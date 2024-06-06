@@ -1,5 +1,9 @@
 import Meal from "../Meal";
 import s from "../../styles/Meal.module.css";
+
+/**
+ * @desc Block that provides a collapsable list of Meal components for each meal of the current day.
+ */
 export default function Meals({ cafData }) {
   return (
     <>

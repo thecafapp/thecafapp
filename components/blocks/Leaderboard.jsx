@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../styles/Leaderboard.module.css";
 
+/**
+ * @desc Block that provides a list of the top users in terms of quantity of ratings.
+ */
 export default function Leaderboard({ memo, closeMemo }) {
   const user = useFirebaseUser();
   const router = useRouter();

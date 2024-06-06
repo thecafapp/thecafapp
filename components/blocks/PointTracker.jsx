@@ -5,6 +5,9 @@ import styles from "../../styles/PointTracker.module.css";
 import modalStyles from "../../styles/Vote.module.css";
 import useFirebaseUser from "../../hooks/useFirebaseUser";
 
+/**
+ * @desc Block that provides the current status of the logged-in user's meal points.
+ */
 export default function PointTracker() {
   const [balance, setBalance] = useState("--.--");
   const [loaded, setLoaded] = useState(false);

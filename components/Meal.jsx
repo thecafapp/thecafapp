@@ -1,6 +1,9 @@
 import styles from "../styles/Meal.module.css";
 import Food from "./Food";
 
+/**
+ * @desc Meal component rendered in the Meals block.  Contains a list of foods, as well as the name and time of the meal.
+ */
 export default function Meal({ meal }) {
   return (
     <div className={styles.mealInfo}>

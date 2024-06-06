@@ -6,7 +6,7 @@ import { MongoClient } from "mongodb";
 const client = new MongoClient(process.env.CAFMONGO);
 export const handler = async () => {
   const confirm = prompt(
-    "Are you sure you want to continue purging all points for all users? (y/n) "
+    "Are you sure you want to continue purging the balances for all users? (y/n) "
   );
   if (confirm !== "y") return;
   await client.connect();
@@ -19,13 +19,13 @@ export const handler = async () => {
     throw new Error("Invalid purge key, please try again.");
     return;
   }
-  console.warn("DELETING ALL USER POINTS.");
+  console.warn("DELETING ALL USER BALANCES.");
   const users = db.collection("users");
   await users.updateMany(
     { points: { $exists: true } },
-    { $set: { points: 0 } }
+    { $unset: { balance: 1 } }
   );
-  console.log("Deleted all user point values and set to zero.");
+  console.log("Deleted all user balance values.");
   return;
 };
 

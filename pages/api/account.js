@@ -1,3 +1,4 @@
+export const maxDuration = 20;
 import { MongoClient } from "mongodb";
 import firebaseAdmin from "firebase-admin";
 const firebaseApp = firebaseAdmin.initializeApp({

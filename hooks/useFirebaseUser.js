@@ -10,7 +10,7 @@ function useFirebaseUser() {
   const [authUser, setAuthUser] = useState(null);
   const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
-    authDomain: "login.thecaf.app", // login.thecaf.me
+    authDomain: "login.thecaf.app",
     projectId: "thecaf-dotme",
     storageBucket: "thecaf-dotme.appspot.com",
     appId: "1:545159752910:web:bd66c8c0e7e0b2d0d6f49f",

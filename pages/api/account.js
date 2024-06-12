@@ -22,17 +22,18 @@ export default async function handler(req, res) {
   const db = client.db(dbName);
   const usersCollection = db.collection("users");
   const metaCollection = db.collection("db-meta");
+  const auth = firebaseApp.auth();
   if (req.method == "DELETE") {
     if (req.query.id) {
-      const auth = firebaseApp.auth();
       auth.deleteUser(req.query.id).then(async () => {
         await usersCollection.deleteOne({ uid: req.query.id });
         client.close();
-        res.status(200).json({ status: "success" });
+        res.status(200).json({ status: "success", error: null });
       });
     } else {
       res.status(400).json({
         error: "You must provide a correct UID.",
+        status: "failure",
       });
     }
   } else if (req.method == "PUT") {
@@ -43,12 +44,32 @@ export default async function handler(req, res) {
       const password = meta[0].password;
       client.close();
       if (req.query.password === password) {
-        res.status(200).send();
+        res.status(200).json({ status: "success", error: null });
       } else {
-        res.status(401).send();
+        res.status(401).json({
+          error: "Invalid administrator password.",
+          status: "failure",
+        });
       }
     } else {
-      res.status(301).send();
+      res.status(301).json({
+        error: "Missing password in query string.",
+        status: "failure",
+      });
+    }
+  } else if (req.method == "POST") {
+    const user = await auth.verifyIdToken(req.headers["x-firebase-token"]);
+    const isAdmin = await usersCollection.findOne({
+      admin: true,
+      uid: user.uid,
+    });
+    if (!!isAdmin) {
+      res.status(200).json({ status: "success" });
+    } else {
+      res.status(401).json({
+        error: "You are not a Caf App administrator.",
+        status: "failure",
+      });
     }
   }
 }

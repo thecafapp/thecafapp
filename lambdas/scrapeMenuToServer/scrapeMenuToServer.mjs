@@ -107,29 +107,34 @@ export const handler = async () => {
       let items = [];
       // Check if the meal has a name, if it doesn't then it's not valid and should be skipped
       if (!!meal.querySelector("h3").textContent) {
+        // Set a flag for whether or not the caf is closed on this day
+        let closedFlag = false;
         // Set the name if the meal has one
         const mealName = meal.querySelector("h3").textContent.trim();
         // Loop through each food *category*
         // Food categories are defined by <ul> or <ol> elements and are grouped by which station of the cafeteria they are served at
-        meal.querySelectorAll(".item ul, .item ol").forEach((item) => {
+        for (const item of meal.querySelectorAll(".item ul, .item ol")) {
           // Loop through each food *item* and add it to the items array
-          item.querySelectorAll("li").forEach((food) => {
+          for (const food of item.querySelectorAll("li")) {
             // Check if the food item should actually be added to the list
             // The MC Cafeteria website includes a lot of items that are not actually served, so we need to filter those out
             // Also filter out blank/empty items just in case
+            if (food.textContent.trim().toLowerCase() == "closed") {
+              closedFlag = true;
+              break;
+            }
             if (
               food.textContent.trim().length > 0 &&
               food.textContent.trim() != "Menu Not Available" &&
               food.textContent.trim() != "TBD" &&
-              food.textContent.trim() != "Closed" &&
               !items.includes(food.textContent.trim()) &&
               !ignoreItems.includes(food.textContent.trim())
             ) {
               // Push the item to the items array where it'll later be added to the JSON object
               items.push(food.textContent.trim());
             }
-          });
-        });
+          }
+        }
         // If by some chance the meal is breakfast, turn off the shim for that
         if (mealName === "Breakfast") needsBreakfast = false;
         // Get the start and end times for the meal based on the day of the week and its name
@@ -152,10 +157,11 @@ export const handler = async () => {
               day: "numeric",
             })
           ),
+          closed: closedFlag,
           // Generate the start and end times for the meal as user-friendly strings
           times: thisMealTimes.start + " - " + thisMealTimes.end,
           // Set the menu to the list of generated items
-          menu: items,
+          menu: closedFlag ? [] : items,
         });
       }
       // This is the end of the meal loop.  For a normal day it will run twice (lunch and dinner)

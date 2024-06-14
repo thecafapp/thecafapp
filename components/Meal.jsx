@@ -22,10 +22,13 @@ export default function Meal({ meal }) {
               MC has stopped publishing the breakfast menu. Until they bring it
               back, we don&apos;t have a way to reliably provide a menu.
             </p>
+          ) : meal.closed == true ? (
+            <p>The Caf will not be serving this meal today.</p>
           ) : (
             <p>
               The Caf has not posted the menu for today. There&apos;s no way for
-              us to display what will be available at this meal.
+              us to display what will be available at this meal, or if the Caf
+              is even open.
             </p>
           )}
         </div>

@@ -72,11 +72,11 @@ export default function Home() {
   };
   return (
     <div className={s.container}>
-      <div className={s.broken}>
+      {/*<div className={s.broken}>
         <p>
           <b>The Caf App is currently under maintenence.</b><br/><br/>We&qt;re working hard to get it ready for the upcoming semester!  Keep an eye out for updates on our <a href="https://instagram.com/the.caf.app" target="_blank" rel="noreferrer">Instagram page</a>.
         </p>
-      </div>
+      </div>*/}
       <Head>
         <title>The Caf at MC</title>
         <meta

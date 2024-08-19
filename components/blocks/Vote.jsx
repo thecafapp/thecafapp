@@ -11,7 +11,7 @@ Modal.setAppElement("#__next");
 /**
  * @desc Block that provides a 0.5-5 star rating selector for users to rate the current meal and also displays the current rating of the meal.
  */
-export default function Vote({ currentMealtime, shimData = false }) {
+export default function Vote({ currentMealtime, shimData = false, marginTop = 0 }) {
   const [mealRating, setMealRating] = useState(shimData ? 4.5 : 0);
   const [numOfRatings, setNumOfRatings] = useState(shimData ? 17 : 0);
   const [canRate, setCanRate] = useState(true);
@@ -90,7 +90,7 @@ export default function Vote({ currentMealtime, shimData = false }) {
           <h3>Loading ratings...</h3>
         </div>
       ) : (
-        <div className={styles.voteParent}>
+        <div className={styles.voteParent} style={{marginTop: marginTop}}>
           <div className={styles.votePercentageCell}>
             <p>Meal rating</p>
             <h2>

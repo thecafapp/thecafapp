@@ -90,6 +90,7 @@ export default function RenderBlocks({
           case "Vote": {
             tempArray[tempArray.length - 1].props = {
               currentMealtime: cafData.meals[0],
+              marginTop: "1em"
             };
             break;
           }

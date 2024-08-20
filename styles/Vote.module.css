@@ -178,6 +178,10 @@
   background-color: var(--grad-1);
 }
 
+.pointInput:focus::placeholder {
+  color: rgba(255,255,255, 0.5)
+}
+
 .pointModal {
   height: 20rem;
   max-height: 85vh;

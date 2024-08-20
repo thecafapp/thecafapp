@@ -13,7 +13,7 @@ import parser from "jsdom";
 // JSDOM is used to parse the HTML from the MC Cafeteria website
 const { JSDOM } = parser;
 // Import custom ignorelist for items that should not be displayed
-const ignoreItems = ["*Seafood Night*"];
+const ignoreItems = ["*seafood night*", "menu not available", "tbd", "closed"];
 
 /* This is the main scraper function.  It:
    1) Gets the current date and time in CST.
@@ -119,16 +119,10 @@ export const handler = async () => {
             // Check if the food item should actually be added to the list
             // The MC Cafeteria website includes a lot of items that are not actually served, so we need to filter those out
             // Also filter out blank/empty items just in case
-            if (food.textContent.trim().toLowerCase() == "closed") {
-              closedFlag = true;
-              break;
-            }
             if (
               food.textContent.trim().length > 0 &&
-              food.textContent.trim() != "Menu Not Available" &&
-              food.textContent.trim() != "TBD" &&
               !items.includes(food.textContent.trim()) &&
-              !ignoreItems.includes(food.textContent.trim())
+              !ignoreItems.includes(food.textContent.trim().toLowerCase())
             ) {
               // Push the item to the items array where it'll later be added to the JSON object
               items.push(food.textContent.trim());
@@ -214,5 +208,3 @@ export const handler = async () => {
     return { message: "Error uploading to MongoDB", errorMsg: err.message };
   }
 };
-
-handler();

@@ -39,7 +39,7 @@ export default function PointModal({
         "X-Firebase-Token": await user.getIdToken(),
       },
     });
-    setBalance(finalValue.toFixed(2));
+    setBalance(Number(finalValue).toFixed(2));
     setModalScreen("auto");
     closeModal();
   };
@@ -77,6 +77,7 @@ export default function PointModal({
               onFocus={updateFieldVal}
               onKeyUp={(e) => checkForSubmit(e)}
               ref={spendInput}
+              placeholder="--.--"
             ></input>
           </div>
         </>
@@ -84,7 +85,7 @@ export default function PointModal({
       {mode === "manual" && (
         <>
           <div className={styles.heading}>
-            <h2>what is your current balance?</h2>
+            <h2>what is your balance?</h2>
             <p>
               or{" "}
               <a
@@ -107,6 +108,7 @@ export default function PointModal({
               onKeyUp={(e) => checkForSubmit(e)}
               onFocus={updateFieldVal}
               ref={setInput}
+              placeholder="--.--"
             ></input>
           </div>
         </>

@@ -7,13 +7,13 @@ import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import RenderBlocks from "../components/RenderBlocks";
-import AlterLayout from "../components/AlterLayout";
-// const AlterLayout = dynamic(
-//   () => import("../components/AlterLayout"),
-//   {
-//     ssr: false,
-//   }
-// );
+// import AlterLayout from "../components/AlterLayout";
+const AlterLayout = dynamic(
+  () => import("../components/AlterLayout"),
+  {
+    ssr: false,
+  }
+);
 
 const SHIM_API = false;
 
@@ -32,7 +32,25 @@ export default function Home() {
     }
 
     if (localStorage.getItem("layout") != null) {
-      setRenderLayout(JSON.parse(localStorage.getItem("layout")));
+      try {
+        const localLayout = JSON.parse(localStorage.getItem("layout"));
+        if (!localLayout[0]?.name) {
+          fetch("/layout.json")
+            .then((res) => res.json())
+            .then((json) => {
+              setRenderLayout(json);
+              localStorage.setItem("layout", JSON.stringify(json));
+            });
+        }
+        setRenderLayout(localLayout);
+      } catch {
+        fetch("/layout.json")
+          .then((res) => res.json())
+          .then((json) => {
+            setRenderLayout(json);
+            localStorage.setItem("layout", JSON.stringify(json));
+          });
+      }
     } else {
       fetch("/layout.json")
         .then((res) => res.json())

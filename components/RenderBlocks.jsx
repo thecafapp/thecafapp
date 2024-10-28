@@ -34,21 +34,7 @@ const TopFoods = dynamic(() => import("./blocks/TopFoods"), {
  * @see {@link ./components/blocks/README.md}
  */
 export default function RenderBlocks({
-  renderLayout = [
-    "Timer",
-    "Meals",
-    "Divider",
-    "Vote",
-    "Divider",
-    "Memo",
-    "Restaurants",
-    "Divider",
-    "Leaderboard",
-    "PointTracker",
-    "Divider",
-    "TopFoods",
-    "Divider",
-  ],
+  renderLayout = [],
   cafData,
   shimData = false,
   memo,
@@ -70,10 +56,10 @@ export default function RenderBlocks({
   const [toRender, setToRender] = useState([]);
   useEffect(() => {
     let tempArray = [];
-    renderLayout.forEach((blockName) => {
-      if (componentList[blockName]) {
-        tempArray.push({ component: componentList[blockName] });
-        switch (blockName) {
+    renderLayout.forEach((block) => {
+      if (componentList[block.component]) {
+        tempArray.push({ component: componentList[block.component] });
+        switch (block.component) {
           case "Timer": {
             tempArray[tempArray.length - 1].props = {
               meal: cafData?.meals[0] || null,
@@ -108,7 +94,7 @@ export default function RenderBlocks({
     });
   }, [cafData, memo, showMemo]);
   return (
-    <div>
+    <div style={{ display: "flex", flexDirection: 'column', rowGap: "0.7rem" }}>
       <ErrorBoundary fallback={<div>Something went wrong</div>}>
         {toRender.map((Component, index) => (
           <Component.component

@@ -21,7 +21,7 @@ export default function TopFoods() {
       });
   }, []);
   return (
-    <div className={styles.mealInfo}>
+    <div className={styles.mealInfo} style={{ marginBottom: 0 }}>
       <p>All-Time Top Rated Foods</p>
       <div className={styles.mealFoods}>
         {topFoods.map((item, i) => (

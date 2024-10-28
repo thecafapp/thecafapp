@@ -12,6 +12,10 @@
   color: var(--text-secondary);
 }
 
+.mealInfo:last-of-type {
+  margin-bottom: 0;
+}
+
 .mealInfo ul {
   line-height: 1.1em;
 }
@@ -40,6 +44,7 @@
 
 .mealTitle {
   font-size: 1.2em;
+  line-height: 0.8;
   font-weight: 600;
   margin-bottom: 0.25em;
   color: var(--text-primary);

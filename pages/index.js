@@ -7,12 +7,13 @@ import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import RenderBlocks from "../components/RenderBlocks";
-const TransitionWarning = dynamic(
-  () => import("../components/TransitionWarning"),
-  {
-    ssr: false,
-  }
-);
+import AlterLayout from "../components/AlterLayout";
+// const AlterLayout = dynamic(
+//   () => import("../components/AlterLayout"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 const SHIM_API = false;
 
@@ -20,24 +21,26 @@ export default function Home() {
   const [cafData, setCafData] = useState(null);
   const [memo, setMemo] = useState({});
   const [renderLayout, setRenderLayout] = useState(null);
+  const [alterLayout, setAlterLayout] = useState(false);
   const [showMemo, setShowMemo] = useState(false);
   const [menuError, setMenuError] = useState(false);
-  const [needsTransition, setNeedsTransition] = useState(false);
 
   const user = useFirebaseUser();
   useEffect(() => {
     if (!window.localStorage.getItem("iden")) {
       window.localStorage.setItem("iden", getUID({ length: 20 }));
     }
-    if (window.location.href.includes("?redir")) {
-      setNeedsTransition(true);
-    }
 
-    fetch("/layout.json")
-      .then((res) => res.json())
-      .then((json) => {
-        setRenderLayout(json);
-      });
+    if (localStorage.getItem("layout") != null) {
+      setRenderLayout(JSON.parse(localStorage.getItem("layout")));
+    } else {
+      fetch("/layout.json")
+        .then((res) => res.json())
+        .then((json) => {
+          setRenderLayout(json);
+          localStorage.setItem("layout", JSON.stringify(json));
+        });
+    }
 
     fetch(`/api/menu${SHIM_API ? "?shim=true" : ""}`)
       .then((res) => {
@@ -70,6 +73,14 @@ export default function Home() {
     localStorage.setItem("lm", memo.memo_id);
     setShowMemo(false);
   };
+
+  const layoutMode = () => {
+    if (alterLayout) {
+      setRenderLayout(JSON.parse(localStorage.getItem("layout")));
+    }
+    setAlterLayout(!alterLayout);
+  }
+
   return (
     <div className={s.container}>
       {/*<div className={s.broken}>
@@ -112,13 +123,7 @@ export default function Home() {
         )}
         {(cafData || menuError) && (
           <div className={s.content}>
-            {needsTransition && (
-              <>
-                <TransitionWarning />
-                <div className={s.divider}></div>
-              </>
-            )}
-            {renderLayout && (
+            {renderLayout && !alterLayout && (
               <RenderBlocks
                 renderLayout={renderLayout}
                 cafData={cafData}
@@ -129,7 +134,10 @@ export default function Home() {
                 menuError={menuError}
               />
             )}
+            {alterLayout && <AlterLayout />}
             <p className={s.disclaimer}>
+              <button type="button" className={s.editButton} onClick={layoutMode}>{alterLayout ? "Save" : "Edit"} Layout</button>
+              <br />
               Meal data comes from the{" "}
               <a
                 href="https://www.mc.edu/offices/food/"

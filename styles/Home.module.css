@@ -84,6 +84,22 @@
   margin-bottom: 0.5rem;
 }
 
+.editButton {
+  background-color: #c19932;
+  color: white;
+  padding: 1em 1.5em;
+  border: none;
+  border-radius: 0.4rem;
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.2ch;
+  cursor: pointer;
+  margin: auto;
+  margin-bottom: 1rem;
+  margin-top:1rem;
+}
+
 .disclaimer {
   font-size: 0.85em;
   opacity: 0.75;

@@ -1,0 +1,21 @@
+.item {
+    width: 100%;
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    border-radius: 0.4rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    cursor: grab;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.item[aria-pressed="true"] {
+    cursor: grabbing;
+}
+
+.item svg {
+    margin-right: 1rem;
+    fill: var(--bg-secondary);
+}

@@ -1,7 +1,6 @@
 .title {
   font-size: 1.2em;
   font-weight: 600;
-  margin-bottom: 0.5em;
   color: var(--text-primary);
 }
 
@@ -33,7 +32,7 @@
     position: absolute;
     right: -1em;
     top: 0;
-    z-index: 2;
+    z-index: 3;
   }
 
   .restaurants::-webkit-scrollbar {
@@ -61,12 +60,12 @@
   }
 
   .restaurants {
-    margin-bottom: 0.5em;
     scroll-behavior: smooth;
   }
 }
 
 .notice {
   font-size: 0.85em;
+  margin-top: -0.4rem;
   color: var(--text-primary);
 }

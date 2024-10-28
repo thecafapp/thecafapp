@@ -9,30 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/sortable": "^8.0.0",
     "@micahlt/react-simple-star-rating": "^5.1.9",
     "classnames": "^2.5.1",
     "crypto-random-string": "^5.0.0",
     "dotenv": "^16.4.5",
-    "firebase": "^10.12.2",
-    "firebase-admin": "^12.1.1",
+    "firebase": "^10.14.1",
+    "firebase-admin": "^12.6.0",
     "firebaseui": "^6.1.0",
     "friendly-time": "^1.1.1",
-    "jsdom": "^24.1.0",
-    "mongodb": "^6.7.0",
-    "next": "^14.2.12",
+    "jsdom": "^25.0.1",
+    "mongodb": "^6.9.0",
+    "next": "^14.2.15",
     "next-pwa": "^5.6.0",
-    "nextjs-google-analytics": "^2.3.3",
+    "nextjs-google-analytics": "^2.3.7",
     "node-fetch": "^3.3.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-error-boundary": "^4.0.13",
+    "react-error-boundary": "^4.1.2",
     "react-modal": "^3.16.1",
-    "simple-duration": "^1.1.0"
+    "simple-duration": "^1.1.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^14.2.3",
+    "@next/bundle-analyzer": "^14.2.15",
     "eslint": "8.57.0",
-    "eslint-config-next": "^14.2.6",
+    "eslint-config-next": "^14.2.15",
     "npm-run-all": "^4.1.5",
     "prompt-sync": "^4.2.0"
   }

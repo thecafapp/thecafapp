@@ -1,14 +1,10 @@
 [
-  "Timer",
-  "Meals",
-  "Vote",
-  "Divider",
-  "Memo",
-  "Restaurants",
-  "Divider",
-  "Leaderboard",
-  "Divider",
-  "PointTracker",
-  "TopFoods",
-  "Divider"
+  {"name": "Meal Timer", "component": "Timer", "id": 1},
+  {"name": "Menu", "component": "Meals", "id": 2},
+  {"name": "Meal Rating", "component": "Vote", "id": 3},
+  {"name": "Announcments", "component": "Memo", "id": 4},
+  {"name": "Other Dining", "component": "Restaurants", "id": 5},
+  {"name": "Top Reviewers", "component": "Leaderboard", "id": 6},
+  {"name": "Point Tracker", "component": "PointTracker", "id": 7},
+  {"name": "Top Rated Foods", "component": "TopFoods", "id": 8}
 ]

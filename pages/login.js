@@ -100,8 +100,9 @@ function Login() {
                 )}
                 <br />
                 <br />
-                Each meal rating nets you ten points, and rating individual meal
-                items gets extra. Rate more meals and move up the leaderboard!
+                Each meal rating gets you ten points, and rating individual meal
+                items will earn extra. Rate more meals and move up the leaderboard!
+                <br />
                 <br />
               </p>
               <button

@@ -26,8 +26,7 @@ export default function Vote({ currentMealtime, shimData = false, marginTop = 0 
   }, [user]);
   const getRating = async (noCache, personalUser, forceNoRate) => {
     fetch(
-      `/api/ratings?id=${
-        personalUser ? personalUser.uid : window.localStorage.getItem("iden")
+      `/api/ratings?id=${personalUser ? personalUser.uid : window.localStorage.getItem("iden")
       }&_vercel_no_cache=${noCache || 0}`
     )
       .then((res) => res.json())
@@ -90,7 +89,7 @@ export default function Vote({ currentMealtime, shimData = false, marginTop = 0 
           <h3>Loading ratings...</h3>
         </div>
       ) : (
-        <div className={styles.voteParent} style={{marginTop: marginTop}}>
+        <div className={styles.voteParent}>
           <div className={styles.votePercentageCell}>
             <p>Meal rating</p>
             <h2>

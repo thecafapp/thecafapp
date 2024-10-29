@@ -4,7 +4,6 @@ import {
     DndContext,
     DragOverlay,
     PointerSensor,
-    TouchSensor,
     useSensor,
     useSensors,
 } from '@dnd-kit/core';
@@ -21,13 +20,12 @@ export default function AlterLayout() {
     const [activeItem, setActiveItem] = useState(null);
     const [items, setItems] = useState(JSON.parse(window.localStorage.getItem("layout")));
     const sensors = useSensors(
-        useSensor(PointerSensor),
-        useSensor(TouchSensor, {
+        useSensor(PointerSensor, {
             activationConstraint: {
-                delay: 250,
-                tolerance: 5,
-            },
-        })
+                delay: 150,
+                tolerance: 2
+            }
+        }),
     );
     function handleDragStart(event) {
         const { active } = event;
@@ -54,11 +52,12 @@ export default function AlterLayout() {
     }, [items])
 
     const toggleVisibility = (id, visibility) => {
-        console.log('toggle')
+        console.log("visibility change", visibility)
         setItems((items) => {
-            const i = items.findIndex((item) => item.id === id);
-            items[i].visible = visibility;
-            return items;
+            let arr = [...items]
+            const i = arr.findIndex((item) => item.id === id);
+            arr[i].visible = visibility;
+            return arr;
         })
     }
 

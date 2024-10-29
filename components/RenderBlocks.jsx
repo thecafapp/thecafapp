@@ -57,7 +57,7 @@ export default function RenderBlocks({
   useEffect(() => {
     let tempArray = [];
     renderLayout.forEach((block) => {
-      if (componentList[block.component]) {
+      if (componentList[block.component] && block.visible !== false) {
         tempArray.push({ component: componentList[block.component] });
         switch (block.component) {
           case "Timer": {

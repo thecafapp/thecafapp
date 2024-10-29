@@ -22,7 +22,7 @@ export default function AlterLayout() {
     const sensors = useSensors(
         useSensor(PointerSensor, {
             activationConstraint: {
-                delay: 150,
+                delay: 60,
                 tolerance: 2
             }
         }),

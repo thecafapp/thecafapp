@@ -3,8 +3,8 @@
     background-color: var(--text-primary);
     color: var(--bg-primary);
     border-radius: 0.4rem;
+    margin-bottom: 0.5rem;
     padding: 1rem;
-    margin-bottom: 1rem;
     cursor: grab;
     font-weight: bold;
     display: flex;
@@ -16,6 +16,13 @@
 }
 
 .item svg {
-    margin-right: 1rem;
     fill: var(--bg-secondary);
+}
+
+.item svg:first-of-type {
+    margin-right: 1rem;
+}
+
+.spacer {
+    flex-grow: 1;
 }

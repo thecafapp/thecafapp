@@ -7,7 +7,6 @@ import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import RenderBlocks from "../components/RenderBlocks";
-// import AlterLayout from "../components/AlterLayout";
 const AlterLayout = dynamic(
   () => import("../components/AlterLayout"),
   {
@@ -38,8 +37,8 @@ export default function Home() {
           fetch("/layout.json")
             .then((res) => res.json())
             .then((json) => {
-              setRenderLayout(json);
               localStorage.setItem("layout", JSON.stringify(json));
+              window.location.reload();
             });
         }
         setRenderLayout(localLayout);
@@ -47,8 +46,8 @@ export default function Home() {
         fetch("/layout.json")
           .then((res) => res.json())
           .then((json) => {
-            setRenderLayout(json);
             localStorage.setItem("layout", JSON.stringify(json));
+            window.location.reload();
           });
       }
     } else {

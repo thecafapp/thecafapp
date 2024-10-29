@@ -3,15 +3,14 @@ import {
     closestCenter,
     DndContext,
     DragOverlay,
-    KeyboardSensor,
     PointerSensor,
+    TouchSensor,
     useSensor,
     useSensors,
 } from '@dnd-kit/core';
 import {
     arrayMove,
     SortableContext,
-    sortableKeyboardCoordinates,
     verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
@@ -23,8 +22,11 @@ export default function AlterLayout() {
     const [items, setItems] = useState(JSON.parse(window.localStorage.getItem("layout")));
     const sensors = useSensors(
         useSensor(PointerSensor),
-        useSensor(KeyboardSensor, {
-            coordinateGetter: sortableKeyboardCoordinates,
+        useSensor(TouchSensor, {
+            activationConstraint: {
+                delay: 250,
+                tolerance: 5,
+            },
         })
     );
     function handleDragStart(event) {
@@ -51,8 +53,17 @@ export default function AlterLayout() {
         window.localStorage.setItem("layout", JSON.stringify(items));
     }, [items])
 
+    const toggleVisibility = (id, visibility) => {
+        console.log('toggle')
+        setItems((items) => {
+            const i = items.findIndex((item) => item.id === id);
+            items[i].visible = visibility;
+            return items;
+        })
+    }
+
     return (
-        <div className="alter-layout">
+        <div className="alter-layout" style={{ touchAction: "none" }}>
             <DndContext
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -63,7 +74,7 @@ export default function AlterLayout() {
                     items={items}
                     strategy={verticalListSortingStrategy}
                 >
-                    {items.map(item => <SortableLayoutItem key={item.id} id={item.id} name={item.name} />)}
+                    {items.map(item => <SortableLayoutItem key={item.id} id={item.id} name={item.name} visible={item.visible} toggleVisibility={toggleVisibility} />)}
                 </SortableContext>
                 <DragOverlay>
                     {activeItem ? <LayoutItem id={activeItem.id} name={activeItem.name} /> : null}

@@ -19,7 +19,7 @@ export default function SortableLayoutItem(props) {
   };
 
   return (
-    <LayoutItem ref={setNodeRef} style={style} {...attributes} id={props.id} name={props.name} {...listeners}>
+    <LayoutItem ref={setNodeRef} style={style} {...attributes} id={props.id} name={props.name} visible={props.visible} toggleVisibility={() => alert('hey')} {...listeners}>
     </LayoutItem>
   );
 }

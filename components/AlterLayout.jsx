@@ -73,7 +73,7 @@ export default function AlterLayout() {
                     items={items}
                     strategy={verticalListSortingStrategy}
                 >
-                    {items.map(item => <SortableLayoutItem key={item.id} id={item.id} name={item.name} visible={item.visible} toggleVisibility={toggleVisibility} />)}
+                    {items.map(item => <SortableLayoutItem key={item.id} id={item.id} name={item.name} visible={item.visible === false ? false : true} toggleVisibility={toggleVisibility} />)}
                 </SortableContext>
                 <DragOverlay>
                     {activeItem ? <LayoutItem id={activeItem.id} name={activeItem.name} /> : null}

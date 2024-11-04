@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 const client = new MongoClient(process.env.CAFMONGO);
 export const handler = async () => {
   let masterObject = {};
-  const cafFetch = await fetch(`${process.env.CAFAPI}/caf`);
+  const cafFetch = await fetch(`${process.env.CAFAPI}/menu`);
   if (!cafFetch.ok) {
     console.log("caf API internal error");
     return { message: "caf API internal error" };
@@ -25,6 +25,7 @@ export const handler = async () => {
     .format(dateString)
     .replaceAll("/", "-");
   const distanceFromMealEnd = cafJson.meals[0].end - Date.now();
+  console.log("distance from meal end is " + distanceFromMealEnd / 60000 + "min");
   if (distanceFromMealEnd > 0 && distanceFromMealEnd <= 300000) {
     console.log("close to meal end");
     const dbName = "info";
@@ -81,6 +82,6 @@ export const handler = async () => {
   }
 };
 
-// handler();
+handler();
 
 // listing URL: https://objectstorage.us-ashburn-1.oraclecloud.com/p/nyWTgMiuwyM7ad_-U0mT0LZIRCpLijIJ-atkcnVtIs5ny9ceQ7IGr5YTXp_LwlOh/n/idosm4hvvvj8/b/cafapp-data-bucket/o?fields=timeCreated

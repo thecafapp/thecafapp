@@ -1,6 +1,6 @@
 {
   "name": "cafapp-lambda-upload-meal-data",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "AWS Lambda script for The Caf App",
   "main": "uploadMealData.mjs",
   "scripts": {

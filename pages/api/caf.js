@@ -188,10 +188,10 @@ export default async function handler(req, res) {
     if (
       dayType === "Weekday" &&
       date <
-        generateDate(
-          mealTimes,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        )
+      generateDate(
+        mealTimes,
+        new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
+      )
     ) {
       const breakfast = {
         name: "Breakfast",
@@ -218,6 +218,8 @@ export default async function handler(req, res) {
     // Set the cache age to the time until the next meal ends
     let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     cacheAge = cacheAge < 900 ? cacheAge : 900;
+    json.deprecated = true;
+    json.deprecationNotice = "You should not use this endpoint.  Instead use /api/menu"
     res
       .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
       .status(200)

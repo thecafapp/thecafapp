@@ -25,7 +25,7 @@ export const handler = async () => {
     .format(dateString)
     .replaceAll("/", "-");
   const distanceFromMealEnd = cafJson.meals[0].end - Date.now();
-  console.log("distance from meal end is " + distanceFromMealEnd / 60000 + "min");
+  console.log("distance from meal end is " + (distanceFromMealEnd / 60000).toFixed(1) + "min");
   if (distanceFromMealEnd > 0 && distanceFromMealEnd <= 300000) {
     console.log("close to meal end");
     const dbName = "info";
@@ -54,7 +54,7 @@ export const handler = async () => {
     const file = Buffer.from(JSON.stringify(masterObject), "utf8");
     // fetch url from a preauthed request in Oracle Console
     const bucketUpload = await fetch(
-      `${process.env.CAFBUCKETPUTURL}-${date}.json`,
+      `${process.env.CAFBUCKETPUTURL}/cafdata-${date}.json`,
       {
         method: "PUT",
         headers: {
@@ -65,11 +65,12 @@ export const handler = async () => {
       }
     );
     await client.close();
-    if (await bucketUpload.ok) {
+    if (bucketUpload.ok) {
       console.log("uploaded to Oracle");
       return { message: "uploaded to Oracle" };
     } else {
-      console.log("upload failed at Oracle up step");
+      console.error("upload failed at Oracle up step");
+      console.error(bucketUpload);
       return {
         message: "upload failed at Oracle up step",
       };

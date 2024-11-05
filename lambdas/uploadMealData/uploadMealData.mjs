@@ -83,6 +83,6 @@ export const handler = async () => {
   }
 };
 
-handler();
+// handler();
 
 // listing URL: https://objectstorage.us-ashburn-1.oraclecloud.com/p/nyWTgMiuwyM7ad_-U0mT0LZIRCpLijIJ-atkcnVtIs5ny9ceQ7IGr5YTXp_LwlOh/n/idosm4hvvvj8/b/cafapp-data-bucket/o?fields=timeCreated

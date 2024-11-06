@@ -188,7 +188,7 @@ export const handler = async () => {
     });
 
     // This is the breakfast shim.  For some reason, the MC Cafeteria website doesn't include breakfast on the menu most of the time.
-    // This is a workaround to make sure that breakfast is included in the JSON object if it's before the end time of breakfast.
+    // This is a workaround to make sure that breakfast is included in the JSON object if it's a weekday.
     // To be honest this really needs to be cleaned up quite a bit - the date formatting specifically.
     const breakfast = new Mealtime(new Date());
     breakfast.defineFromName("Breakfast");
@@ -209,5 +209,3 @@ export const handler = async () => {
     return { message: "Error uploading to MongoDB", errorMsg: err.message };
   }
 };
-
-handler();

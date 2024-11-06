@@ -79,9 +79,7 @@ export const handler = async () => {
       new Date().toLocaleString("en-US", { timeZone: "CST" })
     );
     // Set the current date in an easily-readable format
-    const currentDate = `${date.getFullYear()}-${(
-      "0" + String(date.getMonth() + 1)
-    ).slice(-2)}-${("0" + String(date.getDate())).slice(-2)}`;
+    const currentDate = date.toLocaleDateString("en-CA");
     // Set the returned object's date to the current readable date
     json.date = currentDate;
     // Get the main content of the MC Cafeteria website

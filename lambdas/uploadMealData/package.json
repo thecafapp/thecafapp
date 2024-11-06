@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "zip -r uploadMealData.zip .",
     "deploy": "aws lambda update-function-code --function-name uploadMealData --region us-east-1 --zip-file fileb://./uploadMealData.zip",
+    "clean": "rm uploadMealData.zip",
     "publish": "npm-run-all build deploy"
   },
   "repository": {

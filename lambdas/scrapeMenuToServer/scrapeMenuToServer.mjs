@@ -14,6 +14,102 @@ import parser from "jsdom";
 const { JSDOM } = parser;
 // Import custom ignorelist for items that should not be displayed
 const ignoreItems = ["*seafood night*", "menu not available", "tbd", "closed"];
+/**
+   * Generates a date object from a time and date string
+   * @param {String} time - time string in the format "HH:MM AM/PM"
+   * @param {String} date - date string in any standard date format (e.g. "January 1")
+   * @returns {Date}
+   */
+const generateDate = (time, date) => {
+  return (
+    new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 0 // set to 3600000 for Daylight Savings Time, 0 for not
+  );
+};
+
+// Define hardcoded mealtimes for the MC Cafeteria
+const mealTimes = {
+  Weekday: {
+    Breakfast: {
+      start: "7:00 AM",
+      end: "9:30 AM",
+    },
+    Lunch: {
+      start: "10:30 AM",
+      end: "2:00 PM",
+    },
+    Dinner: {
+      start: "4:30 PM",
+      end: "7:00 PM",
+    },
+  },
+  Weekend: {
+    Lunch: {
+      start: "11:00 AM",
+      end: "1:30 PM",
+    },
+    Dinner: {
+      start: "4:30 PM",
+      end: "6:30 PM",
+    },
+  },
+};
+
+class Mealtime {
+  name = "";
+  menu = [];
+  start = 0;
+  end = 0;
+  closed = false;
+  times = "";
+  date;
+  dayType;
+
+  constructor(referenceDate) {
+    this.date = referenceDate;
+    // Determine whether or not the meal should be treated as a weekday or weekend
+    this.dayType =
+      this.date.getDay() > 0 && this.date.getDay() < 6 ? "Weekday" : "Weekend";
+  }
+
+  defineFromName(name) {
+    this.name = name.trim();
+
+    // Get the start and end times for the meal based on the day of the week and its name
+    const mt = mealTimes[this.dayType][this.name];
+    this.times = mt.start + " - " + mt.end;
+    this.start = generateDate(
+      mt.start,
+      new Date().toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+      }));
+    this.end = generateDate(
+      mt.end,
+      new Date().toLocaleString("en-US", {
+        month: "long",
+        day: "numeric",
+      }));
+  }
+
+  setClosed(isClosed) {
+    this.closed = isClosed;
+  }
+
+  addFood(foodName) {
+    this.menu.push(foodName.trim().toLowerCase());
+  }
+
+  get json() {
+    return {
+      name: this.name,
+      menu: this.closed ? [] : this.menu,
+      times: this.times,
+      start: this.start,
+      end: this.end,
+      closed: this.closed
+    };
+  }
+}
 
 /* This is the main scraper function.  It:
    1) Gets the current date and time in CST.
@@ -23,46 +119,8 @@ const ignoreItems = ["*seafood night*", "menu not available", "tbd", "closed"];
    6) Stores that object in the MongoDB database
  */
 export const handler = async () => {
-  // Define hardcoded mealtimes for the MC Cafeteria
-  const mealTimes = {
-    Weekday: {
-      Breakfast: {
-        start: "7:00 AM",
-        end: "9:30 AM",
-      },
-      Lunch: {
-        start: "10:30 AM",
-        end: "2:00 PM",
-      },
-      Dinner: {
-        start: "4:30 PM",
-        end: "7:00 PM",
-      },
-    },
-    Weekend: {
-      Lunch: {
-        start: "11:00 AM",
-        end: "1:30 PM",
-      },
-      Dinner: {
-        start: "4:30 PM",
-        end: "6:30 PM",
-      },
-    },
-  };
   // Initialize the JSON object that will eventually hold the day's information and be stored in Mongo
   const json = { meals: [], date: "", updatedAt: new Date() };
-  /**
-   * Generates a date object from a time and date string
-   * @param {String} time - time string in the format "HH:MM AM/PM"
-   * @param {String} date - date string in any standard date format (e.g. "January 1")
-   * @returns {Date}
-   */
-  const generateDate = (time, date) => {
-    return (
-      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 0 // set to 3600000 for Daylight Savings Time, 0 for not
-    );
-  };
   // Fetch the MC Cafeteria website's raw HTML
   // We don't use Playwright or similar browser automation tools for the sake of speed
   const result = await fetch("https://www.mc.edu/offices/food/caf");
@@ -87,9 +145,6 @@ export const handler = async () => {
     // Get every menu on the page
     // The MC Cafeteria website includes multiple menus for different dates, so we need to filter out the one for the current date.
     const allDates = page.querySelectorAll(".menu-date");
-    // Determine whether or not the meal should be treated as a weekday or weekend
-    const dayType =
-      date.getDay() > 0 && date.getDay() < 6 ? "Weekday" : "Weekend";
     // Filter out the menus to get the one for the current date
     const todayMeals = Array.from(allDates).filter(
       (day) => day.getAttribute("id") === currentDate
@@ -100,18 +155,15 @@ export const handler = async () => {
       todayMeals.length > 0 ? todayMeals[0] : Array.from(allDates)[0];
     const menu = meals.querySelectorAll(".menu-location");
     // Loop through each meal and get the foods that will be served
-    menu.forEach((meal) => {
-      // Initialize the array that will hold the items for the meal
-      let items = [];
+    menu.forEach((m) => {
+      const meal = new Mealtime(new Date());
       // Check if the meal has a name, if it doesn't then it's not valid and should be skipped
-      if (!!meal.querySelector("h3").textContent) {
-        // Set a flag for whether or not the caf is closed on this day
-        let closedFlag = false;
-        // Set the name if the meal has one
-        const mealName = meal.querySelector("h3").textContent.trim();
-        // Loop through each food *category*
+      if (!!m.querySelector("h3").textContent) {
+        // Set the name and times using the Mealtime class
+        meal.defineFromName(m.querySelector("h3").textContent);
+        // Loop through each food category
         // Food categories are defined by <ul> or <ol> elements and are grouped by which station of the cafeteria they are served at
-        for (const item of meal.querySelectorAll(".item ul, .item ol")) {
+        for (const item of m.querySelectorAll(".item ul, .item ol")) {
           // Loop through each food *item* and add it to the items array
           for (const food of item.querySelectorAll("li")) {
             // Check if the food item should actually be added to the list
@@ -119,42 +171,18 @@ export const handler = async () => {
             // Also filter out blank/empty items just in case
             if (
               food.textContent.trim().length > 0 &&
-              !items.includes(food.textContent.trim()) &&
+              !meal.menu.includes(food.textContent.trim()) &&
               !ignoreItems.includes(food.textContent.trim().toLowerCase())
             ) {
               // Push the item to the items array where it'll later be added to the JSON object
-              items.push(food.textContent.trim().toLowerCase());
+              meal.addFood(food.textContent);
             }
           }
         }
         // If by some chance the meal is breakfast, turn off the shim for that
-        if (mealName === "Breakfast") needsBreakfast = false;
-        // Get the start and end times for the meal based on the day of the week and its name
-        const thisMealTimes = mealTimes[dayType][mealName];
+        if (meal.name === "Breakfast") needsBreakfast = false;
         // Add the meal to the JSON object
-        json.meals.push({
-          name: mealName,
-          // Generate the start and end times for the meal as actual Date() objects
-          start: generateDate(
-            thisMealTimes.start,
-            new Date().toLocaleString("en-US", {
-              month: "long",
-              day: "numeric",
-            })
-          ),
-          end: generateDate(
-            thisMealTimes.end,
-            new Date().toLocaleString("en-US", {
-              month: "long",
-              day: "numeric",
-            })
-          ),
-          closed: closedFlag,
-          // Generate the start and end times for the meal as user-friendly strings
-          times: thisMealTimes.start + " - " + thisMealTimes.end,
-          // Set the menu to the list of generated items
-          menu: closedFlag ? [] : items,
-        });
+        json.meals.push(meal.json);
       }
       // This is the end of the meal loop.  For a normal day it will run twice (lunch and dinner)
     });
@@ -162,36 +190,11 @@ export const handler = async () => {
     // This is the breakfast shim.  For some reason, the MC Cafeteria website doesn't include breakfast on the menu most of the time.
     // This is a workaround to make sure that breakfast is included in the JSON object if it's before the end time of breakfast.
     // To be honest this really needs to be cleaned up quite a bit - the date formatting specifically.
-    if (
-      dayType === "Weekday" &&
-      date <
-      generateDate(
-        mealTimes,
-        new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-      )
-    ) {
-      const breakfast = {
-        name: "Breakfast",
-        start: generateDate(
-          mealTimes.Weekday.Breakfast.start,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        ),
-        end: generateDate(
-          mealTimes.Weekday.Breakfast.end,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        ),
-        times: `${mealTimes.Weekday.Breakfast.start} - ${mealTimes.Weekday.Breakfast.end}`,
-        menu: [],
-      };
-      if (needsBreakfast) json.meals.unshift(breakfast);
+    const breakfast = new Mealtime(new Date());
+    breakfast.defineFromName("Breakfast");
+    if (breakfast.dayType === "Weekday") {
+      if (needsBreakfast) json.meals.unshift(breakfast.json);
     }
-    // Filter out meals that have already ended (according to the hardcoded mealtimes, no it's not optimal)
-    // json.meals = json.meals.filter((item) => {
-    //   if (item.end > Date.now()) return true;
-    //   else return false;
-    // });
-    // Get the end time of the current meal
-    const currentMealEnd = json.meals[0].end;
     // Upload the JSON object to the MongoDB database
     const dbName = "info";
     await mongo.connect();
@@ -206,3 +209,5 @@ export const handler = async () => {
     return { message: "Error uploading to MongoDB", errorMsg: err.message };
   }
 };
+
+handler();

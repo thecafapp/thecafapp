@@ -74,10 +74,10 @@ export default async function handler(req, res) {
     return (
       new Date(
         new Date().toDateString("en-US", { timeZone: "CST" }) +
-          ", " +
-          time +
-          " CST"
-      ) - 3600000 // add 3600000 for Daylight Savings, 0 for not
+        ", " +
+        time +
+        " CST"
+      ) - 0 // add 3600000 for Daylight Savings, 0 for not
     );
   };
   const json = { restaurants: [] };

@@ -60,7 +60,7 @@ export const handler = async () => {
    */
   const generateDate = (time, date) => {
     return (
-      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 3600000 // set to 3600000 for Daylight Savings Time, 0 for not
+      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 0 // set to 3600000 for Daylight Savings Time, 0 for not
     );
   };
   // Fetch the MC Cafeteria website's raw HTML
@@ -125,7 +125,7 @@ export const handler = async () => {
               !ignoreItems.includes(food.textContent.trim().toLowerCase())
             ) {
               // Push the item to the items array where it'll later be added to the JSON object
-              items.push(food.textContent.trim());
+              items.push(food.textContent.trim().toLowerCase());
             }
           }
         }
@@ -167,10 +167,10 @@ export const handler = async () => {
     if (
       dayType === "Weekday" &&
       date <
-        generateDate(
-          mealTimes,
-          new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
-        )
+      generateDate(
+        mealTimes,
+        new Date().toLocaleString("en-US", { month: "long", day: "numeric" })
+      )
     ) {
       const breakfast = {
         name: "Breakfast",

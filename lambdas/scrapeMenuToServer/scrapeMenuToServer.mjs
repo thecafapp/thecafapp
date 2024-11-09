@@ -13,7 +13,7 @@ import parser from "jsdom";
 // JSDOM is used to parse the HTML from the MC Cafeteria website
 const { JSDOM } = parser;
 // Import custom ignorelist for items that should not be displayed
-const ignoreItems = ["*seafood night*", "menu not available", "tbd", "closed"];
+const ignoreItems = ["*seafood night*", "menu not available", "tbd", "closed", ".", "chef's choice"];
 /**
    * Generates a date object from a time and date string
    * @param {String} time - time string in the format "HH:MM AM/PM"
@@ -224,5 +224,3 @@ export const handler = async () => {
     return { message: "Error uploading to MongoDB", errorMsg: err.message };
   }
 };
-
-handler();

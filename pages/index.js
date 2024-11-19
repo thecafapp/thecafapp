@@ -23,6 +23,7 @@ export default function Home() {
   const [alterLayout, setAlterLayout] = useState(false);
   const [showMemo, setShowMemo] = useState(false);
   const [menuError, setMenuError] = useState(false);
+  const [schoolName, setSchoolName] = useState(false);
 
   const user = useFirebaseUser();
   useEffect(() => {
@@ -116,7 +117,7 @@ export default function Home() {
       <main className={s.main}>
         <header className={s.header}>
           <img src="/caf.svg" />
-          <h1>The Caf at MC</h1>
+          <h1 onClick={() => setSchoolName(!schoolName)}>The Caf at {schoolName == false ? 'MC' : "MCU"}</h1>
           <Link href="/login" role="button">
             <img
               src={user ? user.photoURL : "/account.svg"}

@@ -35,7 +35,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.19",
     "eslint": "8.57.0",
-    "eslint-config-next": "^14.2.19",
+    "eslint-config-next": "^15.0.3",
     "npm-run-all": "^4.1.5",
     "prompt-sync": "^4.2.0"
   }

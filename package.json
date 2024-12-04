@@ -9,20 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/core": "^6.2.0",
     "@dnd-kit/modifiers": "^7.0.0",
     "@dnd-kit/sortable": "^8.0.0",
     "@micahlt/react-simple-star-rating": "^5.1.9",
     "classnames": "^2.5.1",
     "crypto-random-string": "^5.0.0",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "firebase": "^10.14.1",
-    "firebase-admin": "^12.6.0",
+    "firebase-admin": "^12.7.0",
     "firebaseui": "^6.1.0",
     "friendly-time": "^1.1.1",
     "jsdom": "^25.0.1",
-    "mongodb": "^6.9.0",
-    "next": "^14.2.15",
+    "mongodb": "^6.11.0",
+    "next": "^14.2.19",
     "next-pwa": "^5.6.0",
     "nextjs-google-analytics": "^2.3.7",
     "node-fetch": "^3.3.2",
@@ -33,9 +33,9 @@
     "simple-duration": "^1.1.1"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^14.2.15",
+    "@next/bundle-analyzer": "^14.2.19",
     "eslint": "8.57.0",
-    "eslint-config-next": "^14.2.15",
+    "eslint-config-next": "^14.2.19",
     "npm-run-all": "^4.1.5",
     "prompt-sync": "^4.2.0"
   }

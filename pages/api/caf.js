@@ -4,6 +4,8 @@
  *       All rights reserved         *
 \*************************************/
 
+const isDST = require("../../utils/isDST");
+
 const parser = require("jsdom");
 // JSDOM is used to parse the HTML from the MC Cafeteria website
 const { JSDOM } = parser;
@@ -81,7 +83,7 @@ export default async function handler(req, res) {
    */
   const generateDate = (time, date) => {
     return (
-      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 0 // set to 3600000 for Daylight Savings Time, 0 for not
+      new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - (isDST() ? 3600000 : 0) // set to 3600000 for Daylight Savings Time, 0 for not
     );
   };
   // Fetch the MC Cafeteria website's raw HTML

@@ -10,6 +10,7 @@ import fetch from "node-fetch";
 import { MongoClient } from "mongodb";
 const mongo = new MongoClient(process.env.CAFMONGO);
 import parser from "jsdom";
+import isDST from "./isDST.mjs";
 // JSDOM is used to parse the HTML from the MC Cafeteria website
 const { JSDOM } = parser;
 // Import custom ignorelist for items that should not be displayed
@@ -22,7 +23,7 @@ const ignoreItems = ["*seafood night*", "menu not available", "tbd", "closed", "
    */
 const generateDate = (time, date) => {
   return (
-    new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - 0 // set to 3600000 for Daylight Savings Time, 0 for not
+    new Date(`${time}, ${date} ${new Date().getFullYear()} CST`) - (isDST() ? 3600000 : 0) // set to 3600000 for Daylight Savings Time, 0 for not
   );
 };
 
@@ -64,7 +65,7 @@ class Mealtime {
   date;
   dayType;
 
-  constructor(referenceDate) {
+  constructor(referenceDate = new Date()) {
     this.date = referenceDate;
     // Determine whether or not the meal should be treated as a weekday or weekend
     this.dayType =
@@ -90,13 +91,13 @@ class Mealtime {
     this.times = mt.start + " - " + mt.end;
     this.start = generateDate(
       mt.start,
-      new Date().toLocaleString("en-US", {
+      this.date.toLocaleString("en-US", {
         month: "long",
         day: "numeric",
       }));
     this.end = generateDate(
       mt.end,
-      new Date().toLocaleString("en-US", {
+      this.date.toLocaleString("en-US", {
         month: "long",
         day: "numeric",
       }));
@@ -129,7 +130,7 @@ class Mealtime {
    5) Creates a JSON object with the meals for the day.
    6) Stores that object in the MongoDB database
  */
-export const handler = async () => {
+const scrapeFromMcEdu = async (referenceDate = new Date()) => {
   // Initialize the JSON object that will eventually hold the day's information and be stored in Mongo
   const json = { meals: [], date: "", updatedAt: new Date() };
   // Fetch the MC Cafeteria website's raw HTML
@@ -145,7 +146,7 @@ export const handler = async () => {
     let needsBreakfast = true;
     // Get the current date in CST
     const date = new Date(
-      new Date().toLocaleString("en-US", { timeZone: "CST" })
+      referenceDate.toLocaleString("en-US", { timeZone: "CST" })
     );
     // Set the current date in an easily-readable format
     const currentDate = date.toLocaleDateString("en-CA");
@@ -167,7 +168,7 @@ export const handler = async () => {
     const menu = meals.querySelectorAll(".menu-location");
     // Loop through each meal and get the foods that will be served
     menu.forEach((m) => {
-      const meal = new Mealtime(new Date());
+      const meal = new Mealtime(referenceDate);
       // Check if the meal has a name, if it doesn't then it's not valid and should be skipped
       if (!!m.querySelector("h3").textContent) {
         // Set the name and times using the Mealtime class
@@ -204,7 +205,7 @@ export const handler = async () => {
     // This is the breakfast shim.  For some reason, the MC Cafeteria website doesn't include breakfast on the menu most of the time.
     // This is a workaround to make sure that breakfast is included in the JSON object if it's a weekday.
     // To be honest this really needs to be cleaned up quite a bit - the date formatting specifically.
-    const breakfast = new Mealtime(new Date());
+    const breakfast = new Mealtime(referenceDate);
     breakfast.defineFromName("Breakfast");
     if (breakfast.dayType === "Weekday") {
       if (needsBreakfast) json.meals.unshift(breakfast.json);
@@ -218,9 +219,20 @@ export const handler = async () => {
       upsert: true,
     });
     console.log("Uploaded to MongoDB successfully");
-    return { message: "Uploaded to MongoDB successfully" };
+    return { status: true, error: null };
   } catch (err) {
     console.log(err);
-    return { message: "Error uploading to MongoDB", errorMsg: err.message };
+    return { status: false, error: err.message };
   }
 };
+
+export const handler = async () => {
+  let tomorrowDate = new Date();
+  tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+  const today = await scrapeFromMcEdu();
+  const tomorrow = await scrapeFromMcEdu(tomorrowDate);
+  return {
+    today: today.status ? "Uploaded" : `Failed: ${today.error}`,
+    tomorrow: tomorrow.status ? "Uploaded" : `Failed: ${tomorrow.error}`,
+  };
+}

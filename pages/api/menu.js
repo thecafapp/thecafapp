@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import isDST from "../../utils/isDST";
 
 export default async function handler(req, res) {
   const client = new MongoClient(process.env.CAFMONGO);
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
     } else {
       // Timezone offset from UTC in minutes
       // should be 300 for CDT and 360 for CST
-      const offset = 300;
+      const offset = isDST() ? 300 : 360;
       const date = new Date(new Date().getTime() - offset * 60 * 1000);
       menuDate = date.toISOString().split("T")[0];
     }
@@ -55,6 +56,12 @@ export default async function handler(req, res) {
     }
     await client.close();
     menu.meals = menu.meals.filter((item) => item.end > Date.now());
+    if (menu.meals.length === 0) {
+      return res
+        .setHeader("Cache-Control", "max-age=500")
+        .status(200)
+        .json(menu);
+    }
     const currentMealEnd = menu.meals[0].end;
     let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     cacheAge = cacheAge < 900 ? cacheAge : 900;

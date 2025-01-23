@@ -39,11 +39,10 @@ export default async function handler(req, res) {
         menuDate = req.query.date;
       }
     } else {
-      // Timezone offset from UTC in minutes
-      // should be 300 for CDT and 360 for CST
-      const offset = isDST() ? 300 : 360;
-      const date = new Date(new Date().getTime() - offset * 60 * 1000);
-      menuDate = date.toISOString().split("T")[0];
+      const date = new Date();
+      menuDate = date.toLocaleDateString("en-CA", {
+        timeZone: "America/Chicago"
+      });
     }
     const menu = await menuCollection.findOne({
       date: menuDate,

@@ -15,7 +15,8 @@ export default function Restaurant({ restaurant: rr }) {
       target="_blank"
       rel="noreferrer"
     >
-      <h3 className={styles.name}>{rr.name}</h3>
+      {/* <h3 className={styles.name}>{rr.name}</h3> */}
+      <img src={rr.logo} alt={rr.name} className={styles.restaurantLogo} />
       <h4>{rr.hours.current ? "Open" : "Closed"}</h4>
       {rr.hours.open && (
         <p>

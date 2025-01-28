@@ -1,9 +1,9 @@
 .restaurant {
   text-decoration: none;
   display: block;
-  width: max-content;
+  width: 15rem;
   padding: 1em;
-  padding-top: 2em;
+  padding-top: 1em;
   padding-right: 4em;
   border-radius: 0.4em;
   margin-bottom: 0.5em;
@@ -37,6 +37,14 @@
   opacity: 1;
   color: white;
   font-size: 0.95em;
+}
+
+.restaurantLogo {
+  z-index: 2;
+  position: inherit;
+  height: 30px;
+  margin-bottom: 0.5rem;
+  object-fit: contain;
 }
 
 .overlay {

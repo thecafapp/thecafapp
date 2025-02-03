@@ -51,22 +51,32 @@ export default function PointModal({
   return (
     <>
       <span className="material-symbols-outlined">monetization_on</span>
+      <div className={styles.modeToggle}>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setMode("manual");
+          }}
+          className={mode === "manual" ? styles.active : ""}
+        >
+          Set Balance
+        </a>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            setMode("auto");
+          }}
+          className={mode === "auto" ? styles.active : ""}
+        >
+          Subtract Points
+        </a>
+      </div>
       {mode === "auto" && (
         <>
           <div className={styles.heading}>
             <h2>how much did you spend?</h2>
-            <p>
-              or{" "}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMode("manual");
-                }}
-              >
-                manually set your balance
-              </a>
-            </p>
           </div>
           <div className={styles.foodRatings}>
             <input
@@ -86,18 +96,6 @@ export default function PointModal({
         <>
           <div className={styles.heading}>
             <h2>what is your balance?</h2>
-            <p>
-              or{" "}
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setMode("auto");
-                }}
-              >
-                enter how much you spent
-              </a>
-            </p>
           </div>
           <div className={styles.foodRatings}>
             <input

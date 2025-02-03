@@ -1,5 +1,6 @@
 .title {
   margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.2em;
   font-weight: 600;
   color: var(--text-primary);
@@ -68,7 +69,6 @@
 
 .notice {
   font-size: 0.85em;
-  margin-top: -0.4rem;
   color: var(--text-primary);
   margin-bottom: 0.4rem;
   margin-left: 0.1rem;

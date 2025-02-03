@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Restaurant from "../Restaurant";
 import s from "../../styles/Restaurants.module.css";
 
@@ -8,9 +8,23 @@ import s from "../../styles/Restaurants.module.css";
 export default function Restaurants() {
   const [restaurants, setRestaurants] = useState([]);
   const restaurantsRef = useRef(null);
-  const restaurantScroll = (e) => {
-    restaurantsRef.current.scrollBy(e.deltaY, 0);
-  };
+  const restaurantScroll = useCallback(
+    (e) => {
+      e.preventDefault();
+      restaurantsRef.current.scrollBy(e.deltaY, 0);
+    },
+    [],
+  );
+  const divRefCallback = useCallback(
+    (node) => {
+      if (node == null) {
+        return;
+      }
+      node.addEventListener('wheel', restaurantScroll, { passive: false });
+    },
+    [restaurantScroll],
+  );
+
   useEffect(() => {
     fetch("/api/restaurants")
       .then((res) => res.json())
@@ -19,12 +33,11 @@ export default function Restaurants() {
       });
   }, []);
   return (
-    <>
+    <div ref={divRefCallback}>
       <h3 className={s.title}>Other Dining</h3>
       <div className={s.wrapper}>
         <div
           className={s.restaurants}
-          onWheel={restaurantScroll}
           ref={restaurantsRef}
         >
           {restaurants
@@ -43,6 +56,6 @@ export default function Restaurants() {
       <p className={s.notice}>
         <b>Notice:</b> this section may vary on breaks and holidays
       </p>
-    </>
+    </div>
   );
 }

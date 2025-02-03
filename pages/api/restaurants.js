@@ -51,6 +51,30 @@ export default async function handler(req, res) {
       color: "#6f5e00",
     },
     {
+      name: "Brick Street Burgers",
+      hours: {
+        "M-T": {
+          open: "11:00 AM",
+          close: "9:00 PM",
+        },
+        F: {
+          open: "11:00 AM",
+          close: "3:00 PM",
+        },
+        "S-S": {
+          open: null,
+          close: null,
+          current: false,
+        },
+      },
+      image:
+        "/_next/image?url=%2Fassets%2Frestaurants%2Fbrickstreet.jpg&w=640&q=75",
+      logo: "/assets/restaurants/logos/BrickStreet-logo.png",
+      location: "Jefferson Street",
+      link: "https://maps.app.goo.gl/om4myduo71yDiaq38",
+      color: "#001a6f",
+    },
+    {
       name: "Starbucks",
       hours: {
         "M-T": {

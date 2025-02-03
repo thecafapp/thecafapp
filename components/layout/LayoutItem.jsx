@@ -3,7 +3,7 @@ import s from "../../styles/LayoutItem.module.css";
 
 const LayoutItem = forwardRef(({ id, name, visible, toggleVisibility, ...props }, ref) => {
   return (
-    <div {...props} className={s.item} ref={ref}>
+    <div {...props} className={s.item} ref={ref} style={{ ...props.style }}>
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" opacity="0.5"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" /></svg> {name}
       <span className={s.spacer}></span>
       <span onClick={() => toggleVisibility(id, !visible)} >

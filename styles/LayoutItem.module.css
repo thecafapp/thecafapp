@@ -1,28 +1,30 @@
 .item {
-    width: 100%;
-    background-color: var(--text-primary);
-    color: var(--bg-primary);
-    border-radius: 0.4rem;
-    margin-bottom: 0.5rem;
-    padding: 1rem;
-    cursor: grab;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-radius: 0.4rem;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  cursor: grab;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  user-select: none;
 }
 
 .item[aria-pressed="true"] {
-    cursor: grabbing;
+  cursor: grabbing;
+  background-color: var(--text-secondary);
 }
 
 .item svg {
-    fill: var(--bg-secondary);
+  fill: var(--text-secondary);
 }
 
 .item svg:first-of-type {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .spacer {
-    flex-grow: 1;
+  flex-grow: 1;
 }

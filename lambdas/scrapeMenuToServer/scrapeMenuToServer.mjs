@@ -149,7 +149,7 @@ const scrapeFromMcEdu = async (referenceDate = new Date()) => {
       referenceDate.toLocaleString("en-US", { timeZone: "CST" })
     );
     // Set the current date in an easily-readable format
-    const currentDate = date.toLocaleDateString("en-CA");
+    const currentDate = date.toLocaleDateString("en-CA", { timeZone: "CST" });
     // Set the returned object's date to the current readable date
     json.date = currentDate;
     // Get the main content of the MC Cafeteria website
@@ -236,3 +236,5 @@ export const handler = async () => {
     tomorrow: tomorrow.status ? "Uploaded" : `Failed: ${tomorrow.error}`,
   };
 }
+
+handler();

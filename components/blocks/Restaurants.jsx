@@ -10,8 +10,10 @@ export default function Restaurants() {
   const restaurantsRef = useRef(null);
   const restaurantScroll = useCallback(
     (e) => {
-      e.preventDefault();
-      restaurantsRef.current.scrollBy(e.deltaY, 0);
+      if (e.deltaX === 0) {
+        e.preventDefault();
+        e.target.scrollLeft += e.deltaY * 10;
+      }
     },
     [],
   );

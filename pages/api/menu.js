@@ -1,5 +1,4 @@
 import { MongoClient } from "mongodb";
-import isDST from "../../utils/isDST";
 
 export default async function handler(req, res) {
   const client = new MongoClient(process.env.CAFMONGO);

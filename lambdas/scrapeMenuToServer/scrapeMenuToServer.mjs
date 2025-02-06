@@ -94,12 +94,14 @@ class Mealtime {
       this.date.toLocaleString("en-US", {
         month: "long",
         day: "numeric",
+        timeZone: "America/Chicago",
       }));
     this.end = generateDate(
       mt.end,
       this.date.toLocaleString("en-US", {
         month: "long",
         day: "numeric",
+        timeZone: "America/Chicago",
       }));
   }
 
@@ -146,10 +148,10 @@ const scrapeFromMcEdu = async (referenceDate = new Date()) => {
     let needsBreakfast = true;
     // Get the current date in CST
     const date = new Date(
-      referenceDate.toLocaleString("en-US", { timeZone: "CST" })
+      referenceDate.toLocaleString("en-US", { timeZone: "America/Chicago" })
     );
     // Set the current date in an easily-readable format
-    const currentDate = date.toLocaleDateString("en-CA", { timeZone: "CST" });
+    const currentDate = date.toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
     // Set the returned object's date to the current readable date
     json.date = currentDate;
     // Get the main content of the MC Cafeteria website
@@ -236,5 +238,3 @@ export const handler = async () => {
     tomorrow: tomorrow.status ? "Uploaded" : `Failed: ${tomorrow.error}`,
   };
 }
-
-handler();

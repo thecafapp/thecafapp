@@ -21,6 +21,7 @@ export const handler = async () => {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
+    timeZone: "America/Chicago"
   })
     .format(dateString)
     .replaceAll("/", "-");

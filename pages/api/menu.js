@@ -43,7 +43,7 @@ export default async function handler(req, res) {
         timeZone: "America/Chicago"
       });
     }
-    const menu = await menuCollection.findOne({
+    let menu = await menuCollection.findOne({
       date: menuDate,
     });
     if (!menu) {
@@ -55,10 +55,14 @@ export default async function handler(req, res) {
     await client.close();
     menu.meals = menu.meals.filter((item) => item.end > Date.now());
     if (menu.meals.length === 0) {
-      return res
-        .setHeader("Cache-Control", "max-age=500")
-        .status(200)
-        .json(menu);
+      const date = new Date();
+      date.setDate(date.getDate() + 1);
+      menuDate = date.toLocaleDateString("en-CA", {
+        timeZone: "America/Chicago"
+      });
+      menu = await menuCollection.findOne({
+        date: menuDate,
+      });
     }
     const currentMealEnd = menu.meals[0].end;
     let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;

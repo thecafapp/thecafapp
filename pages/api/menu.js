@@ -3,7 +3,8 @@ import { MongoClient } from "mongodb";
 export default async function handler(req, res) {
   const client = new MongoClient(process.env.CAFMONGO);
   const dbName = "info";
-  await client.connect();
+  const r = await client.connect();
+  console.log(r);
   const db = client.db(dbName);
   const menuCollection = db.collection("menu");
   if (req.query.shim) {
@@ -52,7 +53,6 @@ export default async function handler(req, res) {
         .status(404)
         .json({ error: "No menu for the current mealtime" });
     }
-    await client.close();
     menu.meals = menu.meals.filter((item) => item.end > Date.now());
     if (menu.meals.length === 0) {
       const date = new Date();
@@ -67,6 +67,7 @@ export default async function handler(req, res) {
     const currentMealEnd = menu.meals[0].end;
     let cacheAge = Math.floor((currentMealEnd - Date.now()) / 1000) - 200;
     cacheAge = cacheAge < 900 ? cacheAge : 900;
+    await client.close();
     return res
       .setHeader("Cache-Control", `max-age=${cacheAge}, public`)
       .status(200)

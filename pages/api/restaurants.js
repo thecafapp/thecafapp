@@ -111,8 +111,10 @@ export default async function handler(req, res) {
       ) - 0
     );
   };
-  const json = { restaurants: [] };
-  const date = new Date(new Date().toLocaleString("en-US", {}));
+  const json = { restaurants: [], daylight: isDST() };
+  const date = new Date(new Date().toLocaleString("en-US", {
+    timeZone: "America/Chicago"
+  }));
   const dow = new Date(
     new Date().toLocaleString("en-US", {
       timeZone: "America/Chicago",

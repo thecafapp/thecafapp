@@ -101,14 +101,14 @@ export default async function handler(req, res) {
   ];
   const generateDate = (time) => {
     return (
-      new Date(
+      new Date(new Date(
         new Date().toDateString("en-US", { timeZone: "America/Chicago" }) +
         ", " +
         time +
         " "
         +
         (isDST() ? "CDT" : "CST")
-      ) - 0
+      ).toLocaleString("en-US", { timeZone: "America/Chicago" })) - 0
     );
   };
   const json = { restaurants: [], daylight: isDST() };

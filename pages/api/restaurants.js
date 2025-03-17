@@ -102,18 +102,20 @@ export default async function handler(req, res) {
   const generateDate = (time) => {
     return (
       new Date(
-        new Date().toDateString("en-US", { timeZone: "CST" }) +
+        new Date().toDateString("en-US", { timeZone: (isDST() ? "CDT" : "CST") }) +
         ", " +
         time +
-        " CST"
-      ) - (isDST() ? 3600000 : 0) // set to 3600000 for Daylight Savings, 0 for not
+        " "
+        +
+        (isDST() ? "CDT" : "CST")
+      ) - 0
     );
   };
   const json = { restaurants: [] };
   const date = new Date(new Date().toLocaleString("en-US", {}));
   const dow = new Date(
     new Date().toLocaleString("en-US", {
-      timeZone: "CST",
+      timeZone: (isDST() ? "CDT" : "CST"),
     })
   ).getDay();
   restaurants.forEach((rr, i) => {

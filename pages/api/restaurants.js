@@ -102,7 +102,7 @@ export default async function handler(req, res) {
   const generateDate = (time) => {
     return (
       new Date(
-        new Date().toDateString("en-US", { timeZone: (isDST() ? "CDT" : "CST") }) +
+        new Date().toDateString("en-US", { timeZone: "America/Chicago" }) +
         ", " +
         time +
         " "
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
   const date = new Date(new Date().toLocaleString("en-US", {}));
   const dow = new Date(
     new Date().toLocaleString("en-US", {
-      timeZone: (isDST() ? "CDT" : "CST"),
+      timeZone: "America/Chicago",
     })
   ).getDay();
   restaurants.forEach((rr, i) => {

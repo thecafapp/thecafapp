@@ -27,7 +27,7 @@
     "nextjs-google-analytics": "^2.3.7",
     "node-fetch": "^3.3.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.1.0",
     "react-error-boundary": "^4.1.2",
     "react-modal": "^3.16.1",
     "simple-duration": "^1.1.1"

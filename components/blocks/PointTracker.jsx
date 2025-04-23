@@ -73,6 +73,9 @@ export default function PointTracker() {
                   <b>{enoughFor(9.19)}</b> Chick-Fil-A Sandwich Meals
                 </li>
                 <li>
+                  <b>{enoughFor(11.29)}</b> Chick-Fil-A 12-Count Meals
+                </li>
+                <li>
                   <b>{enoughFor(4.19)}</b> Chick-Fil-A Milkshakes
                 </li>
                 <li>

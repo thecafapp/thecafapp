@@ -9,7 +9,7 @@
 window.thecafapp = {
     init: async (rootElement) => {
         const d = document;
-        const req = await fetch("https://thecaf.app/api/menu");
+        const req = await fetch("https://mc.thecaf.app/api/menu");
         const data = await req.json();
         window.thecafapp.data = data;
         const root = d.querySelector(rootElement);

@@ -4,7 +4,7 @@ The Caf App is a the easiest way to access hours and the menu from the cafeteria
 
 ## Using The App
 
-Go to https://thecaf.app/ and log in with your MC Google account!
+Go to https://mc.thecaf.app/ and log in with your MC Google account!
 
 ## Development
 

@@ -21,10 +21,10 @@ export default function Document() {
         />
         <meta property="og:title" content="The Caf App" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://thecaf.app" />
+        <meta property="og:url" content="https://mc.thecaf.app" />
         <meta
           property="og:image"
-          content="https://thecaf.app/assets/opengraph.png"
+          content="https://mc.thecaf.app/assets/opengraph.png"
         />
         <meta
           property="og:description"

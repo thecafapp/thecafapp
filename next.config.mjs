@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 import nextPWA from "next-pwa";
 import withBundleAnalyzer from "@next/bundle-analyzer";
-import schoolConfig from "./caf.config.json" assert { type: "json" };
+import schoolConfig from "./caf.config.json";
 const nextBundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });

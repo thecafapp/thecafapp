@@ -3,7 +3,7 @@ import nextPWA from "next-pwa";
 import withBundleAnalyzer from "@next/bundle-analyzer";
 import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
-const schoolConfig = require("./caf.config.json");
+const schoolConfig = require("../caf.config.json");
 const nextBundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });

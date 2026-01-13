@@ -1,0 +1,34 @@
+{
+  "schoolName": "Mississippi College",
+  "schoolId": "mc",
+  "branding": {
+    "appTitle": "The Caf at MC",
+    "cafName": "The Caf",
+    "domain": "mc.thecaf.app"
+  },
+  "auth": {
+    "method": "google",
+    "restrictGoogleDomains": true,
+    "allowedGoogleDomain": "mc.edu"
+  },
+  "theme": {
+    "light": {
+      "text": { "primary": "#0c2340", "secondary": "#2e6983" },
+      "background": { "primary": "#ffffff", "secondary": "#ddefff" },
+      "gradient": { "start": "#dca627", "end": "#268da8" },
+      "leaderboard": { "highlight": "#a17914" },
+      "tap-highlight": "rgba(201, 151, 0, 0.2)"
+    },
+    "dark": {
+      "text": { "primary": "#d0ccc6", "secondary": "#7eb8d2" },
+      "background": { "primary": "#181a1b", "secondary": "#222426" },
+      "gradient": { "start": "#826215", "end": "#1e7186" },
+      "leaderboard": { "highlight": "#f7c23b" },
+      "tap-highlight": "rgba(201, 151, 0, 0.5)"
+    }
+  },
+  "featureFlags": [],
+  "database": {
+    "name": "info"
+  }
+}

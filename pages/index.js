@@ -7,6 +7,10 @@ import getUID from "crypto-random-string";
 import InstallPrompt from "../components/InstallPrompt";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import RenderBlocks from "../components/RenderBlocks";
+const cafName = process.env.NEXT_PUBLIC_CAF_NAME ?? "The Caf";
+const schoolName = process.env.NEXT_PUBLIC_SCHOOL_NAME ?? "";
+const appTitle = process.env.NEXT_PUBLIC_APP_TITLE ?? "The Caf App";
+
 const AlterLayout = dynamic(
   () => import("../components/AlterLayout"),
   {
@@ -23,7 +27,6 @@ export default function Home() {
   const [alterLayout, setAlterLayout] = useState(false);
   const [showMemo, setShowMemo] = useState(false);
   const [menuError, setMenuError] = useState(false);
-  const [schoolName, setSchoolName] = useState(false);
 
   const user = useFirebaseUser();
   useEffect(() => {
@@ -107,17 +110,17 @@ export default function Home() {
         </p>
       </div>*/}
       <Head>
-        <title>The Caf at MC</title>
+        <title>{appTitle}</title>
         <meta
           name="description"
-          content="Access hours and menus from the cafeteria at Mississippi College."
+          content={`Access hours and menus from ${cafName} at ${schoolName}.`}
         />
         <link rel="icon" href="/icons/icon.png" />
       </Head>
       <main className={s.main}>
         <header className={s.header}>
           <img src="/caf.svg" />
-          <h1 onClick={() => setSchoolName(!schoolName)}>The Caf at {schoolName == false ? 'MC' : "MCU"}</h1>
+          <h1>{appTitle}</h1>
           <Link href="/login" role="button">
             <img
               src={user ? user.photoURL : "/account.svg"}
@@ -156,15 +159,6 @@ export default function Home() {
             <p className={s.disclaimer}>
               <button type="button" className={s.editButton} onClick={layoutMode}>{alterLayout ? "Save" : "Edit"} Layout</button>
               <br />
-              Meal data comes from the{" "}
-              <a
-                href="https://www.mc.edu/offices/food/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                official MC website
-              </a>
-              .<br />
               This app was created by{" "}
               <a
                 href="https://micahlindley.com"

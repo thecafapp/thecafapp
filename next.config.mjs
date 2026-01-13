@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 import nextPWA from "next-pwa";
 import withBundleAnalyzer from "@next/bundle-analyzer";
+import schoolConfig from "./caf.config.json" assert { type: "json" };
 const nextBundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
@@ -33,6 +34,17 @@ const nextConfig = {
       },
     ];
   },
+  env: {
+    NEXT_PUBLIC_SCHOOL_NAME: schoolConfig.schoolName,
+    NEXT_PUBLIC_SCHOOL_ID: schoolConfig.schoolId,
+    NEXT_PUBLIC_APP_TITLE: schoolConfig.branding.appTitle,
+    NEXT_PUBLIC_CAF_NAME: schoolConfig.branding.cafName,
+    NEXT_PUBLIC_APP_DOMAIN: schoolConfig.branding.domain,
+    NEXT_PUBLIC_AUTH_METHOD: schoolConfig.auth.method,
+    NEXT_PUBLIC_RESTRICT_AUTH_EMAIL_DOMAINS: schoolConfig.auth.restrictGoogleDomains,
+    NEXT_PUBLIC_ALLOWED_AUTH_EMAIL_DOMAIN: schoolConfig.auth.allowedGoogleDomain,
+    NEXT_PUBLIC_SCHOOL_THEME: schoolConfig.theme,
+  }
 };
 
 export default nextBundleAnalyzer(withPWA(nextConfig));

@@ -4,7 +4,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--bg-primary);
+  color: var(--background-primary);
   border-radius: 0.4rem;
   padding: 1.5rem;
   width: calc(100% - 2em);
@@ -22,7 +22,7 @@
 }
 
 .dismiss {
-  background-color: var(--bg-primary);
+  background-color: var(--background-primary);
   color: var(--text-primary);
   border: none;
   padding: 0.75em 1em;

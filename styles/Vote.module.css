@@ -1,5 +1,9 @@
 .voteParent {
-  background: linear-gradient(200deg, var(--grad-1), var(--grad-2));
+  background: linear-gradient(
+    200deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
   display: grid;
   grid-template-columns: auto auto;
   padding: 1em;
@@ -48,7 +52,11 @@
 }
 
 .voteSkeleton {
-  background: linear-gradient(200deg, var(--grad-1), var(--grad-2));
+  background: linear-gradient(
+    200deg,
+    var(--gradient-start),
+    var(--gradient-end)
+  );
   display: grid;
   padding: 2em;
   border-radius: 0.4em;
@@ -91,7 +99,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background: var(--bg-primary);
+  background: var(--background-primary);
   color: var(--text-primary);
   border-radius: 0.4rem;
   padding: 2em;
@@ -133,7 +141,7 @@
   grid-area: c;
   margin: 1em 0.5em 0.5em 1em;
   color: var(--text-primary);
-  background-color: var(--bg-secondary);
+  background-color: var(--background-secondary);
   border: none;
   border-radius: 0.3em;
   padding: 0.75em 0.5em;
@@ -146,7 +154,7 @@
   grid-area: d;
   margin: 1em 1em 0.5em 0.5em;
   color: white;
-  background-color: var(--grad-1);
+  background-color: var(--gradient-start);
   border: none;
   border-radius: 0.3em;
   padding: 0.75em 0.5em;
@@ -159,7 +167,7 @@
 }
 
 .pointInput {
-  background-color: var(--bg-secondary);
+  background-color: var(--background-secondary);
   border: none;
   font-size: 2em;
   width: 3.5em;
@@ -174,7 +182,7 @@
 }
 
 .pointInput:focus {
-  background-color: var(--grad-1);
+  background-color: var(--gradient-start);
 }
 
 .pointInput:focus::placeholder {
@@ -192,7 +200,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background: var(--bg-primary);
+  background: var(--background-primary);
   color: var(--text-primary);
   border-radius: 0.4rem;
   padding: 2em 1em;
@@ -242,7 +250,7 @@
 
 .modeToggle a.active {
   background-color: var(--text-secondary);
-  color: var(--bg-primary);
+  color: var(--background-primary);
 }
 
 @keyframes loading {

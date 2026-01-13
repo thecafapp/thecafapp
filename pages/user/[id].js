@@ -5,6 +5,7 @@ import u from "../../styles/User.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+const appTitle = process.env.NEXT_PUBLIC_APP_TITLE || "The Caf App";
 
 export default function User() {
   const router = useRouter();
@@ -33,7 +34,7 @@ export default function User() {
   return (
     <div className={s.container}>
       <Head>
-        <title>{user ? user.name : "User"} | The Caf at MC</title>
+        <title>{user ? user.name : "User"} | {appTitle}</title>
         <meta
           name="description"
           content="View this user's profile on The Caf App"

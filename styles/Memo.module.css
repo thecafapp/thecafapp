@@ -17,7 +17,7 @@
   content: "ANNOUNCEMENT";
   font-size: 0.65em;
   background-color: var(--text-secondary);
-  color: var(--bg-primary);
+  color: var(--background-primary);
   padding: 0.1em 0.4em;
   padding-bottom: 0;
   margin-left: 0.75em;

@@ -4,6 +4,8 @@ import a from "../styles/Admin.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
+const appTitle = process.env.NEXT_PUBLIC_APP_TITLE || "The Caf App";
+
 export default function Admin() {
   const router = useRouter();
   const [memo_title, setMemoTitle] = useState("");
@@ -105,7 +107,7 @@ export default function Admin() {
   return (
     <div className={s.container}>
       <Head>
-        <title>Admin | The Caf at MC</title>
+        <title>Admin | {appTitle}</title>
         <meta
           name="description"
           content="Admin page to submit alerts to The Caf App"

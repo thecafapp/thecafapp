@@ -10,6 +10,10 @@ import "firebaseui/dist/firebaseui.css";
 import { useEffect, useState } from "react";
 import useFirebaseUser from "../hooks/useFirebaseUser";
 import { useRouter } from "next/router";
+const appTitle = process.env.NEXT_PUBLIC_APP_TITLE || "The Caf App";
+const restrictDomains = process.env.NEXT_PUBLIC_RESTRICT_AUTH_EMAIL_DOMAINS || false;
+const allowedDomain = process.env.NEXT_PUBLIC_ALLOWED_AUTH_EMAIL_DOMAIN || "";
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
   authDomain: "login.thecaf.app",
@@ -33,7 +37,7 @@ function Login() {
             {
               provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
               customParameters: {
-                hd: "mc.edu",
+                hd: restrictDomains ? allowedDomain : "*",
               },
             },
           ],
@@ -72,7 +76,7 @@ function Login() {
   return (
     <div className={s.container}>
       <Head>
-        <title>Account | The Caf at MC</title>
+        <title>Account | {appTitle}</title>
         <meta
           name="description"
           content="Sign in with your MC email to become a rating partner"

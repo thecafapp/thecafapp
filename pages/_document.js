@@ -1,7 +1,12 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { Script } from "next/script";
+const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "thecaf.app";
+const appTitle = process.env.NEXT_PUBLIC_APP_TITLE || "The Caf App";
+const cafName = process.env.NEXT_PUBLIC_CAF_NAME || "The Caf";
+const schoolName = process.env.NEXT_PUBLIC_SCHOOL_NAME || "";
 
 export default function Document() {
+
+
   return (
     <Html>
       <Head>
@@ -19,24 +24,24 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,600,1,0"
         />
-        <meta property="og:title" content="The Caf App" />
+        <meta property="og:title" content={appTitle} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mc.thecaf.app" />
+        <meta property="og:url" content={`https://${appDomain}`} />
         <meta
           property="og:image"
-          content="https://mc.thecaf.app/assets/opengraph.png"
+          content={`https://${appDomain}/assets/opengraph.png`}
         />
         <meta
           property="og:description"
-          content="Access hours and menus from the cafeteria at Mississippi College."
+          content={`Access hours and menus from ${cafName} at ${schoolName}.`}
         />
-        <meta name="application-name" content="The Caf" />
+        <meta name="application-name" content={cafName} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="The Caf" />
+        <meta name="apple-mobile-web-app-title" content={cafName} />
         <meta
           name="description"
-          content="Access hours and menus from the cafeteria at Mississippi College."
+          content={`Access hours and menus from ${cafName} at ${schoolName}.`}
         />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />

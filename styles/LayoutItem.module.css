@@ -1,6 +1,6 @@
 .item {
   width: 100%;
-  background-color: var(--bg-secondary);
+  background-color: var(--background-secondary);
   color: var(--text-primary);
   border-radius: 0.4rem;
   margin-bottom: 0.5rem;

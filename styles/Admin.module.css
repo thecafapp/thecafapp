@@ -11,7 +11,7 @@
 
 .form {
   display: block;
-  background-color: var(--bg-secondary);
+  background-color: var(--background-secondary);
   padding: 1em;
   border-radius: 0.4em;
   margin-bottom: 1em;
@@ -42,7 +42,7 @@
   background: transparent;
   font-size: 1.2rem;
   border: none;
-  border-bottom: 2px solid var(--bg-primary);
+  border-bottom: 2px solid var(--background-primary);
   padding: 0.25rem 0;
   outline: none;
   width: 100%;

@@ -26,7 +26,7 @@
 
 .menuItem {
   display: flex;
-  background-color: var(--bg-primary);
+  background-color: var(--background-primary);
   border-radius: 0.4rem;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
@@ -38,7 +38,7 @@
 }
 
 .rate {
-  background: var(--bg-secondary);
+  background: var(--background-secondary);
 }
 
 .rate .foodName {

@@ -30,7 +30,11 @@
     display: block;
     width: 70px;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--bg-primary));
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--background-primary)
+    );
     position: absolute;
     right: -1em;
     top: 0;
@@ -46,14 +50,14 @@
 
   /* Track */
   .restaurants::-webkit-scrollbar-track {
-    background: var(--bg-primary);
+    background: var(--background-primary);
     margin-left: 1em;
   }
 
   /* Handle */
   .restaurants::-webkit-scrollbar-thumb {
-    background: var(--bg-secondary);
-    border: 2px solid var(--bg-primary);
+    background: var(--background-secondary);
+    border: 2px solid var(--background-primary);
     border-radius: 5px;
   }
 

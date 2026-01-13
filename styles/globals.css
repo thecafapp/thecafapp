@@ -20,16 +20,6 @@
   font-weight: bold;
 }
 
-html {
-  --text-primary: #0c2340;
-  --text-secondary: #2e6983;
-  --bg-primary: #ffffff;
-  --bg-secondary: #ddefff;
-  --grad-1: #dca627;
-  --grad-2: #268da8;
-  --leaderboard-num: #a17914;
-}
-
 #firebaseui-auth-container .mdl-button {
   box-shadow: none !important;
   border-radius: 4px !important;
@@ -38,15 +28,6 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
-    --text-primary: #d0ccc6;
-    --text-secondary: #7eb8d2;
-    --bg-primary: #181a1b;
-    --bg-secondary: #222426;
-    --grad-1: #826215;
-    --grad-2: #1e7186;
-    --leaderboard-num: #f7c23b;
-  }
   #firebaseui-auth-container .mdl-button {
     background-color: rgba(255, 255, 255, 0.2) !important;
     color: white !important;
@@ -60,7 +41,7 @@ html,
 body {
   font-family: "New Atten", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: var(--bg-primary);
+  background-color: var(--background-primary);
 }
 
 a {
@@ -72,7 +53,7 @@ a {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  -webkit-tap-highlight-color: rgba(201, 151, 0, 0.5);
+  -webkit-tap-highlight-color: var(--tap-hightlight);
 }
 
 details > summary {

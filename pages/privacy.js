@@ -2,12 +2,13 @@ import Head from "next/head";
 import s from "../styles/Home.module.css";
 import a from "../styles/Admin.module.css";
 import Link from "next/link";
+const appTitle = process.env.NEXT_PUBLIC_APP_TITLE || "The Caf App";
 
 export default function Privacy() {
   return (
     <div className={s.container}>
       <Head>
-        <title>Privacy | The Caf at MC</title>
+        <title>Privacy | {appTitle}</title>
         <meta name="description" content="Privacy policy for The Caf App" />
         <link rel="icon" href="/icons/icon.png" />
       </Head>

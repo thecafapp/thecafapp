@@ -1,0 +1,20 @@
+name: Notify School Repo
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Add all your school repo names here
+        repo: ['thecafapp/school-cafapp']
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.SCHOOL_REPO_UPDATE_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: update-core

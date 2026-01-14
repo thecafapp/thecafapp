@@ -2,7 +2,7 @@ name: Notify School Repo
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
